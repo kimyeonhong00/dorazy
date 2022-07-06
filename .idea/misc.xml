@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/StartPauseSel.xml" value="0.1545" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1545" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/ic_pause.xml" value="0.1545" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/ic_start.xml" value="0.1545" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_stopwatch.xml" value="0.2" />
         <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/activity_main.xml" value="0.1766304347826087" />
       </map>
     </option>

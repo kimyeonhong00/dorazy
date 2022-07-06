@@ -7,45 +7,46 @@
     tools:context=".stopwatch"
     >
 
-    <Button
+        <ImageButton
+            android:id="@+id/groupBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/groupimg"
+            android:clickable="true"
+            android:int="#000000"
+            app:layout_constraintBottom_toBottomOf="@+id/startBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/finishBtn"
+            app:layout_constraintVertical_bias="1.0" />
 
-        android:id="@+id/resetBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:tint="#FFFFFF"
-        android:text="초기화"
-        app:layout_constraintBottom_toBottomOf="@+id/startBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recordBtn"
-        app:layout_constraintVertical_bias="1.0"/>
 
-    <Button
-        android:id="@+id/startBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="시작"
-        android:clickable="true"
-        android:tint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/recordBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recordBtn"
-        app:layout_constraintVertical_bias="0.0" />
+        <ImageButton
+            android:id="@+id/startBtn"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/StartPauseSel"
+            android:clickable="true"
+            android:foregroundTint="#5D9CD6"
+            app:layout_constraintBottom_toBottomOf="@+id/finishBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/finishBtn"
+            app:layout_constraintVertical_bias="0.612" />
 
-    <Button
-        android:id="@+id/recordBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="기록하기"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.89"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96" />
+        <ImageButton
+            android:id="@+id/finishBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="종료"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.89"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.96" />
 
 
     <TextView

@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import java.util.*
+//import kotlinx.android.synthetic.main.activity_main.*
 
 
 class stopwatch : AppCompatActivity() {
@@ -18,8 +19,8 @@ class stopwatch : AppCompatActivity() {
     //private lateinit var secText: TextView
     private lateinit var milliText: TextView
     private lateinit var startBtn: Button
-    private lateinit var resetBtn: Button
-    private lateinit var recordBtn: Button
+    private lateinit var groupBtn: Button
+    private lateinit var finishBtn: Button
     private lateinit var lap_Layout: LinearLayout
 
 
@@ -31,8 +32,8 @@ class stopwatch : AppCompatActivity() {
         secText = findViewById(R.id.secText)
         milliText = findViewById(R.id.milliText)
         startBtn = findViewById(R.id.startBtn)
-        resetBtn = findViewById(R.id.resetBtn)
-        recordBtn = findViewById(R.id.recordBtn)
+        groupBtn = findViewById(R.id.groupBtn)
+        finishBtn = findViewById(R.id.finishBtn)
         lap_Layout = findViewById(R.id.lap_Layout)
 
         //버튼 클릭 리스너
@@ -40,15 +41,20 @@ class stopwatch : AppCompatActivity() {
             isRunning = !isRunning
             if (isRunning) start() else pause()
         }
-        resetBtn.setOnClickListener {
+        groupBtn.setOnClickListener {
+            //그룹 화면으로 전환 (.xml)
+            //startActivity(Intent(this@stopwatch, **group page**::class.java))
             reset()
         }
-        recordBtn.setOnClickListener {
-            if(time!=0) lapTime()
+        finishBtn.setOnClickListener {
+            if(time!=0) {//화면 공유창으로 이동
+            // lapTime()
+            }
         }
     }
     private fun start() {
-        startBtn.text ="중지"
+        startBtn.setImageResource //setImageResource(R.drawable.ic_pause)
+        //startBtn.text ="멈추기"
         timerTask = kotlin.concurrent.timer(period = 10) { //반복주기는 peroid 프로퍼티로 설정, 단위는 1000분의 1초 (period = 1000, 1초)
             time++ // period=10으로 0.01초마다 time를 1씩 증가하게 됩니다
             val sec = time / 100 // time/100, 나눗셈의 몫 (초 부분)
@@ -63,7 +69,7 @@ class stopwatch : AppCompatActivity() {
     }
 
     private fun pause() {
-        startBtn.text ="재실행"
+        startBtn.text ="다시 시작"
         timerTask?.cancel();
     }
 
@@ -80,7 +86,7 @@ class stopwatch : AppCompatActivity() {
         index = 1
     }
 
-    private fun lapTime() {
+    /*private fun lapTime() {
         val lapTime = time // 함수 호출 시 시간(time) 저장
 
         // apply() 스코프 함수로, TextView를 생성과 동시에 초기화
@@ -91,5 +97,5 @@ class stopwatch : AppCompatActivity() {
 
         lap_Layout.addView(textView,0) // layout에 추가, (View, index) 추가할 위치(0 최상단 의미)
         index++ // 추가된 View의 개수를 저장하는 index 변수
-    }
+    }*/
 }
