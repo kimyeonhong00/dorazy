@@ -1,11 +1,13 @@
 package com.example.dorazy
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.concurrent.timerTask
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import java.util.*
 //import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,12 +18,15 @@ class stopwatch : AppCompatActivity() {
     private var timerTask: Timer? = null
     private var index :Int = 1
     private lateinit var secText: TextView
-    //private lateinit var secText: TextView
-    private lateinit var milliText: TextView
+    private lateinit var minText: TextView
+    private lateinit var hourText: TextView
     private lateinit var startBtn: Button
     private lateinit var groupBtn: Button
     private lateinit var finishBtn: Button
+    private lateinit var backBtn: Button
     private lateinit var lap_Layout: LinearLayout
+
+    var backKeyPressedTime : Long = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,10 +35,12 @@ class stopwatch : AppCompatActivity() {
 
         //View inflate
         secText = findViewById(R.id.secText)
-        milliText = findViewById(R.id.milliText)
+        minText = findViewById(R.id.minText)
+        hourText = findViewById(R.id.hourText)
         startBtn = findViewById(R.id.startBtn)
         groupBtn = findViewById(R.id.groupBtn)
         finishBtn = findViewById(R.id.finishBtn)
+        backBtn = findViewById(R.id.backtBtn)
         lap_Layout = findViewById(R.id.lap_Layout)
 
         //버튼 클릭 리스너
@@ -51,25 +58,36 @@ class stopwatch : AppCompatActivity() {
             // lapTime()
             }
         }
+        backBtn.setOnClickListener {
+            onBackPressed()
+        }
+
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
     private fun start() {
-        startBtn.setImageResource //setImageResource(R.drawable.ic_pause)
+        //startBtn.setImageResource //setImageResource(R.drawable.ic_pause)
         //startBtn.text ="멈추기"
-        timerTask = kotlin.concurrent.timer(period = 10) { //반복주기는 peroid 프로퍼티로 설정, 단위는 1000분의 1초 (period = 1000, 1초)
-            time++ // period=10으로 0.01초마다 time를 1씩 증가하게 됩니다
-            val sec = time / 100 // time/100, 나눗셈의 몫 (초 부분)
-            val milli = time % 100 // time%100, 나눗셈의 나머지 (밀리초 부분)
+        timerTask = kotlin.concurrent.timer(period = 1000) { //반복주기는 peroid 프로퍼티로 설정, 단위는 1000분의 1초 (period = 1000, 1초)
+            time++ // 1초에 1씩 증가
+            val sec = time %60 //초단위로 증가
+            val min = time %3600 /60
+            val hour = time /3600
 
             // UI조작을 위한 메서드
             runOnUiThread {
                 secText.text = "$sec"
-                milliText.text = "$milli"
+                minText.text = "$min"
+                hourText.text = "$hour"
             }
         }
     }
 
     private fun pause() {
-        startBtn.text ="다시 시작"
+
         timerTask?.cancel();
     }
 
@@ -78,8 +96,9 @@ class stopwatch : AppCompatActivity() {
 
         time = 0 // 시간저장 변수 초기화
         isRunning = false // 현재 진행중인지 판별하기 위한 Boolean변수 false 세팅
-        secText.text = "0" // 시간(초) 초기화
-        milliText.text = "00" // 시간(밀리초) 초기화
+        secText.text = "00" // 시간(초) 초기화
+        minText.text = "00"
+        hourText.text = "00"
 
         startBtn.text ="시작"
         lap_Layout.removeAllViews() // Layout에 추가한 기록View 모두 삭제
@@ -98,4 +117,6 @@ class stopwatch : AppCompatActivity() {
         lap_Layout.addView(textView,0) // layout에 추가, (View, index) 추가할 위치(0 최상단 의미)
         index++ // 추가된 View의 개수를 저장하는 index 변수
     }*/
+
+
 }
