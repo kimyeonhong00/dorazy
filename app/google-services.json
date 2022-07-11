@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "170617060685",
+    "project_id": "dorazy-d6181",
+    "storage_bucket": "dorazy-d6181.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170617060685:android:9b2e738fdaa7d3d9ab8b04",
+        "android_client_info": {
+          "package_name": "com.example.dorazy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170617060685-us2pkb76u89rm2s1nv07f2c33po1kb8m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpmyPhb5sSW9GtY5OGfBgF7mQz6HaSUXM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "170617060685-us2pkb76u89rm2s1nv07f2c33po1kb8m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
