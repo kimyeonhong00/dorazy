@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Dorazy</string>
+    <string name="ranking_view_title">랭킹</string>
+    <string name="ranking_stats">내 랭킹 기록</string>
+    <string name="weekly_ranking">금주 랭킹</string>
+    <string name="my_badge">My Badge</string>
+    <string name="rank">위</string>
+    <string name="nick_name">닉네임</string>
+    <string name="study_time">00:00:00</string>
+    <string name="my_ranking">내 순위</string>
+    <string name="profile">프로필 이미지</string>
 </resources>
