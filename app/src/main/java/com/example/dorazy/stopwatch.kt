@@ -17,9 +17,9 @@ class stopwatch : AppCompatActivity() {
     private var isRunning = false
     private var timerTask: Timer? = null
     private var index :Int = 1
-    private lateinit var secText: TextView
-    private lateinit var minText: TextView
-    private lateinit var hourText: TextView
+    private lateinit var txtTime: TextView
+    private lateinit var goalTime: TextView
+
     private lateinit var startBtn: Button
     private lateinit var groupBtn: Button
     private lateinit var finishBtn: Button
@@ -34,9 +34,8 @@ class stopwatch : AppCompatActivity() {
         setContentView(R.layout.activity_stopwatch)
 
         //View inflate
-        secText = findViewById(R.id.secText)
-        minText = findViewById(R.id.minText)
-        hourText = findViewById(R.id.hourText)
+        txtTime = findViewById(R.id.txtText)
+        goalTime = findViewById(R.id.goalText)
         startBtn = findViewById(R.id.startBtn)
         groupBtn = findViewById(R.id.groupBtn)
         finishBtn = findViewById(R.id.finishBtn)
@@ -79,9 +78,8 @@ class stopwatch : AppCompatActivity() {
 
             // UI조작을 위한 메서드
             runOnUiThread {
-                secText.text = "$sec"
-                minText.text = "$min"
-                hourText.text = "$hour"
+                txtTime.text = "{$hour} : {$min} : {$sec}"
+
             }
         }
     }
@@ -96,10 +94,7 @@ class stopwatch : AppCompatActivity() {
 
         time = 0 // 시간저장 변수 초기화
         isRunning = false // 현재 진행중인지 판별하기 위한 Boolean변수 false 세팅
-        secText.text = "00" // 시간(초) 초기화
-        minText.text = "00"
-        hourText.text = "00"
-
+        txtTime.text = "00 : 00 : 00"
         startBtn.text ="시작"
         lap_Layout.removeAllViews() // Layout에 추가한 기록View 모두 삭제
         index = 1
