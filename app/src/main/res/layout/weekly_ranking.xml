@@ -9,21 +9,21 @@
 
 
     <android.widget.Button
-        android:id="@+id/button"
+        android:id="@+id/WeeklyRankingBackButton"
         android:layout_width="102dp"
         android:layout_height="72dp"
         android:background="#00FFFFFF"
         android:text="◀        "
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/WeeklyRankingViewTitleText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/WeeklyRankingViewTitleText"
         android:layout_width="187dp"
         android:layout_height="68dp"
         android:gravity="center"
@@ -35,19 +35,19 @@
         android:textColor="#FFFFFF"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintEnd_toStartOf="@+id/textView15"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        app:layout_constraintBottom_toBottomOf="@+id/WeeklyRankingBackButton"
+        app:layout_constraintEnd_toStartOf="@+id/NullSpaceText"
+        app:layout_constraintStart_toEndOf="@+id/WeeklyRankingBackButton"
+        app:layout_constraintTop_toTopOf="@+id/WeeklyRankingBackButton" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/NullSpaceText"
         android:layout_width="105dp"
         android:layout_height="69dp"
         android:text=" "
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/WeeklyRankingViewTitleText"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
 
@@ -63,7 +63,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15">
+        app:layout_constraintTop_toBottomOf="@+id/NullSpaceText">
 
 
         <ScrollView
@@ -121,6 +121,336 @@
 
                     <TextView
                         android:id="@+id/ranktime1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@string/study_time"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ranking_profile_drawable"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/rank2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/rank"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/rankimage2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/profile"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/rankname2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="start"
+                        android:text="@string/nick_name"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/ranktime2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@string/study_time"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ranking_profile_drawable"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/rank3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/rank"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/rankimage3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/profile"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/rankname3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="start"
+                        android:text="@string/nick_name"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/ranktime3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@string/study_time"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ranking_profile_drawable"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/rank4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/rank"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/rankimage4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/profile"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/rankname4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="start"
+                        android:text="@string/nick_name"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/ranktime4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@string/study_time"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ranking_profile_drawable"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/rank5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/rank"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/rankimage5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/profile"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/rankname5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="start"
+                        android:text="@string/nick_name"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/ranktime5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@string/study_time"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ranking_profile_drawable"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/rank6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/rank"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/rankimage6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/profile"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/rankname6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="start"
+                        android:text="@string/nick_name"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/ranktime6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@string/study_time"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ranking_profile_drawable"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="20dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/rank7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/rank"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/rankimage7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/profile"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        android:id="@+id/rankname7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:gravity="start"
+                        android:text="@string/nick_name"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/ranktime7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -194,7 +524,15 @@
                 android:text="@string/study_time"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/testtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
 
     </LinearLayout>
 
