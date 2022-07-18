@@ -95,12 +95,11 @@
         app:layout_constraintTop_toBottomOf="@+id/psswrdinput"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <com.shobhitpuri.custombuttons.GoogleSignInButton
+    <com.google.android.gms.common.SignInButton
         android:id="@+id/google_button"
         android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_marginBottom="112dp"
-        android:text="Google 계정으로 로그인"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
