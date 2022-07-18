@@ -30,13 +30,14 @@
         app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/finishBtn"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias= "1.0" />
 
 
     <ImageButton
         android:id="@+id/startBtn"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:background="@drawable/ic_select"
         android:clickable="true"
         android:background="@drawable/groupimg"         
         android:foregroundTint="#5D9CD6"
