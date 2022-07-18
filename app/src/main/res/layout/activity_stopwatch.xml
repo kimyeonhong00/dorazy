@@ -25,7 +25,6 @@
         android:layout_height="80dp"
         android:background="@drawable/groupimg"
         android:clickable="true"
-        android:int="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/startBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.12"
