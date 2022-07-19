@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MeetActivity">
+
+    <ImageView
+        android:id="@+id/top_bar"
+        android:layout_width="413dp"
+        android:layout_height="91dp"
+        android:contentDescription="Topbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/top_bar" />
+
+    <ImageView
+        android:id="@+id/under_bar"
+        android:layout_width="413dp"
+        android:layout_height="91dp"
+        android:contentDescription="under_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/top_bar" />
+
+    <ImageView
+        android:id="@+id/table3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/under_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/table2"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/meet_table3"
+        android:contentDescription="table3" />
+
+    <ImageView
+        android:id="@+id/table1"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        app:srcCompat="@drawable/meet_table1"
+        android:contentDescription="table1" />
+
+    <ImageView
+        android:id="@+id/table2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/table1"
+        app:srcCompat="@drawable/meet_table2"
+        android:contentDescription="table2" />
+
+
+    <TextView
+        android:id="@+id/selfstudyroom_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="취업 및 면접실"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/top_bar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.068" />
+
+    <TextView
+        android:id="@+id/reserv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="예약하기"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/under_bar"
+        app:layout_constraintVertical_bias="0.216" />
+
+
+    <Button
+        android:id="@+id/studyroom_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:drawableRight="@drawable/text_studyroom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        app:layout_constraintVertical_bias="0.422"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/selfstudy_btn"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="15dp"
+        android:background="#00000000"
+        android:contentDescription="TODO"
+        android:drawableTop="@drawable/meet_selfchange"
+        app:layout_constraintBottom_toTopOf="@+id/under_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.917"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/back_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="#00000000"
+        android:contentDescription="back"
+        android:drawableLeft="@drawable/table_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/top_bar"
+        app:layout_constraintVertical_bias="0.51" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
