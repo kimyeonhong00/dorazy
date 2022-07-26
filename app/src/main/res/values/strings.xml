@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Dorazy</string>
+    <string name="app_name">도산 라운지</string>
     <string name="ranking_view_title">랭킹</string>
     <string name="ranking_stats">내 랭킹 기록</string>
-    <string name="weekly_ranking">금주 랭킹</string>
+    <string name="personal_ranking">개인 랭킹</string>
+    <string name="in_group_ranking">그룹 랭킹</string>
     <string name="my_badge">My Badge</string>
     <string name="rank">위</string>
     <string name="nick_name">닉네임</string>

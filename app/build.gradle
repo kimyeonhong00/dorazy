@@ -37,8 +37,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     namespace 'com.example.dorazy'
 }
+
 
 dependencies {
     def koin_version= "3.2.0"
@@ -60,5 +62,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }

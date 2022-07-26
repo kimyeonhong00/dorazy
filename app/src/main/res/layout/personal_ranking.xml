@@ -5,15 +5,16 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_blue_drawable">
+    android:background="@drawable/dorazy_main_blue_color">
 
 
     <android.widget.Button
-        android:id="@+id/WeeklyRankingBackButton"
+        android:id="@+id/PersonalRankingBackButton"
         android:layout_width="102dp"
         android:layout_height="72dp"
         android:background="#00FFFFFF"
         android:text="◀        "
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/WeeklyRankingViewTitleText"
@@ -23,7 +24,7 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/WeeklyRankingViewTitleText"
+        android:id="@+id/PersonalRankingViewTitleText"
         android:layout_width="187dp"
         android:layout_height="68dp"
         android:gravity="center"
@@ -31,7 +32,7 @@
         android:shadowDx="0"
         android:shadowDy="7"
         android:shadowRadius="2"
-        android:text="@string/weekly_ranking"
+        android:text="@string/personal_ranking"
         android:textColor="#FFFFFF"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -81,7 +82,7 @@
                     android:layout_height="0dp"
                     android:layout_marginBottom="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ranking_profile_drawable"
+                    android:background="@drawable/dorazy_main_blue_color"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingTop="20dp"
@@ -136,7 +137,7 @@
                     android:layout_height="0dp"
                     android:layout_marginBottom="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ranking_profile_drawable"
+                    android:background="@drawable/dorazy_main_blue_color"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingTop="20dp"
@@ -191,7 +192,7 @@
                     android:layout_height="0dp"
                     android:layout_marginBottom="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ranking_profile_drawable"
+                    android:background="@drawable/dorazy_main_blue_color"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingTop="20dp"
@@ -246,7 +247,7 @@
                     android:layout_height="0dp"
                     android:layout_marginBottom="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ranking_profile_drawable"
+                    android:background="@drawable/dorazy_main_blue_color"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingTop="20dp"
@@ -301,7 +302,7 @@
                     android:layout_height="0dp"
                     android:layout_marginBottom="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ranking_profile_drawable"
+                    android:background="@drawable/dorazy_main_blue_color"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingTop="20dp"
@@ -356,7 +357,7 @@
                     android:layout_height="0dp"
                     android:layout_marginBottom="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ranking_profile_drawable"
+                    android:background="@drawable/dorazy_main_blue_color"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingTop="20dp"
@@ -411,7 +412,7 @@
                     android:layout_height="0dp"
                     android:layout_marginBottom="15dp"
                     android:layout_weight="1"
-                    android:background="@drawable/ranking_profile_drawable"
+                    android:background="@drawable/dorazy_main_blue_color"
                     android:orientation="horizontal"
                     android:paddingLeft="10dp"
                     android:paddingTop="20dp"
@@ -476,7 +477,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:background="@drawable/ranking_profile_drawable"
+            android:background="@drawable/dorazy_main_blue_color"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
             android:paddingTop="20dp"
@@ -526,12 +527,6 @@
                 android:textSize="20sp" />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/testtext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
 
 
     </LinearLayout>

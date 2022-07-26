@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_blue_drawable"
+    android:background="@drawable/dorazy_main_blue_color"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_marginTop="10dp">
 
@@ -21,6 +20,7 @@
             android:layout_weight="1"
             android:background="#00FFFFFF"
             android:text="◀        "
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             tools:ignore="HardcodedText" />
 
@@ -35,6 +35,7 @@
             android:shadowDy="7"
             android:shadowRadius="2"
             android:text="@string/ranking_view_title"
+            android:fontFamily="@font/aritaburihairline"
             android:textColor="#FFFFFF"
             android:textSize="40sp"
             android:textStyle="bold" />
@@ -44,15 +45,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="4"
+            android:scaleType="fitCenter"
             android:background="#00FFFFFF"
-            app:srcCompat="@drawable/profile"
+            app:srcCompat="@drawable/ic_account_circle_white"
             tools:ignore="ContentDescription" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="40"
         android:orientation="vertical"
         android:elevation="100dp"
         android:layout_marginTop="10dp"
@@ -61,8 +62,7 @@
 
         <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:paddingStart="20dp"
             android:paddingTop="40dp"
             android:paddingBottom="20dp"
@@ -76,11 +76,68 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ranking_objects_drawable"
+                    android:orientation="vertical"
+                    android:padding="30dp">
+
+                    <TextView
+                        android:id="@+id/PersonalRankingText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/aritaburilight"
+                        android:gravity="center_horizontal"
+                        android:text="@string/personal_ranking"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <ImageButton
+                        android:id="@+id/PersonalRankingImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="#00FFFFFF"
+                        app:srcCompat="@drawable/personal_white"
+
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ranking_objects_drawable"
+                    android:orientation="vertical"
+                    android:padding="30dp">
+
+                    <TextView
+                        android:id="@+id/InGroupRanking"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/aritaburilight"
+                        android:gravity="center_horizontal"
+                        android:text="@string/in_group_ranking"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp" />
+
+                    <ImageButton
+                        android:id="@+id/InGroupRankingImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="#00FFFFFF"
+                        app:srcCompat="@drawable/groupimg_white"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
-                    android:background="@drawable/menu_blue_drawable"
+                    android:background="@drawable/ranking_objects_drawable"
                     android:orientation="vertical"
                     android:padding="30dp">
 
@@ -88,9 +145,10 @@
                         android:id="@+id/MyRankingStatsText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/aritaburilight"
                         android:gravity="center_horizontal"
                         android:text="@string/ranking_stats"
-                        android:textColor="#000000"
+                        android:textColor="#FFFFFF"
                         android:textSize="20sp" />
 
                     <ImageButton
@@ -99,57 +157,31 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:background="#00FFFFFF"
-                        app:srcCompat="@drawable/stats"
+                        app:srcCompat="@drawable/stats_white"
                         tools:ignore="ContentDescription" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/menu_blue_drawable"
-                    android:orientation="vertical"
-                    android:padding="30dp">
-
-                    <TextView
-                        android:id="@+id/WeeklyRankingText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:text="@string/weekly_ranking"
-                        android:textColor="#000000"
-                        android:textSize="20sp" />
-
-                    <ImageButton
-                        android:id="@+id/WeeklyRankingImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:background="#00FFFFFF"
-                        app:srcCompat="@drawable/weeklyranking"
-                        tools:ignore="ContentDescription" />
-                </LinearLayout>
             </LinearLayout>
         </HorizontalScrollView>
 
         <View
             android:id="@+id/view"
-            android:background="#000000"
+            android:background="@drawable/dorazy_main_blue_color"
             android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            android:layout_height="10dp" />
 
         <TextView
             android:id="@+id/MyBadgeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/my_badge"
-            android:textColor="#000000"
+            android:textColor="#002244"
             android:textSize="20sp"
             android:layout_margin="20dp"/>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1">
 
             <TableLayout
@@ -174,7 +206,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
-                            android:background="@drawable/menu_blue_drawable"
+                            android:background="@drawable/ranking_objects_drawable"
                             android:padding="20dp"
                             app:srcCompat="@drawable/transparent"
                             tools:ignore="ContentDescription" />
@@ -201,7 +233,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
-                            android:background="@drawable/menu_blue_drawable"
+                            android:background="@drawable/ranking_objects_drawable"
                             android:padding="20dp"
                             app:srcCompat="@drawable/transparent"
                             tools:ignore="ContentDescription" />
@@ -228,7 +260,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
-                            android:background="@drawable/menu_blue_drawable"
+                            android:background="@drawable/ranking_objects_drawable"
                             android:padding="20dp"
                             app:srcCompat="@drawable/transparent"
                             tools:ignore="ContentDescription" />
@@ -261,7 +293,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
-                            android:background="@drawable/menu_blue_drawable"
+                            android:background="@drawable/ranking_objects_drawable"
                             android:padding="20dp"
                             app:srcCompat="@drawable/transparent"
                             tools:ignore="ContentDescription" />
@@ -288,7 +320,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
-                            android:background="@drawable/menu_blue_drawable"
+                            android:background="@drawable/ranking_objects_drawable"
                             android:padding="20dp"
                             app:srcCompat="@drawable/transparent"
                             tools:ignore="ContentDescription" />
@@ -313,7 +345,7 @@
                             android:id="@+id/imageButton9"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:background="@drawable/menu_blue_drawable"
+                            android:background="@drawable/ranking_objects_drawable"
                             android:padding="20dp"
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
@@ -348,7 +380,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
-                            android:background="@drawable/menu_blue_drawable"
+                            android:background="@drawable/ranking_objects_drawable"
                             android:padding="20dp"
                             app:srcCompat="@drawable/transparent"
                             tools:ignore="ContentDescription" />
@@ -375,7 +407,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
-                            android:background="@drawable/menu_blue_drawable"
+                            android:background="@drawable/ranking_objects_drawable"
                             android:padding="20dp"
                             app:srcCompat="@drawable/transparent"
                             tools:ignore="ContentDescription" />
@@ -402,7 +434,7 @@
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:layout_margin="2dp"
-                            android:background="@drawable/menu_blue_drawable"
+                            android:background="@drawable/ranking_objects_drawable"
                             android:padding="20dp"
                             app:srcCompat="@drawable/transparent"
                             tools:ignore="ContentDescription" />

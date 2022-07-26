@@ -2,12 +2,13 @@
 <resources>
     <string name="app_name">Dorazy</string>
     <string name="ranking_view_title">Ranking</string>
-    <string name="ranking_stats">My Rankings</string>
-    <string name="weekly_ranking">Weekly Ranking</string>
+    <string name="ranking_stats">Ranking History</string>
     <string name="my_badge">My Badge</string>
     <string name="rank">th</string>
     <string name="nick_name">nickname</string>
     <string name="study_time">00:00:00</string>
     <string name="my_ranking">My Ranking</string>
     <string name="profile">profile image</string>
+    <string name="personal_ranking">Personal Ranking</string>
+    <string name="in_group_ranking">Ranking within Group</string>
 </resources>

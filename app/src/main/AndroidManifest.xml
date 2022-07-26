@@ -18,11 +18,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".RankingHomeActivity" />
-        <activity android:name=".WeeklyRankingActivity" />
+        <activity android:name=".PersonalRankingActivity" />
         <activity android:name=".MainActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".CreateAccountActivity"/>
-        <activity android:name=".stopwatch"/>
+        <activity android:name=".stopwatch" />
+        <activity android:name=".RankingStatsActivity" />
+        <activity android:name=".InGroupRankingActivity"/>
 
     </application>
 

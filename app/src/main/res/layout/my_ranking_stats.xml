@@ -4,30 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_blue_drawable">
+    android:background="@drawable/dorazy_main_blue_color">
 
     <android.widget.Button
-        android:id="@+id/WeeklyRankingBackButton"
+        android:id="@+id/MyRankingStatsBackButton"
         android:layout_width="96dp"
         android:layout_height="77dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:background="#00FFFFFF"
         android:text="◀        "
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-        app:layout_constraintEnd_toStartOf="@+id/textView14"
-        app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.001"
         tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_weight="6"
+        android:fontFamily="@font/aritaburihairline"
         android:gravity="center_vertical|center_horizontal"
         android:shadowColor="#40000000"
         android:shadowDx="0"
@@ -37,24 +38,121 @@
         android:textColor="#FFFFFF"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/MyRankingStatsBackButton"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.019" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="409dp"
-        android:layout_height="820dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="412dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/main_white_drawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14">
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
 
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/imageView3"
+            android:layout_width="392dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:background="@drawable/dorazy_main_blue_color"
+            app:layout_constraintBottom_toTopOf="@+id/textView24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="0.657" />
+
+        <TextView
+            android:id="@+id/besttext"
+            android:layout_width="68dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="최고 기록"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+        <TextView
+            android:id="@+id/recentText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="최근 기록"
+            app:layout_constraintEnd_toStartOf="@+id/avgText"
+            app:layout_constraintHorizontal_bias="0.459"
+            app:layout_constraintStart_toEndOf="@+id/besttext"
+            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+        <TextView
+            android:id="@+id/avgText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:text="평균 기록"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+        <TextView
+            android:id="@+id/bestRecord"
+            android:layout_width="66dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="20dp"
+            android:text="50000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/besttext"
+            app:layout_constraintVertical_bias="0.203" />
+
+        <TextView
+            android:id="@+id/recentRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1234"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/avgRecord"
+            app:layout_constraintHorizontal_bias="0.436"
+            app:layout_constraintStart_toEndOf="@+id/bestRecord"
+            app:layout_constraintTop_toBottomOf="@+id/recentText"
+            app:layout_constraintVertical_bias="0.192" />
+
+        <TextView
+            android:id="@+id/avgRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="12345"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avgText"
+            app:layout_constraintVertical_bias="0.175" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:text="통계"
+            android:textColor="#002244"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

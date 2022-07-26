@@ -13,8 +13,20 @@ class RankingHomeActivity :AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = RankingHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.WeeklyRankingImage.setOnClickListener{
-            startActivity(Intent(this,WeeklyRankingActivity::class.java))
+        binding.PersonalRankingImage.setOnClickListener{
+            startActivity(Intent(this,PersonalRankingActivity::class.java))
+        }
+        binding.InGroupRankingImage.setOnClickListener{
+            startActivity(Intent(this,InGroupRankingActivity::class.java))
+        }
+        binding.MyRankingStatsImage.setOnClickListener {
+            startActivity(Intent(this,RankingStatsActivity::class.java))
+        }
+        binding.RankingHomeBackButton.setOnClickListener {
+            super.onBackPressed()
+        }
+        binding.ProfileImageButton.setOnClickListener {
+            startActivity(Intent(this,RankingStatsActivity::class.java))
         }
     }
 
