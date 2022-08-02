@@ -10,16 +10,13 @@
         android:id="@+id/MyRankingStatsBackButton"
         android:layout_width="96dp"
         android:layout_height="77dp"
-        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:background="#00FFFFFF"
         android:text="◀        "
         android:textColor="#FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001"
         tools:ignore="HardcodedText" />
 
     <TextView
@@ -27,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="18dp"
         android:layout_weight="6"
         android:fontFamily="@font/aritaburihairline"
         android:gravity="center_vertical|center_horizontal"
@@ -42,24 +40,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/MyRankingStatsBackButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="412dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:background="@drawable/main_white_drawable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MyRankingStatsBackButton">
 
         <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/imageView3"
+            android:id="@+id/LineChart"
             android:layout_width="392dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="150dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,8 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            app:layout_constraintVertical_bias="0.657" />
+            app:layout_constraintTop_toBottomOf="@+id/LineChart" />
 
         <TextView
             android:id="@+id/besttext"
@@ -84,6 +82,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="최고 기록"
+            android:textColor="@color/main_theme"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
@@ -93,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="최근 기록"
+            android:textColor="@color/main_theme"
             app:layout_constraintEnd_toStartOf="@+id/avgText"
             app:layout_constraintHorizontal_bias="0.459"
             app:layout_constraintStart_toEndOf="@+id/besttext"
@@ -105,6 +105,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:text="평균 기록"
+            android:textColor="@color/main_theme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
@@ -112,10 +113,11 @@
             android:id="@+id/bestRecord"
             android:layout_width="66dp"
             android:layout_height="18dp"
-            android:layout_marginStart="20dp"
             android:text="50000"
+            android:textColor="@color/main_theme"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/besttext"
+            app:layout_constraintStart_toStartOf="@+id/besttext"
             app:layout_constraintTop_toBottomOf="@+id/besttext"
             app:layout_constraintVertical_bias="0.203" />
 
@@ -124,10 +126,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1234"
+            android:textColor="@color/main_theme"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/avgRecord"
-            app:layout_constraintHorizontal_bias="0.436"
-            app:layout_constraintStart_toEndOf="@+id/bestRecord"
+            app:layout_constraintEnd_toEndOf="@+id/recentText"
+            app:layout_constraintStart_toStartOf="@+id/recentText"
             app:layout_constraintTop_toBottomOf="@+id/recentText"
             app:layout_constraintVertical_bias="0.192" />
 
@@ -135,10 +137,11 @@
             android:id="@+id/avgRecord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:text="12345"
+            android:textColor="@color/main_theme"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/avgText"
+            app:layout_constraintStart_toStartOf="@+id/avgText"
             app:layout_constraintTop_toBottomOf="@+id/avgText"
             app:layout_constraintVertical_bias="0.175" />
 
@@ -149,10 +152,10 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:text="통계"
-            android:textColor="#002244"
+            android:textColor="@color/main_theme"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            app:layout_constraintTop_toBottomOf="@+id/LineChart" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
