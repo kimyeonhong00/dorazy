@@ -21,6 +21,17 @@ class MainActivity : AppCompatActivity() {
         binding.rankingbutton.setOnClickListener {
             startActivity(Intent(this, PersonalRankingActivity::class.java))
         }
+        binding.logoutbutton.setOnClickListener {
+            val intent = Intent(this,LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            auth?.signOut()
+            finish()
+        }
+        binding.recordbutton.setOnClickListener {
+            startActivity(Intent(this, stopwatch::class.java))
+        }
+    }
 
     }
 }
