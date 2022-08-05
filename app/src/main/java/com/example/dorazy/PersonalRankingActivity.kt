@@ -3,6 +3,7 @@ package com.example.dorazy
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.ktx.firestore
@@ -10,9 +11,9 @@ import com.google.firebase.ktx.Firebase
 import com.example.dorazy.databinding.PersonalRankingBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
+import kotlin.math.roundToInt
 
 
 class Record (var name: String, var time: Int) :Comparable<Record>{
@@ -53,23 +54,35 @@ class PersonalRankingActivity :AppCompatActivity() {
 
         thread (start = true){
             Thread.sleep(1000)
-            dataArray.sortDescending()
+            dataArray.sort()
             runOnUiThread {
                 for (i in 0 until dataArray.size){
-                    val personalRankingBarView = LayoutInflater.from(this).inflate(R.layout.ranking_personal_bar_layout,binding.RankingList)
+                    Log.i("AA",dataArray[i].name)
+                    if (dataArray[i].name==binding.MyName.text){
+                        binding.MyTime.text = dataToTime(dataArray[i].time)
+                        binding.MyRanking.text = "${dataArray.size-i}위"
+                    }
+                    val personalRankingBarView = LayoutInflater.from(this).inflate(R.layout.ranking_personal_bar_layout,null,false)
+                    personalRankingBarView.findViewById<TextView>(R.id.rank).text="${dataArray.size-i}위"
+                    personalRankingBarView.findViewById<TextView>(R.id.rankname).text= dataArray[i].name[0].toString()+'*'+dataArray[i].name[2].toString()
+                    personalRankingBarView.findViewById<TextView>(R.id.ranktime).text= dataToTime(dataArray[i].time)
+                    val layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    layoutParams.setMargins(0,0,0,(15 * resources.displayMetrics.density).roundToInt())
+                    personalRankingBarView.layoutParams = layoutParams
+                    binding.RankingList.addView(personalRankingBarView,0)
                 }
             }
-            Log.i("BB", dataArray.toString())
-
         }
-        // 화면 텍스트 변경
 
         binding.PersonalRankingBackButton.setOnClickListener {
             super.onBackPressed()
         }
     }
 
-    fun dataToTime(time: Int):String{
+    private fun dataToTime(time: Int):String{
         var sec = 0
         var min = 0
         var hour = 0

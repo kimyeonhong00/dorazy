@@ -23,8 +23,6 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".CreateAccountActivity"/>
         <activity android:name=".stopwatch" />
-        <activity android:name=".RankingStatsActivity" />
-        <activity android:name=".InGroupRankingActivity"/>
 
     </application>
 

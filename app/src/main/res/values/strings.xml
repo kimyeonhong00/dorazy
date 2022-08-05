@@ -5,7 +5,7 @@
     <string name="personal_ranking">개인 랭킹</string>
     <string name="in_group_ranking">그룹 랭킹</string>
     <string name="my_badge">My Badge</string>
-    <string name="rank">위</string>
+    <string name="rank" translatable="false">#</string>
     <string name="nick_name">닉네임</string>
     <string name="study_time">00:00:00</string>
     <string name="my_ranking">내 순위</string>

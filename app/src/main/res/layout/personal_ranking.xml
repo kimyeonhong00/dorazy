@@ -84,7 +84,10 @@
             android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:layout_marginBottom="3dp"
             android:text="@string/my_ranking"
+            android:fontFamily="@font/aritaburilight"
             android:textColor="#000000"
             android:textSize="20sp" />
 
@@ -107,6 +110,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/rank"
+                android:fontFamily="@font/aritaburilight"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
@@ -127,6 +131,7 @@
                 android:layout_weight="2"
                 android:gravity="start"
                 android:text="@string/nick_name"
+                android:fontFamily="@font/aritaburilight"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
@@ -138,6 +143,7 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="@string/study_time"
+                android:fontFamily="@font/aritaburilight"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
