@@ -1,7 +1,6 @@
 package com.example.dorazy
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -38,12 +37,12 @@ class PersonalRankingActivity :AppCompatActivity() {
         setContentView(binding.root)
         database = Firebase.firestore
 
-        var dataArray = ArrayList<Record>()
-        var personalRecord = Record("",0)
+        val dataArray = ArrayList<Record>()
+        var personalRecord: Record
 
-        val db = database.collection("User").get().addOnSuccessListener { doc ->
+        database.collection("User").get().addOnSuccessListener { doc ->
             for (d in doc){
-                if (d.id.toString()== cu!!.uid) {
+                if (d.id== cu!!.uid) {
                     binding.MyTime.text = d.data["studyTime"].toString()
                     binding.MyName.text = d.data["name"].toString()
                 }
@@ -57,7 +56,6 @@ class PersonalRankingActivity :AppCompatActivity() {
             dataArray.sort()
             runOnUiThread {
                 for (i in 0 until dataArray.size){
-                    Log.i("AA",dataArray[i].name)
                     if (dataArray[i].name==binding.MyName.text){
                         binding.MyTime.text = dataToTime(dataArray[i].time)
                         binding.MyRanking.text = "${dataArray.size-i}위"
@@ -70,7 +68,7 @@ class PersonalRankingActivity :AppCompatActivity() {
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
                     )
-                    layoutParams.setMargins(0,0,0,(15 * resources.displayMetrics.density).roundToInt())
+                    layoutParams.setMargins(0,0,0,(5 * resources.displayMetrics.density).roundToInt())
                     personalRankingBarView.layoutParams = layoutParams
                     binding.RankingList.addView(personalRankingBarView,0)
                 }
@@ -83,12 +81,9 @@ class PersonalRankingActivity :AppCompatActivity() {
     }
 
     private fun dataToTime(time: Int):String{
-        var sec = 0
-        var min = 0
-        var hour = 0
-        sec = time%60
-        min = time%3600/60
-        hour = time/3600
+        val sec: Int = time%60
+        val min: Int = time%3600/60
+        val hour: Int = time/3600
         return "$hour:$min:$sec"
     }
 }

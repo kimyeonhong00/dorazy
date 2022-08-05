@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/bg_blue_drawable.xml" value="0.2015" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/dorazy_background.xml" value="0.2015" />
+        <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/dorazy_main_blue_color.xml" value="0.257" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/ic_account_circle.xml" value="0.2015" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/ic_account_circle_white.xml" value="0.2015" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/ic_settings.xml" value="0.2015" />
@@ -12,10 +13,13 @@
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/loading_background.xml" value="0.2015" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/main_white_drawable.xml" value="0.2015" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/menu_blue_drawable.xml" value="0.2015" />
+        <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/personal_bar.xml" value="0.257" />
+        <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/radius.xml" value="0.257" />
+        <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/ranking_objects_drawable.xml" value="0.257" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/ranking_profile_drawable.xml" value="0.2015" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/seek_back.xml" value="0.2015" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/drawable/seek_thumb.xml" value="0.2015" />
-        <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/layout/activity_main.xml" value="0.3035035880118193" />
+        <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/layout/activity_stopwatch.xml" value="0.3035035880118193" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/layout/create_account.xml" value="0.30739632321504917" />
         <entry key="..\:/Users/LIM SE JUN/AndroidStudioProjects/dorazy/app/src/main/res/layout/in_group_ranking.xml" value="0.30739632321504917" />

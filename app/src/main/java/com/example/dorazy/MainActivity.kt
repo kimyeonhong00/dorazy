@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         binding.rankingbutton.setOnClickListener {
-            startActivity(Intent(this, RankingHomeActivity::class.java))
+            startActivity(Intent(this, PersonalRankingActivity::class.java))
         }
     }
 
