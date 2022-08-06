@@ -62,7 +62,7 @@ class PersonalRankingActivity :AppCompatActivity() {
                     }
                     val personalRankingBarView = LayoutInflater.from(this).inflate(R.layout.ranking_personal_bar_layout,null,false)
                     personalRankingBarView.findViewById<TextView>(R.id.rank).text="${dataArray.size-i}위"
-                    personalRankingBarView.findViewById<TextView>(R.id.rankname).text= dataArray[i].name[0].toString()+'*'+dataArray[i].name[2].toString()
+                    personalRankingBarView.findViewById<TextView>(R.id.rankname).text= nameEncode(dataArray[i].name)
                     personalRankingBarView.findViewById<TextView>(R.id.ranktime).text= dataToTime(dataArray[i].time)
                     val layoutParams = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -85,5 +85,17 @@ class PersonalRankingActivity :AppCompatActivity() {
         val min: Int = time%3600/60
         val hour: Int = time/3600
         return "$hour:$min:$sec"
+    }
+
+    private fun nameEncode(name:String):String{
+        var result = ""
+        for (i in name.indices){
+            if (i%2==1){
+                result += "*"
+            }else{
+                result += name[i]
+            }
+        }
+        return result
     }
 }

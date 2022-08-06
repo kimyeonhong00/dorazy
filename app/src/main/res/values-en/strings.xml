@@ -10,4 +10,17 @@
     <string name="profile">profile image</string>
     <string name="personal_ranking">Ranking</string>
     <string name="in_group_ranking">Ranking within Group</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="enter_name">Please enter a name</string>
+    <string name="select_major">Please choose your major</string>
+    <string name="enter_email">Enter email to use</string>
+    <string name="enter_password">Enter the password to use</string>
+    <string name="doublecheck_password">Please enter the password again</string>
+    <string name="password_alrt">Password must be at least 6 characters long</string>
+    <string name="password_warning">Password doesn\'t match</string>
+    <string name="make_account">Make Account</string>
+    <string name="not_yet">Don\'t you have an account yet?</string>
+    <string name="log_in">Log In</string>
+    <string name="set_profile">Set Profile</string>
+    <string name="start">Start</string>
 </resources>

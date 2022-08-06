@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="customDialog">
+        <item name="android:background">#0F0F0F</item>
+        <item name="android:popupElevation">10dp</item>
+    </style>
+</resources>
