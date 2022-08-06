@@ -1,12 +1,17 @@
 package com.example.dorazy
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.content.Intent
+import android.os.Build
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.NonNull
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dorazy.FirestoreAdapter
 import com.google.firebase.*
@@ -26,9 +31,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.DocumentChange.Type
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 
-class grouppage : AppCompatActivity() {
+class grouppage : AppCompatActivity() { //selectuser
     private var groupID: String?= null
     val selectedUsers = mutableMapOf<String, String>()
     var firestoreAdapter: FirestoreAdapter<*>? = null
@@ -54,6 +64,7 @@ class grouppage : AppCompatActivity() {
         setContentView(R.layout.activity_grouppage)
 
         groupID = intent.getStringExtra("groupID")
+        println("~~~~~~~~~~~~groupID getstring extra")
         firestoreAdapter = RecyclerViewAdapter(FirebaseFirestore.getInstance().collection("Users").orderBy("name"))
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.setLayoutManager(LinearLayoutManager(this))
@@ -88,22 +99,42 @@ class grouppage : AppCompatActivity() {
             )
         }
 
+
     private fun CreateGroup(group: DocumentReference){
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val users = mutableMapOf<String, Int>()
+        val str = EditText(this)
         var title = ""
-        for (key in selectedUsers.keys){
-            users[key] = 0
-            if(title.length<20 && (key!=uid)){
-                title +=selectedUsers[key].toString()+", "
+        val a = System.currentTimeMillis()
+        val t_date = Date(a)
+        val t_dateFormat = SimpleDateFormat("yyyy-MM-dd kk:mm:ss E", Locale("ko", "KR"))
+        val str_date = t_dateFormat.format(t_date)
+
+
+        str.gravity = Gravity.CENTER
+        var builder = AlertDialog.Builder(this).setTitle("그룹 이름을 입력하세요")
+            .setView(str).setPositiveButton("확인",
+                DialogInterface.OnClickListener{dialog, which ->
+                    Toast.makeText(this,str.text, Toast.LENGTH_SHORT).show()
+                    title = str.text.toString()
+                })
+        builder.show()
+        if(str.length()==0){
+            for (key in selectedUsers.keys){
+                users[key] = 0
+                if(title.length<20 && (key!=uid)){
+                    title +=selectedUsers[key].toString()+", "
+                }
             }
+            title =title.substring(0,title.length-2)+str_date
         }
         val data = mutableMapOf<String, Any>()
-        data["title"]= title.substring(0, title.length-2)
+        data["title"]= title
         data["users"] = users
 
         group.set(data).addOnCompleteListener {
             if(it.isSuccessful){
+                println("~~~~~~~~~~~~데이터세팅 성공~~~~~\n")
                 val intent = Intent(this@grouppage, grouplist::class.java)
                 intent.putExtra("groupID", group.id)
                 startActivity(intent)

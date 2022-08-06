@@ -12,7 +12,7 @@ import android.widget.Button
 
 class grouplist : AppCompatActivity() { //chatactivity
     private var drawerLayout: DrawerLayout? = null
-    //private var chatFragment: ChatFragment? = null
+    private var fragment: fragment1? = null
     private var userListInGroupFragment: UserListInGroupFragment? = null
     private var rightMenuBtn: Button?= null
     private var backBtn: Button?= null
@@ -36,7 +36,7 @@ class grouplist : AppCompatActivity() { //chatactivity
                 drawerLayout!!.closeDrawer(Gravity.RIGHT)
             } else {
                 if (userListInGroupFragment == null) {
-                    userListInGroupFragment = UserListInGroupFragment.getInstance(groupID!!, chatFragment!!.userList)
+                    userListInGroupFragment = UserListInGroupFragment.getInstance(groupID!!, fragment!!.userList)
                     supportFragmentManager.beginTransaction().replace(R.id.drawerFragment, userListInGroupFragment!!).commit()
                 }
                 drawerLayout!!.openDrawer(Gravity.RIGHT)
@@ -46,8 +46,8 @@ class grouplist : AppCompatActivity() { //chatactivity
             onBackPressed()
         }
         // chatting area
-        chatFragment = ChatFragment.getInstance(toUid, groupID)
-        supportFragmentManager.beginTransaction().replace(R.id.mainFragment, chatFragment!!).commit()
+        fragment = fragment1.getInstance(toUid, groupID)
+        supportFragmentManager.beginTransaction().replace(R.id.mainFragment, fragment!!).commit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -61,7 +61,7 @@ class grouplist : AppCompatActivity() { //chatactivity
     }
 
     override fun onBackPressed() {
-        chatFragment?.backPressed()
+        fragment?.backPressed()
         finish()
     }
 }

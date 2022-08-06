@@ -42,9 +42,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:openDrawer="start">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/beach_backgroud">
+
+
 
             <FrameLayout
                 android:id="@+id/mainFragment"

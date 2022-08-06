@@ -58,7 +58,7 @@ class stopwatch : AppCompatActivity() {
                 var builder = AlertDialog.Builder(this)
                 var listener = DialogInterface.OnClickListener{
                         dialog, which -> goal = which+1
-                    //goalTime.text = goal_list[which]
+                    goalTime.text = "$goal : 00 : 00"
                 }
                 builder.setTitle("목표시간 설정").setItems(goal_list, listener)
                 builder.show()
@@ -77,11 +77,12 @@ class stopwatch : AppCompatActivity() {
         }
         groupBtn.setOnClickListener {
             //그룹 화면으로 전환
+
             startActivity(Intent(this, grouppage::class.java))
         }
         finishBtn.setOnClickListener {
             //끝나면 사용자 시간 set
-            firestore?.collection("Users")?.document(currentuser.uid)?.set(time!!)
+            //firestore?.collection("Users")?.document(currentuser.uid)?.set(time!!)
             //끝 버튼 누르면 공유 페이지로 이동
             if(time!=0) {//공유창으로 이동
                 startActivity(Intent(this, sharePage::class.java))
@@ -131,6 +132,7 @@ class stopwatch : AppCompatActivity() {
     //타이머 일시정지
     private fun pause() {
         timerTask?.cancel();
+        startBtn.setImageResource(R.drawable.ic_start)
     }
     //타이머 리셋
     private fun reset() {
@@ -139,7 +141,6 @@ class stopwatch : AppCompatActivity() {
         time = 0 // 시간저장 변수 초기화
         isRunning = false // 현재 진행중인지 판별하기 위한 Boolean변수 false 세팅
         txtTime.text = "00 : 00 : 00"
-        index = 1
     }
 
 
