@@ -27,4 +27,9 @@
     <string name="log_in">로그인</string>
     <string name="set_profile">프로필 설정</string>
     <string name="start">시작하기</string>
+    <string name="group_name">그룹명</string>
+    <string name="sit_reservation">자리 예약</string>
+    <string name="rent">물품 대여</string>
+    <string name="more">더보기</string>
+    <string name="members">구성원</string>
 </resources>

@@ -23,4 +23,9 @@
     <string name="log_in">Log In</string>
     <string name="set_profile">Set Profile</string>
     <string name="start">Start</string>
+    <string name="group_name">Group Name</string>
+    <string name="sit_reservation">Sit Reservaiton</string>
+    <string name="rent">Rental of Goods</string>
+    <string name="more">more</string>
+    <string name="members">Members</string>
 </resources>

@@ -31,6 +31,7 @@ class CreateProfileActivity :AppCompatActivity() {
                 val newData = hashMapOf(
                     "name" to binding.nameInput2.text.toString(),
                     "major" to majorArray[binding.majorSpinner2.selectedItemPosition],
+                    "user_id" to auth!!.currentUser!!.email.toString(),
                     "root" to 0,
                     "studyTime" to 0
                 )
