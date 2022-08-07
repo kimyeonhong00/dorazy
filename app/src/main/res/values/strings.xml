@@ -1,12 +1,30 @@
 <resources>
-    <string name="app_name">Dorazy</string>
+    <string name="app_name">도산 라운지</string>
     <string name="ranking_view_title">랭킹</string>
     <string name="ranking_stats">내 랭킹 기록</string>
-    <string name="weekly_ranking">금주 랭킹</string>
+    <string name="personal_ranking">개인 랭킹</string>
+    <string name="in_group_ranking">그룹 랭킹</string>
     <string name="my_badge">My Badge</string>
-    <string name="rank">위</string>
+    <string name="rank" translatable="false">#</string>
     <string name="nick_name">닉네임</string>
     <string name="study_time">00:00:00</string>
     <string name="my_ranking">내 순위</string>
     <string name="profile">프로필 이미지</string>
+    <string name="sign_up">회원가입</string>
+    <string name="enter_name">성함을 입력해주세요</string>
+    <string name="select_major">학과를 선택해주세요</string>
+    <string name="enter_email">사용할 E-mail 을 입력해주세요</string>
+    <string name="enter_password">사용할 Password 를 입력해주세요</string>
+    <string name="doublecheck_password">Password 를 한 번 더 입력해주세요</string>
+    <string name="name" translatable="false">Name</string>
+    <string name="e_mail" translatable="false">E-mail</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="password_alrt">Password 는 6자 이상이어야 합니다.</string>
+    <string name="password_warning">Password가 일치하지 않습니다!</string>
+    <string name="make_account">계정 생성</string>
+    <string name="not_yet">아직 계정이 없으신가요?</string>
+    <string name="or" translatable="false">OR</string>
+    <string name="log_in">로그인</string>
+    <string name="set_profile">프로필 설정</string>
+    <string name="start">시작하기</string>
 </resources>

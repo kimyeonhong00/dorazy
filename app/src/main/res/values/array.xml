@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="major">
+        <item>건축학부 건축공학전공</item>
+        <item>건축학부 건축학전공</item>
+        <item>경영학부 경영학 전공</item>
+        <item>경영학부 회계학 전공</item>
+        <item>경제학과</item>
+        <item>고분자시스템공학부 고분자공학전공</item>
+        <item>고분자시스템공학부 파이버융합소재공학전공</item>
+        <item>공연영화학부 뮤지컬전공</item>
+        <item>공연영화학부 연극전공</item>
+        <item>공연영화학부 영화전공</item>
+        <item>과학교육과</item>
+        <item>국어국문과</item>
+        <item>국제학부 국제경영학전공</item>
+        <item>기계공학과</item>
+        <item>도시계획부동산학부</item>
+        <item>도예과</item>
+        <item>디자인학부 커뮤니케이션디자인전공</item>
+        <item>디자인학부 패션산업디자인전공</item>
+        <item>모바일시스템공학과</item>
+        <item>무역학과</item>
+        <item>무용과</item>
+        <item>미디어커뮤니케이션학부</item>
+        <item>법학과</item>
+        <item>사학과</item>
+        <item>산업경영학과</item>
+        <item>산업보안학과</item>
+        <item>상담학과</item>
+        <item>소프트웨어학과</item>
+        <item>수학교육과</item>
+        <item>영미인문학과</item>
+        <item>음악학부 관현악전공</item>
+        <item>음악학부 국악전공</item>
+        <item>음악학부 성악전공</item>
+        <item>음악학부 작곡전공</item>
+        <item>음악학부 피아노전공</item>
+        <item>전자전기공학부 융합반도체공학전공</item>
+        <item>전자전기공학부 전자전기공학전공</item>
+        <item>정보통계학과</item>
+        <item>정치외교학과</item>
+        <item>철학과</item>
+        <item>체육교육과</item>
+        <item>컴퓨터공학과</item>
+        <item>토목환경공학과</item>
+        <item>특수교육과</item>
+        <item>한문교육과</item>
+        <item>행정학과</item>
+        <item>화학공학과</item>
+
+    </string-array>
+</resources>
