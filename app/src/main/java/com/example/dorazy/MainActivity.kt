@@ -21,5 +21,6 @@ class MainActivity : AppCompatActivity() {
         binding.rankingbutton.setOnClickListener {
             startActivity(Intent(this, PersonalRankingActivity::class.java))
         }
+
     }
 }
