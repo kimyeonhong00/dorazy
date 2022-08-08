@@ -92,7 +92,7 @@ class fragment1:Fragment() {
         if (groupID == null) {                                                     // new group for two user
 
             getUserInfoFromServer(myUid)
-            getUserInfoFromServer(toUid)
+            //getUserInfoFromServer(toUid)
             userCount = 2
         }
 
@@ -113,7 +113,7 @@ class fragment1:Fragment() {
         return view
     }
     private fun findGroup(toUid: String) {
-        firestore!!.collection("groups").whereGreaterThanOrEqualTo("users.$myUid", 0).get()
+        firestore!!.collection("groups").whereGreaterThanOrEqualTo("User.$myUid", 0).get()
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
                 for (document in it.result!!) {
@@ -134,17 +134,17 @@ class fragment1:Fragment() {
             }
             val document = it.result
             val users =
-                document!!.get("users") as Map<String, Long>?
+                document!!.get("User") as Map<String, Long>?
             for (key in users!!.keys) {
                 getUserInfoFromServer(key)
             }
             userCount = users.size//users.put(myUid, (long) 0);
-            //document.getReference().update("users", users);
+            document.getReference().update("User", users);
 
         }
     }
     private fun getUserInfoFromServer(id: String?) {
-        firestore!!.collection("users").document(id!!).get().addOnSuccessListener {
+        firestore!!.collection("User").document(id!!).get().addOnSuccessListener {
             val userModel = it.toObject(UserModel::class.java)
             if(userModel?.uid != null)  userList[userModel.uid!!] = userModel
             if (groupID != null && userCount == userList.size) {

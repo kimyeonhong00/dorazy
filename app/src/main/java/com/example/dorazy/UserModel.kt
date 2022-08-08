@@ -1,11 +1,13 @@
 package com.example.dorazy
 
 class UserModel {
-    var userid: String? = null
-    var uid: String?= null
-    var gender: String?= null
+
+    var goalTime_db:java.lang.Long ? = null
     var major: String?= null
-    var name: String?= null
-    var root: Int?= null
-    var studytime: Int?= null //-> 이걸 맵으로 (날짜,시간)
+    var name: String? = null
+    var root: java.lang.Long?= null
+    var studyTime: java.lang.Long?=null
+    var uid: String?=null
+    var user_id: String?=null
+
 }

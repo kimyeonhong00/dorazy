@@ -1,5 +1,8 @@
 package com.example.dorazy
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -9,13 +12,18 @@ import android.view.View.OnClickListener
 import android.view.Gravity
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageButton
 
 class grouplist : AppCompatActivity() { //chatactivity
     private var drawerLayout: DrawerLayout? = null
     private var fragment: fragment1? = null
     private var userListInGroupFragment: UserListInGroupFragment? = null
-    private var rightMenuBtn: Button?= null
+    private var rightMenuBtn: AppCompatImageButton?= null
     private var backBtn: Button?= null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +33,17 @@ class grouplist : AppCompatActivity() { //chatactivity
         val actionBar: ActionBar = supportActionBar!!
         actionBar.setDisplayHomeAsUpEnabled(true)
         actionBar.setHomeButtonEnabled(true)
+
         val toUid: String? = intent?.getStringExtra("toUid")
         val groupID: String? = intent?.getStringExtra("groupID")
         val groupTitle: String? = intent?.getStringExtra("groupTitle")
         actionBar.setTitle(groupTitle)
         // left drawer
-        drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        //drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        rightMenuBtn = findViewById(R.id.rightMenuBtn)
         rightMenuBtn?.setOnClickListener(OnClickListener {
-            if (drawerLayout!!.isDrawerOpen(Gravity.RIGHT)) {
+            val intent = Intent(this@grouplist, grouppage::class.java)
+            /*if (drawerLayout!!.isDrawerOpen(Gravity.RIGHT)) {
                 drawerLayout!!.closeDrawer(Gravity.RIGHT)
             } else {
                 if (userListInGroupFragment == null) {
@@ -40,7 +51,7 @@ class grouplist : AppCompatActivity() { //chatactivity
                     supportFragmentManager.beginTransaction().replace(R.id.drawerFragment, userListInGroupFragment!!).commit()
                 }
                 drawerLayout!!.openDrawer(Gravity.RIGHT)
-            }
+            }*/
         })
         backBtn?.setOnClickListener {
             onBackPressed()

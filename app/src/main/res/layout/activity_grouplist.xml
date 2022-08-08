@@ -12,13 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#002244">
-        <ImageButton
-            android:id="@+id/backtBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/ic_back_arrow_white"
-            android:clickable="true"
-            tools:visibility="visible" />
         <TextView
             android:layout_width="300dp"
             android:layout_height="40dp"
@@ -28,13 +21,17 @@
             android:textColor="@color/white"
             >
         </TextView>
-        <Button
+        <ImageButton
             android:id="@+id/rightMenuBtn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/ic_menu" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:gravity="right"
+            android:layout_marginRight="1dp"
+            android:background="@drawable/ic_add"
+            />
+
+
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.drawerlayout.widget.DrawerLayout

@@ -44,7 +44,6 @@ class grouppage : AppCompatActivity() { //selectuser
     var firestoreAdapter: FirestoreAdapter<*>? = null
     var firestore: FirebaseFirestore? = null
 
-
     override fun onStart(){
         super.onStart()
         if (firestoreAdapter != null){
@@ -65,7 +64,7 @@ class grouppage : AppCompatActivity() { //selectuser
 
         groupID = intent.getStringExtra("groupID")
         println("~~~~~~~~~~~~groupID getstring extra")
-        firestoreAdapter = RecyclerViewAdapter(FirebaseFirestore.getInstance().collection("Users").orderBy("name"))
+        firestoreAdapter = RecyclerViewAdapter(FirebaseFirestore.getInstance().collection("User").orderBy("name"))
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.setLayoutManager(LinearLayoutManager(this))
         recyclerView.setAdapter(firestoreAdapter)
@@ -110,16 +109,7 @@ class grouppage : AppCompatActivity() { //selectuser
         val t_dateFormat = SimpleDateFormat("yyyy-MM-dd kk:mm:ss E", Locale("ko", "KR"))
         val str_date = t_dateFormat.format(t_date)
 
-
-        str.gravity = Gravity.CENTER
-        var builder = AlertDialog.Builder(this).setTitle("그룹 이름을 입력하세요")
-            .setView(str).setPositiveButton("확인",
-                DialogInterface.OnClickListener{dialog, which ->
-                    Toast.makeText(this,str.text, Toast.LENGTH_SHORT).show()
-                    title = str.text.toString()
-                })
-        builder.show()
-        if(str.length()==0){
+        if(title.length==0){
             for (key in selectedUsers.keys){
                 users[key] = 0
                 if(title.length<20 && (key!=uid)){
@@ -131,7 +121,8 @@ class grouppage : AppCompatActivity() { //selectuser
         val data = mutableMapOf<String, Any>()
         data["title"]= title
         data["users"] = users
-
+        data["leader"] = uid
+        data["userCount"] = users.size
         group.set(data).addOnCompleteListener {
             if(it.isSuccessful){
                 println("~~~~~~~~~~~~데이터세팅 성공~~~~~\n")
@@ -165,12 +156,12 @@ class grouppage : AppCompatActivity() { //selectuser
                 return
             }
 
-            viewHolder.user_id.text = userModel.userid
+            viewHolder.user_id.text = userModel.user_id
             viewHolder.itemView.context
 
             viewHolder.userChk.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    selectedUsers[userModel.uid!!] = userModel.userid!!
+                    selectedUsers[userModel.uid!!] = userModel.user_id!!
                 } else {
                     selectedUsers.remove(userModel.uid)
                 }

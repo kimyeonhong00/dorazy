@@ -61,6 +61,7 @@
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/ic_add.xml" value="0.1915" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/ic_finish_button.xml" value="0.2115" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1545" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/ic_menu.xml" value="0.2025" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/ic_pause.xml" value="0.1545" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/ic_select.xml" value="0.1195" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/ic_start.xml" value="0.1545" />
@@ -72,7 +73,7 @@
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/seek_back.xml" value="0.1" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/seek_thumb.xml" value="0.1" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/drawable/share_rectangle.xml" value="0.216" />
-        <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_grouplist.xml" value="0.152" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_grouplist.xml" value="0.1" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_grouppage.xml" value="0.1" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_sharepage.xml" value="0.2" />

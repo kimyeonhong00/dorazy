@@ -6,5 +6,5 @@ class GroupModel {
     var leader: String? = null
     var userCount: Int? = null
     var unreadCount: Int? = null
-
+    var users: Map<String, String> = HashMap()
 }
