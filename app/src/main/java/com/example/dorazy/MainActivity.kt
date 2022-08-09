@@ -18,10 +18,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
 
     var currentPosition=0
-    val handler=Handler(Looper.getMainLooper()){
-        setPage()
-        true
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +28,11 @@ class MainActivity : AppCompatActivity() {
         binding.rankingbutton.setOnClickListener {
             startActivity(Intent(this, PersonalRankingActivity::class.java))
         }
+
+        binding.bookingbutton.setOnClickListener {
+            startActivity(Intent(this, MeetActivity::class.java))
+        }
+
 //        binding.logoutbutton.setOnClickListener {
 //            val intent = Intent(this,LoginActivity::class.java)
 //            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -43,17 +44,10 @@ class MainActivity : AppCompatActivity() {
         pager.adapter = ViewPagerAdapter(getList())
         pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        val thread=Thread(PagerRunnable())
-        thread.start()
     }
 
     private fun getList(): ArrayList<Int> {
         return arrayListOf<Int>(R.drawable.home_banner_info_1, R.drawable.home_banner_info_2, R.drawable.home_banner_seat)
     }
 
-        binding.bookingbutton.setOnClickListener {
-            startActivity(Intent(this, MeetActivity::class.java))
-        }
-
-    }
 }

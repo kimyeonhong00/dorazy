@@ -28,4 +28,9 @@
     <string name="rent">Rental of Goods</string>
     <string name="more">more</string>
     <string name="members">Members</string>
+    <string name="interview_room">Interview Room</string>
+    <string name="table">Table</string>
+    <string name="studyroom">Study Room</string>
+    <string name="self_study_space">Self-study Space</string>
+    <string name="reserve">Reserve</string>
 </resources>
