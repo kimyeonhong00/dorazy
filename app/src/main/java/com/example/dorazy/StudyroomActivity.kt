@@ -16,17 +16,18 @@ class StudyroomActivity : AppCompatActivity() {
 
         // 미팅 전환
         binding.meetChangeBtn.setOnClickListener {
-            startActivity(Intent(this, MeetActivity::class.java))
+            startActivity(Intent(this, MeetActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
         }
 
         // 자율학습 전환
         binding.selfstudyBtn.setOnClickListener {
-            startActivity(Intent(this, SelfstudyActivity::class.java))
+            startActivity(Intent(this, SelfstudyActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
         }
 
         // 메인으로 전환
         binding.backBtn.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
         // 예약

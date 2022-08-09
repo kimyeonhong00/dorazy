@@ -1,6 +1,5 @@
 package com.example.dorazy
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -24,13 +23,11 @@ class MeetActivity : AppCompatActivity() {
         var isReserv = intent.getBooleanExtra("isReserv", false)
 
         // 인텐트
-        var meetIntent = Intent(this, MeetActivity::class.java)
+        val meetIntent = Intent(this, MeetActivity::class.java)
         val mainIntent = Intent(this, MainActivity::class.java)
         val meetReservIntent = Intent(this, MeetReservActivity::class.java)
         val selfStudyIntent = Intent(this, SelfstudyActivity::class.java)
-        var selfStudyReservIntent = Intent(this, SelfstudyReservActivity::class.java)
         val studyroomIntent = Intent(this, StudyroomActivity::class.java)
-        var studyroomReservIntent = Intent(this, MeetActivity::class.java)
 
         // 자리
         var table1 = intent.getBooleanExtra("table1", false) // table1 자리 존재 여부
@@ -42,11 +39,11 @@ class MeetActivity : AppCompatActivity() {
             isReserv = false
             meetIntent.putExtra("isReserv", isReserv)
 
-            if (table1 == true)
+            if (table1)
                 table1 = false
-            if (table2 == true)
+            if (table2)
                 table2 = false
-            if (table3 == true)
+            if (table3)
                 table3 = false
 
             startActivity(meetIntent)
@@ -70,8 +67,6 @@ class MeetActivity : AppCompatActivity() {
             binding.table3.setImageResource(R.drawable.meet_table3)
 
 
-
-
         // 자리 반납
         fun showDialog() {
             val builder2 = AlertDialog.Builder(this)
@@ -81,7 +76,7 @@ class MeetActivity : AppCompatActivity() {
 
             // 버튼 글자 변경
 
-            var listener = DialogInterface.OnClickListener { _, p1 ->
+            val listener = DialogInterface.OnClickListener { _, p1 ->
                 when(p1) {
                     DialogInterface.BUTTON_POSITIVE ->
                         reservCancelClickYes() // 명령어
@@ -97,16 +92,19 @@ class MeetActivity : AppCompatActivity() {
         }
 
         binding.studyroomBtn.setOnClickListener {
+            studyroomIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(studyroomIntent)
         }
 
         binding.selfstudyBtn.setOnClickListener {
+            selfStudyIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(selfStudyIntent)
         }
 
         binding.backBtn.setOnClickListener {
             mainIntent.putExtra("isReserv", isReserv)
             startActivity(mainIntent)
+            finish()
         }
 
         // 자리를 예약한 경우
@@ -119,6 +117,7 @@ class MeetActivity : AppCompatActivity() {
             {
                 meetReservIntent.putExtra("isReserv", isReserv)
                 startActivity(meetReservIntent)
+                finish()
             }
             else
             {
@@ -129,7 +128,7 @@ class MeetActivity : AppCompatActivity() {
         // 예약 기능 추가
     }
 
-    fun toast(message:String){
+    private fun toast(message:String){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 

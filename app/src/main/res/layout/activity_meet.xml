@@ -124,7 +124,7 @@
         android:layout_width="413dp"
         android:layout_height="wrap_content"
         android:background="@drawable/top_bar"
-        android:text="@string/reserve"
+        android:text="@string/select_seat"
         android:textStyle="bold"
         android:fontFamily="@font/aritaburihairline"
         android:textColor="@color/white"

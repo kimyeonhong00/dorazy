@@ -17,8 +17,9 @@ class MeetReservActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityMeetReservBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meet)
+        setContentView(binding.root)
             // var meetReserv = false // 인텐트하면서 변수가 초기화되는 것으로 보임
 
         var isReserv = intent.getBooleanExtra("isReserv", false) // default value 필요
@@ -82,16 +83,6 @@ class MeetReservActivity : AppCompatActivity() {
         binding = ActivityMeetReservBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 스터디룸(예약) intent
-        binding.studyroomBtn.setOnClickListener {
-            startActivity(studyroomIntent)
-        }
-
-        // 자율학습(예약) intent
-        binding.selfstudyBtn.setOnClickListener {
-            startActivity(selfStudyIntent)
-        }
-
         // 이전 화면 intent
         binding.backBtn.setOnClickListener {
             startActivity(meetIntent)
@@ -99,13 +90,11 @@ class MeetReservActivity : AppCompatActivity() {
 
         // 예약버튼 클릭
         binding.reservBtn.setOnClickListener {
-            if (isReserv == false)
-                if (chooseTable == true)
-                    showDialog()
+            if (!isReserv and chooseTable)
+                showDialog()
         }
 
         // 하나만 클릭이 가능하게
-
 
         // table1 클릭시 (다이얼로그에 테이블 번호 매기기)
         binding.table1.setOnClickListener {
@@ -114,21 +103,16 @@ class MeetReservActivity : AppCompatActivity() {
             table3 = false
             table1Click++
 
-            if (table1Click%2 == 1) // 테이블 클릭한 경우
+            chooseTable = if (table1Click%2 == 1) // 테이블 클릭한 경우
             {
-                binding.reservBtn.setBackgroundResource(R.drawable.top_bar) // 예약가능 이미지로 변경
-                binding.table1.setBackgroundResource(R.drawable.meet_table1_reserv)
-                binding.table2.setBackgroundResource(R.drawable.meet_table2)
-                binding.table3.setBackgroundResource(R.drawable.meet_table3)
-                chooseTable = true
+                binding.table1.setImageResource(R.drawable.meet_table1_reserv)// 예약가능 이미지로 변경
+                binding.table2.setImageResource(R.drawable.meet_table2)
+                binding.table3.setImageResource(R.drawable.meet_table3)
+                true
+            } else {
+                binding.table1.setImageResource(R.drawable.meet_table1) // 예약불가 이미지로 변경
+                false
             }
-            else
-            {
-                binding.reservBtn.setBackgroundResource(R.drawable.reserved_bar) // 예약불가 이미지로 변경
-                binding.table1.setBackgroundResource(R.drawable.meet_table1)
-                chooseTable = false
-            }
-
         }
 
         //table2 클릭시 (다이얼로그에 테이블 번호 매기기)
@@ -138,20 +122,17 @@ class MeetReservActivity : AppCompatActivity() {
             table3 = false // 중복 체크 불가
             table2Click++
 
-            if (table2Click%2 == 1) {
-                binding.reservBtn.setBackgroundResource(R.drawable.top_bar) // 예약가능 이미지로 변경
-                binding.table2.setBackgroundResource(R.drawable.meet_table2_reserv)
-                binding.table1.setBackgroundResource(R.drawable.meet_table1)
-                binding.table3.setBackgroundResource(R.drawable.meet_table3)
-                chooseTable = true
-            }
-
-            else {
-                binding.reservBtn.setBackgroundResource(R.drawable.reserved_bar) // 예약불가 이미지로 변경
-                binding.table2.setBackgroundResource(R.drawable.meet_table2)
-                chooseTable = false
+            chooseTable = if (table2Click%2 == 1) {
+                binding.table2.setImageResource(R.drawable.meet_table2_reserv) // 예약가능 이미지로 변경
+                binding.table1.setImageResource(R.drawable.meet_table1)
+                binding.table3.setImageResource(R.drawable.meet_table3)
+                true
+            } else {
+                binding.table2.setImageResource(R.drawable.meet_table2) // 예약불가 이미지로 변경
+                false
             }
         }
+
         // table3 클릭시 (다이얼로그에 테이블 번호 매기기)
         binding.table3.setOnClickListener {
             table3 = !table3
@@ -159,24 +140,20 @@ class MeetReservActivity : AppCompatActivity() {
             table2 = false
             table3Click++
 
-            if (table3Click%2 == 1) {
-                binding.reservBtn.setBackgroundResource(R.drawable.top_bar) // 예약가능 이미지로 변경
-                binding.table3.setBackgroundResource(R.drawable.meet_table3_reserv)
-                binding.table1.setBackgroundResource(R.drawable.meet_table1)
-                binding.table2.setBackgroundResource(R.drawable.meet_table2)
-                chooseTable = true
-            }
-
-            else {
-                binding.reservBtn.setBackgroundResource(R.drawable.reserved_bar) // 예약불가 이미지로 변경
-                binding.table3.setBackgroundResource(R.drawable.meet_table3)
-                chooseTable = false
+            chooseTable = if (table3Click%2 == 1) {
+                binding.table3.setImageResource(R.drawable.meet_table3_reserv) // 예약가능 이미지로 변경
+                binding.table1.setImageResource(R.drawable.meet_table1)
+                binding.table2.setImageResource(R.drawable.meet_table2)
+                true
+            } else {
+                binding.table3.setImageResource(R.drawable.meet_table3) // 예약불가 이미지로 변경
+                false
             }
         }
 
     }
 
-    fun toast(message:String){
+    private fun toast(message:String){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 

@@ -18,6 +18,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
 
     var currentPosition=0
+    val handler=Handler(Looper.getMainLooper()){
+        setPage()
+        true
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,10 +48,27 @@ class MainActivity : AppCompatActivity() {
         pager.adapter = ViewPagerAdapter(getList())
         pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
+        val thread=Thread(PagerRunnable())
+        thread.start()
     }
 
     private fun getList(): ArrayList<Int> {
         return arrayListOf<Int>(R.drawable.home_banner_info_1, R.drawable.home_banner_info_2, R.drawable.home_banner_seat)
     }
 
+    private fun setPage(){
+        if(currentPosition==5) currentPosition=0
+        pager.setCurrentItem(currentPosition,true)
+        currentPosition+=1
+    }
+
+    //2초 마다 페이지 넘기기
+    inner class PagerRunnable:Runnable{
+        override fun run() {
+            while(true){
+                Thread.sleep(2000)
+                handler.sendEmptyMessage(0)
+            }
+        }
+    }
 }

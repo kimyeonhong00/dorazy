@@ -37,4 +37,5 @@
     <string name="studyroom">스터디룸</string>
     <string name="self_study_space">자율학습공간</string>
     <string name="reserve">예약하기</string>
+    <string name="select_seat">좌석 선택하기</string>
 </resources>
