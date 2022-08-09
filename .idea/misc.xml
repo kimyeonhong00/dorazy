@@ -56,11 +56,26 @@
         <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/drawable/ic_settings.xml" value="0.1" />
         <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/drawable/radius.xml" value="0.1" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/activity_main.xml" value="0.19215686274509805" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/activity_stopwatch.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/activity_toolbar.xml" value="0.1" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/create_account.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/create_profile.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/in_group.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/item_home_banner.xml" value="0.1" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/loading.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/login.xml" value="0.15260416666666668" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/page.xml" value="0.2" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/personal_ranking.xml" value="0.18385416666666668" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/ranking_personal_bar_layout.xml" value="0.18385416666666668" />
         <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/activity_toolbar.xml" value="0.1" />
         <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/layout/item_home_banner.xml" value="0.1" />
         <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/menu/actionbar_menu.xml" value="0.264" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/menu/mainmenu.xml" value="0.11203703703703703" />
+        <entry key="..\:/Users/USER/GitHub/dorazy/app/src/main/res/mipmap-anydpi-v26/dorazy.xml" value="0.1855" />
         <entry key="..\:/Users/dongj/OneDrive/Desktop/dorazy/app/src/main/res/drawable/ic_launcher_dorazy_background.xml" value="0.1" />
         <entry key="..\:/Users/dongj/OneDrive/Desktop/dorazy/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/dongj/OneDrive/Desktop/dorazy/app/src/main/res/layout/activity_meet.xml" value="0.35520833333333335" />
