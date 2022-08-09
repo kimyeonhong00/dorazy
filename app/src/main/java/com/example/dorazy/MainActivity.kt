@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         binding.rankingbutton.setOnClickListener {
-            startActivity(Intent(this, RankingHomeActivity::class.java))
+            startActivity(Intent(this, PersonalRankingActivity::class.java))
         }
 //        binding.logoutbutton.setOnClickListener {
 //            val intent = Intent(this,LoginActivity::class.java)
@@ -66,6 +66,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }
