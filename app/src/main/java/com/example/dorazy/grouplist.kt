@@ -28,7 +28,7 @@ class grouplist : AppCompatActivity() { //chatactivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_grouplist)
-        val toolbar: Toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         val actionBar: ActionBar = supportActionBar!!
         actionBar.setDisplayHomeAsUpEnabled(true)
@@ -39,11 +39,12 @@ class grouplist : AppCompatActivity() { //chatactivity
         val groupTitle: String? = intent?.getStringExtra("groupTitle")
         actionBar.setTitle(groupTitle)
         // left drawer
-        //drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         rightMenuBtn = findViewById(R.id.rightMenuBtn)
         rightMenuBtn?.setOnClickListener(OnClickListener {
             val intent = Intent(this@grouplist, grouppage::class.java)
-            /*if (drawerLayout!!.isDrawerOpen(Gravity.RIGHT)) {
+            startActivity(intent)
+            if (drawerLayout!!.isDrawerOpen(Gravity.RIGHT)) {
                 drawerLayout!!.closeDrawer(Gravity.RIGHT)
             } else {
                 if (userListInGroupFragment == null) {
@@ -51,12 +52,13 @@ class grouplist : AppCompatActivity() { //chatactivity
                     supportFragmentManager.beginTransaction().replace(R.id.drawerFragment, userListInGroupFragment!!).commit()
                 }
                 drawerLayout!!.openDrawer(Gravity.RIGHT)
-            }*/
+            }
         })
         backBtn?.setOnClickListener {
             onBackPressed()
         }
         // chatting area
+        // 여기가 그룹 detail 나오는 fragment 불러오는 페이지
         fragment = fragment1.getInstance(toUid, groupID)
         supportFragmentManager.beginTransaction().replace(R.id.mainFragment, fragment!!).commit()
     }

@@ -169,7 +169,7 @@ class GroupFragment : Fragment() { //Chatroomfragment
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val view =
-                LayoutInflater.from(parent.context).inflate(R.layout.fragment_group, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.item_group, parent, false)
             return GroupViewHolder(view)
         }
 
@@ -178,6 +178,7 @@ class GroupFragment : Fragment() { //Chatroomfragment
             val groupModel = groupList[position]
             groupViewHolder.group_title.text = groupModel.title
             groupViewHolder.group_leader.text = groupModel.leader
+            groupViewHolder.group_count.text = groupModel.userCount.toString()
             //roomViewHolder.last_msg.text = chatRoomModel.lastMsg
             //roomViewHolder.last_time.text = chatRoomModel.lastDatetime
             /*if (chatRoomModel.photo == null) {

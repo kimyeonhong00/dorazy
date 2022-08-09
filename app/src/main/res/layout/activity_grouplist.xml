@@ -19,15 +19,16 @@
             android:textSize="35dp"
             android:gravity="center"
             android:textColor="@color/white"
+            android:layout_gravity="center"
             >
         </TextView>
         <ImageButton
             android:id="@+id/rightMenuBtn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:gravity="right"
-            android:layout_marginRight="1dp"
+            android:layout_gravity="right"
             android:background="@drawable/ic_add"
+            android:layout_marginRight="10dp"
             />
 
 
@@ -45,8 +46,6 @@
             android:layout_height="match_parent"
             android:background="@drawable/beach_backgroud">
 
-
-
             <FrameLayout
                 android:id="@+id/mainFragment"
                 android:layout_width="match_parent"
@@ -58,7 +57,7 @@
 
         <FrameLayout
             android:id="@+id/drawerFragment"
-            android:layout_width="260dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:background="@android:color/white">

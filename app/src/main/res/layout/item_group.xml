@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--item_chatroom-->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -9,6 +10,7 @@
         android:id="@+id/room_image"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:src="@drawable/dorazy_circle"
         android:layout_margin="10dp"/>
 
     <RelativeLayout
@@ -26,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textSize="18dp"
-                android:text="group name"/>
+                android:text="group title"/>
 
             <TextView
                 android:id="@+id/group_count"
