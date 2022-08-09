@@ -22,5 +22,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, PersonalRankingActivity::class.java))
         }
 
+        binding.bookingbutton.setOnClickListener {
+            startActivity(Intent(this, MeetActivity::class.java))
+        }
+
     }
 }

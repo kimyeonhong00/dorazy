@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+  <Button
+      android:id="@+id/back_btn"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:background="@drawable/profile_arrow"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:ignore="SpeakableTextPresentCheck" />
+
+  <ImageView
+      android:id="@+id/sand_img"
+      android:layout_width="410dp"
+      android:layout_height="315dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:srcCompat="@drawable/sandex" />
+
+  <ImageView
+      android:id="@+id/backround_img"
+      android:layout_width="155dp"
+      android:layout_height="155dp"
+      app:layout_constraintBottom_toBottomOf="@+id/sand_img"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.17"
+      app:srcCompat="@drawable/background" />
+
+  <ImageView
+      android:id="@+id/profile_img"
+      android:layout_width="134dp"
+      android:layout_height="134dp"
+      app:layout_constraintBottom_toBottomOf="@+id/sand_img"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.199"
+      app:srcCompat="@drawable/default_img" />
+
+  <TextView
+      android:id="@+id/profile_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="도라지"
+      android:textColor="#000000"
+      android:textSize="25dp"
+      app:layout_constraintBottom_toBottomOf="@+id/sand_img"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/backround_img"
+      app:layout_constraintVertical_bias="0.0" />
+
+  <TextView
+      android:id="@+id/subname"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="368dp"
+      android:text="#컴퓨터공학과 #선택과 집중"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/profile_name"
+      app:layout_constraintVertical_bias="0.0" />
+
+  <TextView
+      android:id="@+id/percent"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="232dp"
+      android:textColor="#66777373"
+      android:text = "0%"
+      android:textSize="40dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="@+id/sand_img"
+      app:layout_constraintTop_toTopOf="@+id/sand_img"
+      app:layout_constraintVertical_bias="0.389" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
