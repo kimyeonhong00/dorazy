@@ -15,30 +15,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <ImageView
-        android:id="@+id/homebanner"
-        android:layout_width="390dp"
-        android:layout_height="256dp"
-        android:contentDescription="home banner Dorazy Information"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/home_banner_info" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/recordbutton"
         android:layout_width="160dp"
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/radius"
         android:text="공부기록"
         android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/rankingbutton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homebanner" />
+        app:layout_constraintTop_toBottomOf="@+id/pager" />
 
     <Button
         android:id="@+id/bookingbutton"
@@ -70,13 +67,13 @@
         android:id="@+id/rankingbutton"
         android:layout_width="160dp"
         android:layout_height="150dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/radius"
         android:text="랭킹"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homebanner" />
+        app:layout_constraintTop_toBottomOf="@+id/pager" />
 
     <Button
         android:id="@+id/setting"
