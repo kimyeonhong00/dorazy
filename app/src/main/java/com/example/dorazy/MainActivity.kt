@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private var auth :FirebaseAuth? = null
     private lateinit var binding:ActivityMainBinding
 
-    var currentPosition=0
+    private var currentPosition=0
     val handler=Handler(Looper.getMainLooper()){
         setPage()
         true
@@ -40,6 +40,9 @@ class MainActivity : AppCompatActivity() {
 //            finish()
 //        }
 
+        setSupportActionBar(toolbar)
+
+        supportActionBar!!.setDisplayShowTitleEnabled(true)
         pager.adapter = ViewPagerAdapter(getList())
         pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
@@ -48,10 +51,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getList(): ArrayList<Int> {
-        return arrayListOf<Int>(R.drawable.home_banner_info_1, R.drawable.home_banner_info_2, R.drawable.home_banner_seat)
+        return arrayListOf(R.drawable.home_banner_info_1, R.drawable.home_banner_info_2, R.drawable.home_banner_seat)
     }
 
-    fun setPage(){
+    private fun setPage(){
         if(currentPosition==5) currentPosition=0
         pager.setCurrentItem(currentPosition,true)
         currentPosition+=1
