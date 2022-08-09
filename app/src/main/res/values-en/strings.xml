@@ -2,12 +2,30 @@
 <resources>
     <string name="app_name">Dorazy</string>
     <string name="ranking_view_title">Ranking</string>
-    <string name="ranking_stats">My Rankings</string>
-    <string name="weekly_ranking">Weekly Ranking</string>
+    <string name="ranking_stats">Ranking History</string>
     <string name="my_badge">My Badge</string>
-    <string name="rank">th</string>
     <string name="nick_name">nickname</string>
     <string name="study_time">00:00:00</string>
     <string name="my_ranking">My Ranking</string>
     <string name="profile">profile image</string>
+    <string name="personal_ranking">Ranking</string>
+    <string name="in_group_ranking">Ranking within Group</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="enter_name">Please enter a name</string>
+    <string name="select_major">Please choose your major</string>
+    <string name="enter_email">Enter email to use</string>
+    <string name="enter_password">Enter the password to use</string>
+    <string name="doublecheck_password">Please enter the password again</string>
+    <string name="password_alrt">Password must be at least 6 characters long</string>
+    <string name="password_warning">Password doesn\'t match</string>
+    <string name="make_account">Make Account</string>
+    <string name="not_yet">Don\'t you have an account yet?</string>
+    <string name="log_in">Log In</string>
+    <string name="set_profile">Set Profile</string>
+    <string name="start">Start</string>
+    <string name="group_name">Group Name</string>
+    <string name="sit_reservation">Sit Reservaiton</string>
+    <string name="rent">Rental of Goods</string>
+    <string name="more">more</string>
+    <string name="members">Members</string>
 </resources>

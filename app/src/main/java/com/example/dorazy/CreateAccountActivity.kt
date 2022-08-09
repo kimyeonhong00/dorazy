@@ -5,19 +5,22 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.example.dorazy.databinding.CreateAccountBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
 private var auth: FirebaseAuth? = null
 
 class CreateAccountActivity : AppCompatActivity(){
 
     private lateinit var binding:CreateAccountBinding
+    private val db:FirebaseFirestore = FirebaseFirestore.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,12 +28,28 @@ class CreateAccountActivity : AppCompatActivity(){
         setContentView(binding.root)
         auth = Firebase.auth
 
+        binding.majorSpinner.adapter = ArrayAdapter.createFromResource(this,R.array.major,R.layout.spinner_item)
+        val majorArray = resources.getStringArray(R.array.major)
+
+        binding.psswrd.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                binding.passwordAlrt.visibility= View.VISIBLE
+                if (binding.psswrd.text.length>5) {
+                    binding.passwordAlrt.visibility= View.INVISIBLE
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
         binding.doublecheck.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 binding.doublecheckresult.visibility= View.VISIBLE
                 if (binding.psswrd.text!=null && binding.doublecheck.text!=null) {
                     binding.signupButton.isEnabled =
-                        binding.psswrd.text.toString() == binding.doublecheck.text.toString()
+                        ((binding.psswrd.text.toString() == binding.doublecheck.text.toString()) and (binding.psswrd.text.length>5))
                     if (binding.signupButton.isEnabled){
                         binding.doublecheckresult.text = "Password가 일치합니다!"
                         binding.doublecheckresult.setTextColor(Color.parseColor("#0000EE"))
@@ -49,9 +68,11 @@ class CreateAccountActivity : AppCompatActivity(){
             }
         })
 
+
         binding.signupButton.setOnClickListener{
             createAccount(binding.email.text.toString(),binding.psswrd.text.toString())
             Toast.makeText(this.applicationContext, "계정 생성 완료", Toast.LENGTH_LONG).show()
+            createDatabase(majorArray[binding.majorSpinner.selectedItemPosition])
             finish()
         }
 
@@ -59,7 +80,6 @@ class CreateAccountActivity : AppCompatActivity(){
     }
 
     private fun createAccount(email: String, password: String) {
-
         if (email.isNotEmpty() && password.isNotEmpty()) {
             auth?.createUserWithEmailAndPassword(email, password)
                 ?.addOnCompleteListener(this) { task ->
@@ -68,7 +88,7 @@ class CreateAccountActivity : AppCompatActivity(){
                             this, "계정 생성 완료.",
                             Toast.LENGTH_SHORT
                         ).show()
-                        finish() // 가입창 종료
+                        finish()
                     } else {
                         Toast.makeText(
                             this, "계정 생성 실패",
@@ -77,5 +97,13 @@ class CreateAccountActivity : AppCompatActivity(){
                     }
                 }
         }
+    }
+
+    private fun createDatabase(s: String) {
+        val newData = hashMapOf(
+            "name" to binding.nameInput.text.toString(),
+            "major" to s
+        )
+        db.collection("temp").document(binding.email.text.toString()).set(newData)
     }
 }

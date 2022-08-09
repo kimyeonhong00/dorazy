@@ -10,27 +10,32 @@
         android:id="@+id/emailinput"
         android:layout_width="350dp"
         android:layout_height="48dp"
-        android:hint="E-mail"
+        android:hint="@string/e_mail"
+        android:fontFamily="@font/aritaburilight"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/psswrdinput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:importantForAutofill="no"
+        android:inputType="textWebEmailAddress" />
 
     <EditText
         android:id="@+id/psswrdinput"
         android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_marginBottom="60dp"
-        android:hint="Password"
+        android:hint="@string/password"
+        android:fontFamily="@font/aritaburilight"
         android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:importantForAutofill="no" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -42,7 +47,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/logo"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textView2"
@@ -50,7 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:layout_marginTop="8dp"
-        android:text="아직 계정이 없으신가요?"
+        android:text="@string/not_yet"
+        android:fontFamily="@font/aritaburilight"
         android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/createAccountButton"
         app:layout_constraintHorizontal_bias="0.685"
@@ -62,7 +69,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="OR"
+        android:text="@string/or"
+        android:fontFamily="@font/aritaburilight"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/google_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +83,7 @@
         android:layout_height="52dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/login_button_drawable"
-        android:text="로그인"
+        android:text="@string/log_in"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +97,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
         android:background="#00FFFFFF"
-        android:text="회원가입"
+        android:fontFamily="@font/aritaburilight"
+        android:text="@string/sign_up"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/psswrdinput"
