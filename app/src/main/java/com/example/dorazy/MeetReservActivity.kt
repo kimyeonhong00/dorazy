@@ -2,74 +2,85 @@ package com.example.dorazy
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.widget.Toast
-import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import com.example.dorazy.databinding.ActivityMeetReservBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 
 class MeetReservActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMeetReservBinding
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private var auth : FirebaseAuth? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMeetReservBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-            // var meetReserv = false // 인텐트하면서 변수가 초기화되는 것으로 보임
+        auth = Firebase.auth
 
-        var isReserv = intent.getBooleanExtra("isReserv", false) // default value 필요
+        var isReserv = intent.getBooleanExtra("isReserv", false) // 예약 되었는가
         var chooseTable = false // 테이블 선택 여부
-
-        var table1Click = 0 // 테이블 예약 시 누르는 클릭
-        var table2Click = 0 // 테이블 예약 시 누르는 클릭
-        var table3Click = 0 // 테이블 예약 시 누르는 클릭
+        var tableClick = 0 // 선택한 테이블 번호
 
         // 인텐트
         val meetIntent = Intent(this, MeetActivity::class.java)
-        val mainIntent = Intent(this, MainActivity::class.java)
-        val meetReservIntent = Intent(this, MeetReservActivity::class.java)
-        val selfStudyIntent = Intent(this, SelfstudyActivity::class.java)
-        val selfStudyReservIntent = Intent(this, SelfstudyReservActivity::class.java)
-        val studyroomIntent = Intent(this, StudyroomActivity::class.java)
-        val studyroomReservIntent = Intent(this, MeetActivity::class.java)
 
-        // 자리
-        var table1 = intent.getBooleanExtra("table1", false) // table1 자리 존재 여부
-        var table2 = intent.getBooleanExtra("table2", false) // table2 자리 존재 여부
-        var table3 = intent.getBooleanExtra("table3", false) // table3 자리 존재 여부
+        // 자리 예약 여부
+        var table1 = intent.getBooleanExtra("table1", false)
+        var table2 = intent.getBooleanExtra("table2", false)
+        var table3 = intent.getBooleanExtra("table3", false)
+        var t1book = intent.getStringExtra("t1book")
+        var t2book = intent.getStringExtra("t2book")
+        var t3book = intent.getStringExtra("t3book")
 
+        Log.i("TAG",table1.toString())
 
         // 다이얼로그에서 예를 누르는 경우
-        fun reservClickYes() {
+        fun reservClickYes(tc:Int) {
             isReserv = true
+            when (tc) {
+                1 -> { table1 = true; t1book = auth!!.uid }
+                2 -> { table2 = true; t2book = auth!!.uid }
+                else -> { table3 = true; t3book = auth!!.uid }
+            }
+            val reservData = hashMapOf(
+                "table1" to table1,
+                "t1_booker" to t1book,
+                "table2" to table2,
+                "t2_booker" to t2book,
+                "table3" to table3,
+                "t3_booker" to t3book,
+            )
+            db.collection("reservation").document("InterviewRoom").set(reservData)
             meetIntent.putExtra("isReserv", isReserv)
-            meetIntent.putExtra("table1", table1)
-            meetIntent.putExtra("table2", table2)
-            meetIntent.putExtra("table3", table3)
             startActivity(meetIntent) // 명령어
+            finish()
         }
 
         // MeetReserv에서 자리예약 진행
-        fun showDialog(){
+        fun showDialog(tc : Int){
             val builder = AlertDialog.Builder(this)
             builder.setTitle("자리 예약")
-            builder.setMessage("자리를 예약하시겠습니까?")
+            builder.setMessage("${tc}번 자리를 예약하시겠습니까?")
             // 자리 예약 기능 추가
             // 버튼 글자 변경
-//            var inflater:LayoutInflater = layoutInflater
-//            builder.setView(inflater.inflate(R.layout.meet_reserv_dialog, null))
 
-            var listener = DialogInterface.OnClickListener { _, p1 ->
+            val listener = DialogInterface.OnClickListener { _, p1 ->
                 when(p1) {
                     DialogInterface.BUTTON_POSITIVE ->
-                        reservClickYes()
+                        reservClickYes(tc)
                     DialogInterface.BUTTON_NEGATIVE ->
-                        toast("취소하셨습니다")
+                        Toast.makeText(this, "취소하셨습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -78,84 +89,101 @@ class MeetReservActivity : AppCompatActivity() {
             builder.show()
         }
 
+        //테이블 초기 상태 세팅
+        if (table1)
+            binding.table1.setImageResource(R.drawable.meet_table1_reserv)
+        else
+            binding.table1.setImageResource(R.drawable.meet_table1)
 
+        if (table2)
+            binding.table2.setImageResource(R.drawable.meet_table2_reserv)
+        else
+            binding.table2.setImageResource(R.drawable.meet_table2)
 
-        binding = ActivityMeetReservBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        if (table3)
+            binding.table3.setImageResource(R.drawable.meet_table3_reserv)
+        else
+            binding.table3.setImageResource(R.drawable.meet_table3)
 
         // 이전 화면 intent
-        binding.backBtn.setOnClickListener {
-            startActivity(meetIntent)
-        }
+        binding.backBtn.setOnClickListener { super.onBackPressed() }
 
         // 예약버튼 클릭
         binding.reservBtn.setOnClickListener {
             if (!isReserv and chooseTable)
-                showDialog()
+                showDialog(tableClick)
         }
 
-        // 하나만 클릭이 가능하게
-
-        // table1 클릭시 (다이얼로그에 테이블 번호 매기기)
+        // 하나만 클릭이 가능
+        // table 클릭시 (예약 가능 자리인지 확인 후 색 변화)
         binding.table1.setOnClickListener {
-            table1 = !table1
-            table2 = false
-            table3 = false
-            table1Click++
-
-            chooseTable = if (table1Click%2 == 1) // 테이블 클릭한 경우
-            {
-                binding.table1.setImageResource(R.drawable.meet_table1_reserv)// 예약가능 이미지로 변경
-                binding.table2.setImageResource(R.drawable.meet_table2)
-                binding.table3.setImageResource(R.drawable.meet_table3)
-                true
-            } else {
-                binding.table1.setImageResource(R.drawable.meet_table1) // 예약불가 이미지로 변경
-                false
+            if (table1){
+                Toast.makeText(this, "이미 예약된 자리입니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            tableClick = if (tableClick!=1) {
+                chooseTable = true
+                binding.table1.setImageResource(R.drawable.meet_table1_reserv)
+                binding.reservBtn.setBackgroundColor(Color.parseColor("#002244"))
+                if (tableClick==2){
+                    binding.table2.setImageResource(R.drawable.meet_table2)
+                } else if (tableClick==3){
+                    binding.table3.setImageResource(R.drawable.meet_table3)
+                }
+                1
+            }else{
+                chooseTable = false
+                binding.table1.setImageResource(R.drawable.meet_table1)
+                binding.reservBtn.setBackgroundColor(Color.parseColor("#808080"))
+                0
             }
         }
 
-        //table2 클릭시 (다이얼로그에 테이블 번호 매기기)
         binding.table2.setOnClickListener {
-            table2 = !table2
-            table1 = false // 중복 체크 불가
-            table3 = false // 중복 체크 불가
-            table2Click++
-
-            chooseTable = if (table2Click%2 == 1) {
-                binding.table2.setImageResource(R.drawable.meet_table2_reserv) // 예약가능 이미지로 변경
-                binding.table1.setImageResource(R.drawable.meet_table1)
-                binding.table3.setImageResource(R.drawable.meet_table3)
-                true
-            } else {
-                binding.table2.setImageResource(R.drawable.meet_table2) // 예약불가 이미지로 변경
-                false
+            if (table2){
+                Toast.makeText(this, "이미 예약된 자리입니다!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
-        }
-
-        // table3 클릭시 (다이얼로그에 테이블 번호 매기기)
-        binding.table3.setOnClickListener {
-            table3 = !table3
-            table1 = false
-            table2 = false
-            table3Click++
-
-            chooseTable = if (table3Click%2 == 1) {
-                binding.table3.setImageResource(R.drawable.meet_table3_reserv) // 예약가능 이미지로 변경
-                binding.table1.setImageResource(R.drawable.meet_table1)
+            tableClick = if (tableClick!=2) {
+                chooseTable = true
+                binding.table2.setImageResource(R.drawable.meet_table2_reserv)
+                binding.reservBtn.setBackgroundColor(Color.parseColor("#002244"))
+                if (tableClick==1){
+                    binding.table1.setImageResource(R.drawable.meet_table1)
+                } else if (tableClick==3){
+                    binding.table3.setImageResource(R.drawable.meet_table3)
+                }
+                2
+            }else{
+                chooseTable = false
                 binding.table2.setImageResource(R.drawable.meet_table2)
-                true
-            } else {
-                binding.table3.setImageResource(R.drawable.meet_table3) // 예약불가 이미지로 변경
-                false
+                binding.reservBtn.setBackgroundColor(Color.parseColor("#808080"))
+                0
+            }
+        }
+
+        binding.table3.setOnClickListener {
+            if (table3){
+                Toast.makeText(this, "이미 예약된 자리입니다!", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            tableClick = if (tableClick!=3) {
+                chooseTable = true
+                binding.table3.setImageResource(R.drawable.meet_table3_reserv)
+                binding.reservBtn.setBackgroundColor(Color.parseColor("#002244"))
+                if (tableClick==2){
+                    binding.table2.setImageResource(R.drawable.meet_table2)
+                } else if (tableClick==1){
+                    binding.table1.setImageResource(R.drawable.meet_table1)
+                }
+                3
+            }else{
+                chooseTable = false
+                binding.table3.setImageResource(R.drawable.meet_table3)
+                binding.reservBtn.setBackgroundColor(Color.parseColor("#808080"))
+                0
             }
         }
 
     }
-
-    private fun toast(message:String){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-
 }

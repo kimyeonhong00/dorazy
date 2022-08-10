@@ -37,13 +37,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, MeetActivity::class.java))
         }
 
-//        binding.logoutbutton.setOnClickListener {
-//            val intent = Intent(this,LoginActivity::class.java)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//            startActivity(intent)
-//            auth?.signOut()
-//            finish()
-//        }
+        binding.recordbutton.setOnClickListener {
+            val intent = Intent(this,LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            auth?.signOut()
+            finish()
+        }
 
         setSupportActionBar(toolbar)
 
