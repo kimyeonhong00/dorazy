@@ -115,19 +115,20 @@
 
     </LinearLayout>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/reserv_btn"
         android:layout_width="413dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/top_bar"
-        android:text="@string/reserve"
-        android:textStyle="bold"
+        android:background="@color/gray"
         android:fontFamily="@font/aritaburihairline"
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
+        android:text="@string/reserve"
         android:textColor="@color/white"
         android:textSize="28sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 

@@ -55,12 +55,12 @@
 
         <ImageView
             android:id="@+id/table1"
+            android:src="@drawable/meet_table1"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:src="@drawable/meet_table1"
             android:contentDescription="@string/table" />
 
         <ImageView
@@ -121,7 +121,7 @@
 
     <Button
         android:id="@+id/reserv_btn"
-        android:layout_width="413dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/top_bar"
         android:text="@string/select_seat"

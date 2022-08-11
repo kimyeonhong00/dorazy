@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.dorazy.databinding.ActivityMeetReservBinding
@@ -28,7 +27,10 @@ class MeetReservActivity : AppCompatActivity() {
         setContentView(binding.root)
         auth = Firebase.auth
 
-        var isReserv = intent.getBooleanExtra("isReserv", false) // 예약 되었는가
+        //이용 안내
+        clickViewEvents()
+
+        var isReserv = intent.getBooleanExtra("isReserv", false) // 예약 했는가
         var chooseTable = false // 테이블 선택 여부
         var tableClick = 0 // 선택한 테이블 번호
 
@@ -39,29 +41,33 @@ class MeetReservActivity : AppCompatActivity() {
         var table1 = intent.getBooleanExtra("table1", false)
         var table2 = intent.getBooleanExtra("table2", false)
         var table3 = intent.getBooleanExtra("table3", false)
-        var t1book = intent.getStringExtra("t1book")
-        var t2book = intent.getStringExtra("t2book")
-        var t3book = intent.getStringExtra("t3book")
-
-        Log.i("TAG",table1.toString())
+        var t1book: String?
+        var t2book: String?
+        var t3book: String?
 
         // 다이얼로그에서 예를 누르는 경우
         fun reservClickYes(tc:Int) {
             isReserv = true
             when (tc) {
-                1 -> { table1 = true; t1book = auth!!.uid }
-                2 -> { table2 = true; t2book = auth!!.uid }
-                else -> { table3 = true; t3book = auth!!.uid }
+                1 -> {
+                    table1 = true
+                    t1book = auth!!.uid
+                    db.collection("reservation").document("InterviewRoom").update("table1", table1)
+                    db.collection("reservation").document("InterviewRoom").update("t1_booker", t1book)
+                }
+                2 -> {
+                    table2 = true
+                    t2book = auth!!.uid
+                    db.collection("reservation").document("InterviewRoom").update("table2", table2)
+                    db.collection("reservation").document("InterviewRoom").update("t2_booker", t2book)
+                }
+                else -> {
+                    table3 = true
+                    t3book = auth!!.uid
+                    db.collection("reservation").document("InterviewRoom").update("table3", table3)
+                    db.collection("reservation").document("InterviewRoom").update("t3_booker", t3book)
+                }
             }
-            val reservData = hashMapOf(
-                "table1" to table1,
-                "t1_booker" to t1book,
-                "table2" to table2,
-                "t2_booker" to t2book,
-                "table3" to table3,
-                "t3_booker" to t3book,
-            )
-            db.collection("reservation").document("InterviewRoom").set(reservData)
             meetIntent.putExtra("isReserv", isReserv)
             startActivity(meetIntent) // 명령어
             finish()
@@ -72,8 +78,6 @@ class MeetReservActivity : AppCompatActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("자리 예약")
             builder.setMessage("${tc}번 자리를 예약하시겠습니까?")
-            // 자리 예약 기능 추가
-            // 버튼 글자 변경
 
             val listener = DialogInterface.OnClickListener { _, p1 ->
                 when(p1) {
@@ -185,5 +189,11 @@ class MeetReservActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun clickViewEvents(){
+        val timeGuide = ConfirmDialog("알림","좌석은 최대 2시간까지 사용 가능합니다.","확인")
+        timeGuide.isCancelable=false
+        timeGuide.show(this.supportFragmentManager,"ConfirmDialog")
     }
 }

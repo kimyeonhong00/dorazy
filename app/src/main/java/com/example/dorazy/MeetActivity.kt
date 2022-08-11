@@ -5,12 +5,14 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.dorazy.databinding.ActivityMeetBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import java.util.*
 import kotlin.concurrent.thread
 
 
@@ -18,14 +20,15 @@ class MeetActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMeetBinding
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var auth : FirebaseAuth? = null
+    private var timerTask : Timer? = null
+    private var timeUsage = 0
+    private var reservedTable = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meet)
-        auth = Firebase.auth
-
         binding = ActivityMeetBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = Firebase.auth
 
         // 예약 여부
         var isReserv = intent.getBooleanExtra("isReserv", false)
@@ -45,6 +48,7 @@ class MeetActivity : AppCompatActivity() {
         var t1book:String?=null
         var t2book:String?=null
         var t3book:String?=null
+        var t = 0
         db.collection("reservation").document("InterviewRoom").get().addOnSuccessListener {
             table1 = it["table1"].toString().toBoolean()
             table2 = it["table2"].toString().toBoolean()
@@ -60,6 +64,16 @@ class MeetActivity : AppCompatActivity() {
             meetReservIntent.putExtra("t3book",t3book)
             if (t1book==auth!!.uid.toString() || t2book==auth!!.uid.toString() || t3book==auth!!.uid.toString()){
                 isReserv = true
+                t = if (t1book==auth!!.uid.toString()){
+                    reservedTable = 1
+                    it["t1_time"].toString().toInt()
+                } else if (t2book==auth!!.uid.toString()){
+                    reservedTable = 2
+                    it["t2_time"].toString().toInt()
+                } else {
+                    reservedTable = 3
+                    it["t3_time"].toString().toInt()
+                }
             }
         }
 
@@ -68,19 +82,25 @@ class MeetActivity : AppCompatActivity() {
         fun reservCancelClickYes() {
             isReserv = false
             when (auth!!.uid.toString()) {
-                t1book -> { table1 = false; t1book = null }
-                t2book -> { table2 = false; t2book = null }
-                else -> { table3 = false; t3book = null }
+                t1book -> {
+                    table1 = false; t1book = null
+                    db.collection("reservation").document("InterviewRoom").update("table1",table1)
+                    db.collection("reservation").document("InterviewRoom").update("t1_booker",t1book)
+                    db.collection("reservation").document("InterviewRoom").update("t1_time",0)
+                }
+                t2book -> {
+                    table2 = false; t2book = null
+                    db.collection("reservation").document("InterviewRoom").update("table2",table2)
+                    db.collection("reservation").document("InterviewRoom").update("t2_booker",t2book)
+                    db.collection("reservation").document("InterviewRoom").update("t2_time",0)
+                }
+                else -> {
+                    table3 = false; t3book = null
+                    db.collection("reservation").document("InterviewRoom").update("table3",table3)
+                    db.collection("reservation").document("InterviewRoom").update("t3_booker",t3book)
+                    db.collection("reservation").document("InterviewRoom").update("t3_time",0)
+                }
             }
-            val reservData = hashMapOf(
-                "table1" to table1,
-                "t1_booker" to t1book,
-                "table2" to table2,
-                "t2_booker" to t2book,
-                "table3" to table3,
-                "t3_booker" to t3book,
-            )
-            db.collection("reservation").document("InterviewRoom").set(reservData)
             meetIntent.putExtra("isReserv", isReserv)
             meetIntent.putExtra("table1", table1)
             meetIntent.putExtra("table2", table2)
@@ -105,12 +125,16 @@ class MeetActivity : AppCompatActivity() {
                 binding.table3.setImageResource(R.drawable.meet_table3_reserv)
             else
                 binding.table3.setImageResource(R.drawable.meet_table3)
-            if (isReserv)
-                binding.reservBtn.text = "자리 반납"
+            if (isReserv) {
+                // 2시간 타이머
+                runTimer(t, reservedTable)
+                binding.reservBtn.text = getString(R.string.return_seat)
+            }
             runOnUiThread {
                 binding.reservBtn.isEnabled = true
             }
         }
+
 
         // 자리 반납
         fun showDialog() {
@@ -118,15 +142,13 @@ class MeetActivity : AppCompatActivity() {
             builder2.setTitle("자리 반납")
             builder2.setMessage("자리를 반납하시겠습니까?")
 
-            // 버튼 글자 변경
-
             val listener = DialogInterface.OnClickListener { _, p1 ->
                 when(p1) {
                     DialogInterface.BUTTON_POSITIVE ->
                         reservCancelClickYes() // 명령어
 
                     DialogInterface.BUTTON_NEGATIVE ->
-                        toast("취소하셨습니다")
+                        Toast.makeText(this, "취소하셨습니다", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -157,7 +179,6 @@ class MeetActivity : AppCompatActivity() {
             {
                 meetReservIntent.putExtra("isReserv", isReserv)
                 startActivity(meetReservIntent)
-                finish()
             }
             else
             {
@@ -168,8 +189,21 @@ class MeetActivity : AppCompatActivity() {
         // 예약 기능 추가
     }
 
-    private fun toast(message:String){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun runTimer(t:Int,reservedTable:Int){
+        timeUsage = t
+        timerTask = kotlin.concurrent.timer(period = 60000) {
+            timeUsage++
+            when (reservedTable) {
+                1 -> {
+                    db.collection("reservation").document("InterviewRoom").update("t1_time",timeUsage)
+                }
+                2 -> {
+                    db.collection("reservation").document("InterviewRoom").update("t2_time",timeUsage)
+                }
+                else -> {
+                    db.collection("reservation").document("InterviewRoom").update("t3_time",timeUsage)
+                }
+            }
+        }
     }
-
 }

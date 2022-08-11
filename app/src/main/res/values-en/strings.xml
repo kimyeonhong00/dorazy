@@ -34,4 +34,5 @@
     <string name="self_study_space">Self-study Space</string>
     <string name="reserve">Reserve</string>
     <string name="select_seat">Select a Seat</string>
+    <string name="return_seat">Return a Seat</string>
 </resources>

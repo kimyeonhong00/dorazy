@@ -100,13 +100,13 @@
 
     </LinearLayout>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/reserv_btn"
         android:layout_width="413dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/gray"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:background="@color/gray"
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp"
         android:text="@string/reserve"
         android:textStyle="bold"
         android:fontFamily="@font/aritaburihairline"
