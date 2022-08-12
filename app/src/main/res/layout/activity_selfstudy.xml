@@ -90,6 +90,7 @@
             android:layout_marginTop="10dp"
             android:drawableEnd="@drawable/right_arrow_resize"
             android:text="@string/this_week"
+            android:textColor="@color/black"
             android:textSize="17sp" />
 
         <ScrollView

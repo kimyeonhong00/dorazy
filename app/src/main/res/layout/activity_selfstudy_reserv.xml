@@ -1617,7 +1617,7 @@
         android:id="@+id/reserv_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/main_theme"
+        android:background="@color/gray"
         android:fontFamily="@font/aritaburihairline"
         android:padding="22dp"
         android:text="@string/reserve"

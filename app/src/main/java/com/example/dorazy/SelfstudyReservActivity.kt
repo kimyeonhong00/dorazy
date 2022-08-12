@@ -130,10 +130,11 @@ class SelfstudyReservActivity : AppCompatActivity() {
             if (isSelected) {
                 selected = arrayOf(w,s)
                 var close = 23 // 도라지 닫는 시간
-                if (w==6){ close = 13 } //토요일
+                if (w==5){ close = 13 } //토요일
                 var tempPeriod = period // period는 바뀌면 안되므로 임시 period 생성
                 if (tempPeriod>close-s){ tempPeriod = close-s} // 닫는 시간까지만 이용 가능
-                // 예약시간 색칠
+                // 색칠
+                binding.reservBtn.setBackgroundColor(Color.parseColor("#002244"))
                 for (i in 0 until 6) {
                     for (j in 1 until 23) {
                         val btn = findViewById<Button>(resources.getIdentifier(toWeekString(i) + (j),"id",applicationContext.packageName))
@@ -149,10 +150,14 @@ class SelfstudyReservActivity : AppCompatActivity() {
                 }
             }
             else{
+                binding.reservBtn.setBackgroundColor(Color.parseColor("#808080"))
                 for (i in 0 until 6) {
                     for (j in 1 until 23) {
                         val btn = findViewById<Button>(resources.getIdentifier(toWeekString(i) + (j),"id",applicationContext.packageName))
                         btn.setBackgroundColor(Color.parseColor("#00FFFFFF"))
+                        if ((i==5) and (j>12)){
+                            continue
+                        }
                         btn.isEnabled = true
                     }
                 }
