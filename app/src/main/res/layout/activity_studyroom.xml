@@ -134,15 +134,16 @@
 
     </LinearLayout>
 
-    <Button
+    <android.widget.Button
         android:id="@+id/reserv_btn"
-        android:layout_width="413dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/top_bar"
+        android:background="@color/main_theme"
         android:text="@string/select_seat"
         android:textStyle="bold"
         android:fontFamily="@font/aritaburihairline"
         android:textColor="@color/white"
+        android:padding="22dp"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

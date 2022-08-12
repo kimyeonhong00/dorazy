@@ -39,4 +39,6 @@
     <string name="reserve">예약하기</string>
     <string name="select_seat">좌석 선택하기</string>
     <string name="return_seat">자리 반납</string>
+    <string name="select_time">시간 선택하기</string>
+    <string name="usage_notice">색깔별 예약 현황\n노랑 : 1팀 / 주황 : 2팀 / 빨강 : 3팀</string>
 </resources>

@@ -2,152 +2,1633 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/main_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SelfstudyReservActivity">
+    tools:context=".SelfstudyActivity">
 
-    <TextView
-        android:id="@+id/text_around"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="168dp"
-        android:text="창가"
-        android:textColor="#000000"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/reserv_btn"
-        android:layout_width="413dp"
-        android:layout_height="91dp"
-        android:background="@drawable/top_bar"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
-        android:text="예약하기"
-        android:textSize="28sp"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <android.widget.ImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:background="@color/main_theme"
+        android:src="@drawable/back_arrow_resize"
+        app:layout_constraintBottom_toBottomOf="@+id/choose_txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-
-    <ImageView
-        android:id="@+id/up_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/meet_arrow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/meet_change_btn"
-        android:layout_width="96dp"
-        android:layout_height="18dp"
-        android:background="@drawable/meet_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_arrow"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-
-    <Button
-        android:id="@+id/back_btn"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/table_arrow"
-        android:contentDescription="back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/choose_txt"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/choose_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="자리를 선택해주세요"
-        android:textSize="28sp"
+        android:fontFamily="@font/aritaburihairline"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:text="@string/self_study_space"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/boundary"
-        android:layout_width="0dp"
-        android:layout_height="190dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/self_boundary" />
-
-    <ImageView
-        android:id="@+id/imageView6"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meet_change_btn"
-        app:srcCompat="@drawable/self_meetingdesk" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_around"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/self_readingbook" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@drawable/main_white_drawable"
         app:layout_constraintBottom_toTopOf="@+id/reserv_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/self_laptop" />
+        app:layout_constraintTop_toBottomOf="@+id/choose_txt">
 
-    <TextView
-        android:id="@+id/text_center"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/usage_notice"
+            android:textColor="@color/main_theme"
+            android:gravity="center"/>
+
+        <android.widget.Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="75dp"
+            android:paddingEnd="70dp"
+            android:background="#00FFFFFF"
+            android:layout_marginTop="10dp"
+            android:drawableEnd="@drawable/right_arrow_resize"
+            android:text="2022.08 1주차"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/reserve_table"
+                android:orientation="vertical" >
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat8"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon9"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue9"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed9"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur9"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri9"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat9"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon10"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue10"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed10"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur10"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri10"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat10"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp,TooManyViews" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp"
+                    tools:ignore="TooManyViews">
+
+                    <android.widget.Button
+                        android:id="@+id/mon11"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue11"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp,TooManyViews" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed11"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur11"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri11"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat11"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon12"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue12"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed12"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur12"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri12"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat12"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon13"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue13"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed13"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur13"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri13"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat13"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:enabled="false"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon14"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue14"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed14"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur14"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri14"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat14"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:enabled="false"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon15"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue15"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed15"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur15"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri15"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat15"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:enabled="false"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon16"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue16"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed16"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur16"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri16"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat16"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:enabled="false"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon17"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue17"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed17"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur17"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri17"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat17"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:enabled="false"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon18"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue18"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed18"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur18"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri18"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat18"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:enabled="false"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon19"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue19"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed19"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur19"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri19"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat19"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:enabled="false"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon20"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue20"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed20"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur20"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri20"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat20"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:enabled="false"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon21"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+                    <android.widget.Button
+                        android:id="@+id/tue21"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        android:textSize="10sp"
+                        tools:ignore="SmallSp" />
+                    <android.widget.Button
+                        android:id="@+id/wed21"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        android:textSize="10sp"
+                        tools:ignore="SmallSp" />
+                    <android.widget.Button
+                        android:id="@+id/thur21"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        android:textSize="10sp"
+                        tools:ignore="SmallSp" />
+                    <android.widget.Button
+                        android:id="@+id/fri21"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        android:textSize="10sp"
+                        tools:ignore="SmallSp" />
+                    <android.widget.Button
+                        android:id="@+id/sat21"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        android:textSize="10sp"
+                        android:enabled="false"
+                        tools:ignore="SmallSp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="2dp">
+
+                    <android.widget.Button
+                        android:id="@+id/mon22"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:background="#00FFFFFF"
+                        tools:ignore="NestedWeights,SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/tue22"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/wed22"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/thur22"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/fri22"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+
+                    <android.widget.Button
+                        android:id="@+id/sat22"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="10sp"
+                        android:enabled="false"
+                        android:background="#00FFFFFF"
+                        tools:ignore="SmallSp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <android.widget.Button
+        android:id="@+id/reserv_btn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="중앙"
-        android:textColor="#000000"
-        android:textSize="34sp"
+        android:background="@color/main_theme"
+        android:fontFamily="@font/aritaburihairline"
+        android:padding="22dp"
+        android:text="@string/reserve"
+        android:textColor="@color/white"
+        android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
-
-    <Button
-        android:id="@+id/studyroom_btn"
-        android:layout_width="75dp"
-        android:layout_height="34dp"
-        android:background="@drawable/text_studyroom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499"
         tools:ignore="SpeakableTextPresentCheck" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

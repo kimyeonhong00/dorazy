@@ -5,6 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.dorazy.databinding.ActivitySelfstudyBinding
 
+
+enum class Week {
+    Mon,Tue,Wed,Thur,Fri,Sat
+}
+
 class SelfstudyActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelfstudyBinding
     override fun onCreate(savedInstanceState: Bundle?) {

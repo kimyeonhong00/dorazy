@@ -45,16 +45,6 @@ class SelfstudyReservActivity : AppCompatActivity() {
         binding = ActivitySelfstudyReservBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 미팅룸 예약 activity로 전환
-        binding.meetChangeBtn.setOnClickListener {
-            startActivity(Intent(this, MeetReservActivity::class.java))
-        }
-
-        // 스터디룸 예약 activity로 전환
-        binding.studyroomBtn.setOnClickListener {
-            startActivity(Intent(this, StudyroomReservActivity::class.java))
-        }
-
         // 자율학습 activity로
         binding.backBtn.setOnClickListener {
             startActivity(Intent(this, SelfstudyActivity::class.java))
