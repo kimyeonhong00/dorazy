@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dorazy">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/dorazy"
@@ -23,6 +27,14 @@
         <activity android:name=".CreateAccountActivity"/>
         <activity android:name=".stopwatch" />
         <activity android:name=".CreateProfileActivity"/>
+        <activity android:name=".ProfileActivity"/>
+        <activity android:name=".MeetActivity"/>
+        <activity android:name=".MeetReservActivity"/>
+        <activity android:name=".SelfstudyActivity"/>
+        <activity android:name=".SelfstudyReservActivity"/>
+        <activity android:name=".StudyroomActivity"/>
+        <activity android:name=".StudyroomReservActivity"/>
+
 
     </application>
 

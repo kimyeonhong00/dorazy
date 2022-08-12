@@ -33,6 +33,8 @@ class PersonalRankingActivity :AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         binding = PersonalRankingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         database = Firebase.firestore

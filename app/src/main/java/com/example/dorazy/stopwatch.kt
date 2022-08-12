@@ -2,12 +2,10 @@ package com.example.dorazy
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
-import kotlin.concurrent.timerTask
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import java.util.*
 //import kotlinx.android.synthetic.main.activity_main.*
 
@@ -39,7 +37,7 @@ class stopwatch : AppCompatActivity() {
         startBtn = findViewById(R.id.startBtn)
         groupBtn = findViewById(R.id.groupBtn)
         finishBtn = findViewById(R.id.finishBtn)
-        backBtn = findViewById(R.id.backtBtn)
+        backBtn = findViewById(R.id.backBtn)
         lap_Layout = findViewById(R.id.lap_Layout)
 
         //버튼 클릭 리스너

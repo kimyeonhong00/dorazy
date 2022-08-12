@@ -93,7 +93,7 @@
         app:layout_constraintVertical_bias="0.782" />
 
     <ImageButton
-        android:id="@+id/backtBtn"
+        android:id="@+id/backBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@drawable/back"
