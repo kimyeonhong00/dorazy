@@ -61,10 +61,9 @@
                 android:layout_weight="1"
                 android:background="#00FFFFFF"
                 android:drawableStart="@drawable/left_arrow"
-                android:text="@string/self_study_space"
+                android:text="@string/studyroom"
                 android:textColor="@color/main_theme"
-                android:textSize="20sp"
-                tools:ignore="DuplicateSpeakableTextCheck" />
+                android:textSize="20sp"/>
 
             <android.widget.Button
                 android:id="@+id/meet_change_btn"
@@ -90,9 +89,8 @@
             android:background="#00FFFFFF"
             android:layout_marginTop="10dp"
             android:drawableEnd="@drawable/right_arrow_resize"
-            android:text="2022.08 1주차"
-            android:textSize="17sp"
-            tools:ignore="HardcodedText" />
+            android:text="@string/this_week"
+            android:textSize="17sp" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -111,7 +109,7 @@
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1.03" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

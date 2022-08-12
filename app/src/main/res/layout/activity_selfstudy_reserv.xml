@@ -64,9 +64,9 @@
             android:background="#00FFFFFF"
             android:layout_marginTop="10dp"
             android:drawableEnd="@drawable/right_arrow_resize"
-            android:text="2022.08 1주차"
-            android:textSize="17sp"
-            tools:ignore="HardcodedText" />
+            android:text="@string/this_week"
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
 
         <ScrollView
             android:layout_width="match_parent"

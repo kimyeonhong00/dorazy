@@ -37,4 +37,7 @@
     <string name="return_seat">Return a Seat</string>
     <string name="select_time">Select Time</string>
     <string name="usage_notice">Reservation status by color\\nYellow : 1 team / Orange : 2 teams / Red : 3 teams</string>
+    <string name="this_week">This Week</string>
+    <string name="next_week">Next Week</string>
+    <string name="nnext_week">Week after Next</string>
 </resources>
