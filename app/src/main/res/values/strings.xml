@@ -42,6 +42,7 @@
     <string name="select_time">시간 선택하기</string>
     <string name="usage_notice">색깔별 예약 현황\n노랑 : 1팀 / 주황 : 2팀 / 빨강 : 3팀</string>
     <string name="this_week">이번주</string>
-    <string name="next_week">이번주</string>
-    <string name="nnext_week">이번주</string>
+    <string name="next_week">다음주</string>
+    <string name="nnext_week">다다음주</string>
+    <string name="cancel_reserv">예약 및 이용 취소</string>
 </resources>

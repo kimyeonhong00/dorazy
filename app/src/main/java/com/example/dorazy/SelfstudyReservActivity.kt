@@ -5,7 +5,9 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -29,38 +31,69 @@ class SelfstudyReservActivity : AppCompatActivity() {
         setContentView(binding.root)
         auth = Firebase.auth
 
-
         // 인텐트
-        val studyroomIntent = Intent(this, StudyroomActivity::class.java)
+        val selfstudyIntent = Intent(this, SelfstudyActivity::class.java)
 
         // 현재 예약 데이터 불러오기
         binding.reservBtn.isEnabled=false
         val reservStatus = ArrayList<List<String>>()
-        val groupId = intent.getStringExtra("groupId")
+//        val groupId = intent.getStringExtra("groupId")
+        val groupId = "Lim" //수정할것@@@@
+        var maxPeriod = 5
+//        db.collection("groups").document(groupId!!).get().addOnSuccessListener {
+//            maxPeriod = when (it["userCount"].toString().toInt()){
+//                2,3,4 -> 4
+//                5 -> 5
+//                else -> 6
+//            }
+//        }
         var selected = arrayOf(0,0)
         var isSelected = false
-        val period = 4
+        var period = 1
         db.collection("reservation").document("SelfStudySpace").get().addOnSuccessListener {doc ->
             val removeChars = "[] "
-            var str = doc["Mon"].toString()
+            var str = doc["mon"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["Tue"].toString()
+            str = doc["tue"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["Wed"].toString()
+            str = doc["wed"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["Thur"].toString()
+            str = doc["thur"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["Fri"].toString()
+            str = doc["fri"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["Sat"].toString()
+            str = doc["sat"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
         }
+
+        // 사용 시간 알림
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setTitle("시간 설정")
+        builder.setMessage("몇 시간 예약하시겠습니까?\n(${maxPeriod.toFloat()/2}시간까지 이용 가능합니다.)")
+        val editText = EditText(this)
+        editText.inputType = InputType.TYPE_CLASS_NUMBER
+        builder.setView(editText)
+        val listener = DialogInterface.OnClickListener { _, p1 ->
+            when(p1) {
+                DialogInterface.BUTTON_POSITIVE -> {
+                    period = editText.text.toString().toInt()*2
+                    Toast.makeText(this, "${period.toFloat()/2}시간 예약을 진행합니다.", Toast.LENGTH_SHORT).show()  //maxperiod 조건 달기
+                }
+                DialogInterface.BUTTON_NEGATIVE -> {
+                    Toast.makeText(this, "취소하셨습니다.", Toast.LENGTH_SHORT).show()
+                    super.onBackPressed()
+                }
+            }
+        }
+        builder.setPositiveButton("예약하기", listener)
+        builder.setNegativeButton("취소", listener)
+        builder.show()
 
         thread {
             Thread.sleep(1000)
@@ -88,24 +121,51 @@ class SelfstudyReservActivity : AppCompatActivity() {
             }
         }
 
-        fun reservClickYes(time:Array<Int>,per:Int){
-
+        // 확인 눌렀을때
+        fun reservClickYes(per:Int){
+            val newStatus = reservStatus[selected[0]].toMutableList()
+            for (i in selected[1]-1 until selected[1]+per-1) {
+                if (newStatus[i].isEmpty()){
+                    newStatus[i] = "$groupId"
+                } else {
+                    newStatus[i] = newStatus[i]+"/$groupId"
+                }
+            }
+            db.collection("reservation").document("SelfStudySpace").update(toWeekString(selected[0]),newStatus)
+            selfstudyIntent.putExtra("isReserved",true)
+            startActivity(selfstudyIntent)
+            finish()
         }
 
-
-        fun showDialog(time:Array<Int>, per:Int) {
+        // 예약하시겠습니까 다이얼로그
+        fun showDialog() {
+            val stTime = 9 + (selected[1].toFloat()-1)/2
+            val finTime = stTime + period.toFloat()/2
+            val st = arrayOf(stTime.toInt(),(stTime%1*60).toInt())
+            val fin = arrayOf(finTime.toInt(),(finTime%1*60).toInt())
+            val weekKor = when(selected[0]){
+                0->"월"
+                1->"화"
+                2->"수"
+                3->"목"
+                4->"금"
+                else->"토"
+            }
+            var close = 23
+            if (selected[0]==5){ close = 13 }
+            var tempPeriod = period
+            if (tempPeriod>close-selected[1]){ tempPeriod = close-selected[1]}
             val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-            builder.setTitle("예약")
-            builder.setMessage("예약하시겠습니까?")
+            builder.setTitle("예약 확인")
+            builder.setMessage("${weekKor}요일 ${st[0]}:${st[1]}~${fin[0]}:${fin[1]} 예약하시겠습니까?")
             val listener = DialogInterface.OnClickListener { _, p1 ->
                 when(p1) {
                     DialogInterface.BUTTON_POSITIVE ->
-                        reservClickYes(time,per)
+                        reservClickYes(tempPeriod)
                     DialogInterface.BUTTON_NEGATIVE ->
                         Toast.makeText(this, "취소하셨습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
-
             builder.setPositiveButton("예", listener)
             builder.setNegativeButton("아니요", listener)
             builder.show()
@@ -114,7 +174,7 @@ class SelfstudyReservActivity : AppCompatActivity() {
 
         // 예약 기능
         binding.reservBtn.setOnClickListener {
-           showDialog(selected,period)
+           showDialog()
         }
 
         // 뒤로 가기
@@ -148,9 +208,11 @@ class SelfstudyReservActivity : AppCompatActivity() {
                     btn.setBackgroundColor(Color.parseColor("#002244"))
                     btn.isEnabled = true
                 }
+                binding.reservBtn.isEnabled=true
             }
             else{
                 binding.reservBtn.setBackgroundColor(Color.parseColor("#808080"))
+                binding.reservBtn.isEnabled=false
                 for (i in 0 until 6) {
                     for (j in 1 until 23) {
                         val btn = findViewById<Button>(resources.getIdentifier(toWeekString(i) + (j),"id",applicationContext.packageName))

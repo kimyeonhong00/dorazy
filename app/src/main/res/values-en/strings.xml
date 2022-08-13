@@ -40,4 +40,5 @@
     <string name="this_week">This Week</string>
     <string name="next_week">Next Week</string>
     <string name="nnext_week">Week after Next</string>
+    <string name="cancel_reserv">Cancel Reservation</string>
 </resources>

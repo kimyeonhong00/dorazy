@@ -1,11 +1,14 @@
 package com.example.dorazy
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import com.example.dorazy.databinding.ActivitySelfstudyBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -30,32 +33,35 @@ class SelfstudyActivity : AppCompatActivity() {
         val meetIntent = Intent(this, MeetActivity::class.java)
         val mainIntent = Intent(this, MainActivity::class.java)
         val selfstudyReservIntent = Intent(this, SelfstudyReservActivity::class.java)
+        val selfstudyIntent = Intent(this, SelfstudyActivity::class.java)
         val studyroomIntent = Intent(this, StudyroomActivity::class.java)
 
         // 현재 예약 데이터 불러오기
         binding.reservBtn.isEnabled=false
         val reservStatus = ArrayList<List<String>>()
-        val groupId = intent.getStringExtra("groupId")
+//        val groupId = intent.getStringExtra("groupId")
+        val groupId = "Lim" //수정할것@@@@
         selfstudyReservIntent.putExtra("groupId",groupId)
-        var booked = false
+        var isReserved = false
+        val myReserve = ArrayList<Array<Int>>()
         db.collection("reservation").document("SelfStudySpace").get().addOnSuccessListener {doc ->
             val removeChars = "[] "
-            var str = doc["Mon"].toString()
+            var str = doc["mon"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["Tue"].toString()
+            str = doc["tue"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["Wed"].toString()
+            str = doc["wed"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["Thur"].toString()
+            str = doc["thur"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["Fri"].toString()
+            str = doc["fri"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["Sat"].toString()
+            str = doc["sat"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
         }
@@ -82,28 +88,68 @@ class SelfstudyActivity : AppCompatActivity() {
                         }
                         for (t in reservTeams) {
                             if (groupId == t) {
+                                myReserve.add(arrayOf(i,j))
                                 timetableTextview.setBackgroundColor(Color.parseColor("#002244"))
-                                booked = true
+                                isReserved = true
+                                binding.reservBtn.text = getString(R.string.cancel_reserv)
                             }
                         }
                     }
                 }
             }
             runOnUiThread {
-                // 예약 안했으면 버튼 enable
-                if (!booked) {
-                    binding.reservBtn.isEnabled = true
-                }
+                binding.reservBtn.isEnabled = true
             }
         }
 
+        fun cancelReservClickYes(cancelType:Int) {
+            if (cancelType==0) {
+                val newStatus = reservStatus[myReserve[0][0]].toMutableList()
+                for (record in myReserve) {
+                    if (newStatus[record[1]].contains("/")){
+                        newStatus[record[1]].replace("$groupId/","")
+                        newStatus[record[1]].replace("/$groupId","")
+                    } else{
+                        newStatus[record[1]] = ""
+                    }
+                }
+                db.collection("reservation").document("SelfStudySpace").update(toWeekString(myReserve[0][0]),newStatus)
+            } else {
+
+            }
+            startActivity(selfstudyIntent)
+        }
+
+        // 자리 반납
+        fun showDialog() {
+            val builder2 = AlertDialog.Builder(this)
+            var cancelType = 0
+            // 이용 전 if () {
+            builder2.setTitle("예약 취소")
+            builder2.setMessage("예약을 취소 하시겠습니까?")
+            // 이용 중 else { cancelType = 1
+            // builder2.setTitle("이용 종료")
+            // builder2.setMessage("이용을 종료 하시겠습니까?")}
+            val listener = DialogInterface.OnClickListener { _, p1 ->
+                when(p1) {
+                    DialogInterface.BUTTON_POSITIVE ->
+                        cancelReservClickYes(cancelType) // 명령어
+                    DialogInterface.BUTTON_NEGATIVE ->
+                        Toast.makeText(this, "취소하셨습니다", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            builder2.setPositiveButton("예", listener)
+            builder2.setNegativeButton("아니요", listener)
+            builder2.show()
+        }
 
         // 미팅룸 activity로 전환
         binding.meetChangeBtn.setOnClickListener {
             startActivity(meetIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
         }
 
-        // 스터디룸 activity로  전환
+        // 스터디룸 activity로 전환
         binding.studyroomBtn.setOnClickListener {
             startActivity(studyroomIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
         }
@@ -116,7 +162,11 @@ class SelfstudyActivity : AppCompatActivity() {
 
         //예약 버튼
         binding.reservBtn.setOnClickListener {
-            startActivity(selfstudyReservIntent)
+            if (!isReserved) {
+                startActivity(selfstudyReservIntent)
+            } else{
+                showDialog()
+            }
         }
 
     }
