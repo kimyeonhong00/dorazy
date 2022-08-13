@@ -43,6 +43,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.recordbutton.setOnClickListener {
+            startActivity(Intent(this, stopwatch::class.java))
+        }
+
+        binding.setting.setOnClickListener {
+            auth!!.signOut()
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
         setSupportActionBar(toolbar)

@@ -80,18 +80,41 @@
 
         </LinearLayout>
 
-        <android.widget.Button
-            android:id="@+id/to_next_week_btn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="75dp"
-            android:paddingEnd="70dp"
-            android:background="#00FFFFFF"
-            android:layout_marginTop="10dp"
-            android:drawableEnd="@drawable/right_arrow_resize"
-            android:text="@string/this_week"
-            android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:paddingTop="10dp"
+            android:orientation="horizontal">
+
+            <android.widget.Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="@string/this_week"
+                android:textColor="@color/black"
+                android:textSize="17sp"  />
+
+            <android.widget.Button
+                android:id="@+id/toNext"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingEnd="70dp"
+                android:drawableEnd="@drawable/right_arrow_resize"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -702,7 +725,7 @@
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        tools:ignore="SmallSp" />
+                        tools:ignore="SmallSp,TooManyViews" />
 
                     <android.widget.TextView
                         android:id="@+id/wed10"

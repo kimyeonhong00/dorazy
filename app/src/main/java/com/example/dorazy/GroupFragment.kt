@@ -21,8 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 //import kotlinx.android.synthetic.main.fragment_chatroom.*
 import java.text.SimpleDateFormat
 import java.util.*

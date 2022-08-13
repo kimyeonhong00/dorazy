@@ -8,20 +8,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
-import com.example.dorazy.databinding.ActivitySelfstudyBinding
+import com.example.dorazy.databinding.ActivitySelfstudyN2weekBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import kotlin.concurrent.thread
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.concurrent.thread
 
-class SelfstudyActivity : AppCompatActivity() {
+class SelfstudyN2WeekActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySelfstudyBinding
+    private lateinit var binding: ActivitySelfstudyN2weekBinding
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var auth : FirebaseAuth? = null
     private var curTime = LocalDateTime.now()
@@ -32,45 +32,46 @@ class SelfstudyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySelfstudyBinding.inflate(layoutInflater)
+        binding = ActivitySelfstudyN2weekBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
 
         // 인텐트
         val meetIntent = Intent(this, MeetActivity::class.java)
         val mainIntent = Intent(this, MainActivity::class.java)
-        val selfstudyReservIntent = Intent(this, SelfstudyReservActivity::class.java)
-        val selfstudyNextweekIntent = Intent(this, SelfstudyNextweekActivity::class.java)
-        val selfstudyIntent = Intent(this, SelfstudyActivity::class.java)
+        val selfstudyN2weekReservIntent = Intent(this, SelfstudyN2weekReservActivity::class.java)
         val studyroomIntent = Intent(this, StudyroomActivity::class.java)
+        val selfstudyNextweekIntent = Intent(this, SelfstudyNextweekActivity::class.java)
+        val selfstudyN2weekIntent = Intent(this, SelfstudyN2WeekActivity::class.java)
 
         // 현재 예약 데이터 불러오기
         binding.reservBtn.isEnabled=false
         val reservStatus = ArrayList<List<String>>()
         val groupId = intent.getStringExtra("groupId")
-        selfstudyReservIntent.putExtra("groupId",groupId)
         selfstudyNextweekIntent.putExtra("groupId",groupId)
+        selfstudyN2weekReservIntent.putExtra("groupId",groupId)
+
         var isReserved = false
         var past = false
         var myReserve = ArrayList<Array<Int>>()
         db.collection("reservation").document("SelfStudySpace").get().addOnSuccessListener {doc ->
             val removeChars = "[] "
-            var str = doc["mon"].toString()
+            var str = doc["mon2next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["tue"].toString()
+            str = doc["tue2next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["wed"].toString()
+            str = doc["wed2next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["thur"].toString()
+            str = doc["thur2next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["fri"].toString()
+            str = doc["fri2next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["sat"].toString()
+            str = doc["sat2next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
         }
@@ -141,8 +142,8 @@ class SelfstudyActivity : AppCompatActivity() {
                     newStatus[record[1]] = ""
                 }
             }
-            db.collection("reservation").document("SelfStudySpace").update(toWeekString(myReserve[0][0]),newStatus)
-            startActivity(selfstudyIntent)
+            db.collection("reservation").document("SelfStudySpace").update(toWeekString(myReserve[0][0])+"2next",newStatus)
+            startActivity(selfstudyN2weekIntent)
         }
 
         // 자리 반납
@@ -165,7 +166,6 @@ class SelfstudyActivity : AppCompatActivity() {
                         Toast.makeText(this, "취소하셨습니다", Toast.LENGTH_SHORT).show()
                 }
             }
-
             builder2.setPositiveButton("예", listener)
             builder2.setNegativeButton("아니요", listener)
             builder2.show()
@@ -188,7 +188,7 @@ class SelfstudyActivity : AppCompatActivity() {
             startActivity(studyroomIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
         }
 
-        // 다음주 activity로 전환
+        // 다음주로 전환
         binding.toNext.setOnClickListener {
             startActivity(selfstudyNextweekIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
         }
@@ -220,10 +220,10 @@ class SelfstudyActivity : AppCompatActivity() {
                 builder.setNegativeButton("취소", listener)
                 builder.show()
             } else if (!isReserved) {
-                startActivity(selfstudyReservIntent)
+                startActivity(selfstudyN2weekReservIntent)
             } else if (!past) {
                 showDialog1()
-            } else{
+            } else {
                 showDialog2()
             }
         }

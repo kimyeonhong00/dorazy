@@ -8,20 +8,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
-import com.example.dorazy.databinding.ActivitySelfstudyBinding
+import com.example.dorazy.databinding.ActivitySelfstudyNextweekBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import kotlin.concurrent.thread
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.concurrent.thread
 
-class SelfstudyActivity : AppCompatActivity() {
+class SelfstudyNextweekActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySelfstudyBinding
+    private lateinit var binding: ActivitySelfstudyNextweekBinding
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var auth : FirebaseAuth? = null
     private var curTime = LocalDateTime.now()
@@ -32,45 +32,47 @@ class SelfstudyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySelfstudyBinding.inflate(layoutInflater)
+        binding = ActivitySelfstudyNextweekBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
 
         // 인텐트
         val meetIntent = Intent(this, MeetActivity::class.java)
         val mainIntent = Intent(this, MainActivity::class.java)
-        val selfstudyReservIntent = Intent(this, SelfstudyReservActivity::class.java)
-        val selfstudyNextweekIntent = Intent(this, SelfstudyNextweekActivity::class.java)
+        val selfstudyNextweekReservIntent = Intent(this, SelfstudyNextweekReservActivity::class.java)
         val selfstudyIntent = Intent(this, SelfstudyActivity::class.java)
         val studyroomIntent = Intent(this, StudyroomActivity::class.java)
+        val selfstudyNextweekIntent = Intent(this, SelfstudyNextweekActivity::class.java)
+        val selfstudyN2weekIntent = Intent(this, SelfstudyN2WeekActivity::class.java)
 
         // 현재 예약 데이터 불러오기
         binding.reservBtn.isEnabled=false
         val reservStatus = ArrayList<List<String>>()
         val groupId = intent.getStringExtra("groupId")
-        selfstudyReservIntent.putExtra("groupId",groupId)
-        selfstudyNextweekIntent.putExtra("groupId",groupId)
+        selfstudyIntent.putExtra("groupId",groupId)
+        selfstudyN2weekIntent.putExtra("groupId",groupId)
+        selfstudyNextweekReservIntent.putExtra("groupId",groupId)
         var isReserved = false
         var past = false
         var myReserve = ArrayList<Array<Int>>()
         db.collection("reservation").document("SelfStudySpace").get().addOnSuccessListener {doc ->
             val removeChars = "[] "
-            var str = doc["mon"].toString()
+            var str = doc["mon1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["tue"].toString()
+            str = doc["tue1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["wed"].toString()
+            str = doc["wed1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["thur"].toString()
+            str = doc["thur1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["fri"].toString()
+            str = doc["fri1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["sat"].toString()
+            str = doc["sat1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
         }
@@ -141,8 +143,8 @@ class SelfstudyActivity : AppCompatActivity() {
                     newStatus[record[1]] = ""
                 }
             }
-            db.collection("reservation").document("SelfStudySpace").update(toWeekString(myReserve[0][0]),newStatus)
-            startActivity(selfstudyIntent)
+            db.collection("reservation").document("SelfStudySpace").update(toWeekString(myReserve[0][0])+"1next",newStatus)
+            startActivity(selfstudyNextweekIntent)
         }
 
         // 자리 반납
@@ -165,7 +167,6 @@ class SelfstudyActivity : AppCompatActivity() {
                         Toast.makeText(this, "취소하셨습니다", Toast.LENGTH_SHORT).show()
                 }
             }
-
             builder2.setPositiveButton("예", listener)
             builder2.setNegativeButton("아니요", listener)
             builder2.show()
@@ -188,9 +189,14 @@ class SelfstudyActivity : AppCompatActivity() {
             startActivity(studyroomIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
         }
 
-        // 다음주 activity로 전환
-        binding.toNext.setOnClickListener {
-            startActivity(selfstudyNextweekIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+        // 이번주로 전환
+        binding.toThis.setOnClickListener {
+            startActivity(selfstudyIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+        }
+
+        // 다다음주로 전환
+        binding.toNNext.setOnClickListener {
+            startActivity(selfstudyN2weekIntent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
         }
 
         // 메인으로 돌아가기 activity
@@ -220,7 +226,7 @@ class SelfstudyActivity : AppCompatActivity() {
                 builder.setNegativeButton("취소", listener)
                 builder.show()
             } else if (!isReserved) {
-                startActivity(selfstudyReservIntent)
+                startActivity(selfstudyNextweekReservIntent)
             } else if (!past) {
                 showDialog1()
             } else{
