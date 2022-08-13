@@ -7,10 +7,21 @@ import com.example.dorazy.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import android.os.Handler
+import android.os.Looper
+import androidx.viewpager2.widget.ViewPager2
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
     private var auth :FirebaseAuth? = null
     private lateinit var binding:ActivityMainBinding
+
+    private var currentPosition=0
+    val handler=Handler(Looper.getMainLooper()){
+        setPage()
+        true
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,15 +32,41 @@ class MainActivity : AppCompatActivity() {
         binding.rankingbutton.setOnClickListener {
             startActivity(Intent(this, PersonalRankingActivity::class.java))
         }
-        /*binding.logoutbutton.setOnClickListener {
-            val intent = Intent(this,LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
-            auth?.signOut()
-            finish()
-        }*/
-        binding.recordbutton.setOnClickListener {
-            startActivity(Intent(this, stopwatch::class.java))
+//        binding.logoutbutton.setOnClickListener {
+//            val intent = Intent(this,LoginActivity::class.java)
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//            startActivity(intent)
+//            auth?.signOut()
+//            finish()
+//        }
+
+        setSupportActionBar(toolbar)
+
+        supportActionBar!!.setDisplayShowTitleEnabled(true)
+        pager.adapter = ViewPagerAdapter(getList())
+        pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        val thread=Thread(PagerRunnable())
+        thread.start()
+    }
+
+    private fun getList(): ArrayList<Int> {
+        return arrayListOf(R.drawable.home_banner_info_1, R.drawable.home_banner_info_2, R.drawable.home_banner_seat)
+    }
+
+    private fun setPage(){
+        if(currentPosition==5) currentPosition=0
+        pager.setCurrentItem(currentPosition,true)
+        currentPosition+=1
+    }
+
+    //2초 마다 페이지 넘기기
+    inner class PagerRunnable:Runnable{
+        override fun run() {
+            while(true){
+                Thread.sleep(2000)
+                handler.sendEmptyMessage(0)
+            }
         }
     }
 
