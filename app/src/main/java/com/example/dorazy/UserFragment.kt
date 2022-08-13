@@ -28,6 +28,8 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
+import com.example.dorazy.databinding.FragmentUserBinding
+
 @Suppress("DEPRECATION")
 class UserFragment : Fragment() {
 
@@ -104,7 +106,7 @@ class UserFragment : Fragment() {
     private fun getUserInfoFromServer() {
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
 
-        val docRef = FirebaseFirestore.getInstance().collection("users").document(uid)
+        val docRef = FirebaseFirestore.getInstance().collection("User").document(uid)
         docRef.get().addOnSuccessListener { documentSnapshot ->
             userModel = documentSnapshot.toObject<UserModel>(UserModel::class.java)
             user_id?.setText(userModel?.user_id)

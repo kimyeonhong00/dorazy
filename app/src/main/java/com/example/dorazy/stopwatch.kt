@@ -23,6 +23,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.*
 import kotlin.concurrent.thread
+import java.lang.Long
 
 
 class stopwatch : AppCompatActivity() {
@@ -122,18 +123,16 @@ class stopwatch : AppCompatActivity() {
         groupBtn.setOnClickListener {
             //running이면안되게
             //그룹 화면으로 전환
-            if(isRunning == false) startActivity(Intent(this, grouplist::class.java))
+            if(isRunning == false) startActivity(Intent(this, GroupActivity::class.java))
         }
         finishBtn.setOnClickListener {
             //끝나면 사용자 시간 set
+            val time_db = time.toLong()
             //firestore?.collection("Users")?.document(currentuser.uid)?.set(time!!)
             //끝 버튼 누르면 공유 페이지로 이동
             val saveuser = db.collection("User").document(myUid)
             if (saveuser != null) {
-                saveuser
-                    .update(
-                    mapOf("studyTime" to time.toLong())
-                )
+                saveuser.update("studyTime", time_db)
                     .addOnSuccessListener { document ->
                         if ( document != null){
                             Log.d(TAG, "DocumentSnapshot finish data: ${document}")
@@ -210,9 +209,7 @@ class stopwatch : AppCompatActivity() {
         val saveuser = db.collection("User").document(myUid)
         if (saveuser != null) {
             saveuser
-                .update(
-                    mapOf("studyTime" to time.toLong())
-                )
+                .update("studyTime",time.toLong())
                 .addOnSuccessListener { document ->
                     if ( document != null){
                         Log.d(TAG, "DocumentSnapshot finish data: ${document}")

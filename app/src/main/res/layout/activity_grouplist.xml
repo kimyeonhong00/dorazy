@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".grouplist"
-    >
+    tools:context=".groupDetail">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -13,15 +13,16 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#002244">
         <TextView
-            android:layout_width="300dp"
-            android:layout_height="40dp"
-            android:text="나의 그룹"
-            android:textSize="35dp"
-            android:gravity="center"
-            android:textColor="@color/white"
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            >
-        </TextView>
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:text="hihello"
+            />
+
         <ImageButton
             android:id="@+id/rightMenuBtn"
             android:layout_width="30dp"

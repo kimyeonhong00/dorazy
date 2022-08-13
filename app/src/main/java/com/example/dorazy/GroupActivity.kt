@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -17,6 +18,7 @@ import com.example.dorazy.GroupFragment
 import com.example.dorazy.UserFragment
 import com.example.dorazy.UserListFragment
 import com.example.dorazy.databinding.ActivityGroupactivityBinding
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -28,50 +30,42 @@ import kotlinx.android.synthetic.main.activity_grouppage.*
 class GroupActivity : AppCompatActivity() {
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
-    //lateinit var mViewPager: ViewPager
-    //private var makeRoomBtn: FloatingActionButton? = null
-    private lateinit var binding: ActivityGroupactivityBinding
+    lateinit var mViewPager: ViewPager
+    private var makeGroupBtn: AppCompatImageButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityGroupactivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_groupactivity)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
-        //mViewPager = findViewById<ViewPager>(R.id.container)
+        mViewPager = findViewById(R.id.container)
         container.adapter = mSectionsPagerAdapter
-        binding.makeGroupBtnBtn.setOnClickListener {
+        makeGroupBtn = findViewById(R.id.makeGroupBtn)
+        makeGroupBtn?.setOnClickListener {
             startActivity(Intent(it.context, grouppage::class.java))
         }
-        //val tabLayout: TabLayout = findViewById(R.id.tabs)
-        /*tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+        val tabLayout: TabLayout = findViewById(R.id.tabs)
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             @SuppressLint("RestrictedApi")
             override fun onTabSelected(tab: TabLayout.Tab) {
                 if (tab.position == 1) {     // char room
-                    makeGroupBtn.visibility = View.VISIBLE
+                    //makeGroupBtn.visibility = View.VISIBLE
                 }
             }
 
             @SuppressLint("RestrictedApi")
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-                makeGroupBtn.visibility = View.INVISIBLE
+                //makeGroupBtn.visibility = View.INVISIBLE
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })*/
-
-        /*container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-        tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))*/
+        })
+        //GroupFragment()
+        //container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
+        //tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
         sendRegistrationToServer()
-        //makeRoomBtn = findViewById(R.id.makeRoomBtn)
 
-        @SuppressLint("RestrictedApi")
-        makeGroupBtn.visibility = View.INVISIBLE
-        makeGroupBtn.setOnClickListener{
-            startActivity(Intent(it.context, grouppage::class.java))
-        }
     }
 
     private fun sendRegistrationToServer() {
@@ -88,7 +82,7 @@ class GroupActivity : AppCompatActivity() {
             }
         var map = mutableMapOf<String, String?>()
         map["token"] = token
-        FirebaseFirestore.getInstance().collection("users").document(uid).set(map, SetOptions.merge())
+        FirebaseFirestore.getInstance().collection("User").document(uid).set(map, SetOptions.merge())
     }
 
     /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -100,12 +94,12 @@ class GroupActivity : AppCompatActivity() {
      * A [FragmentPagerAdapter] that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    class SectionsPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
-                0 -> UserListFragment()
-                1 -> GroupFragment()
+                0 -> GroupFragment()
+                1 -> UserListFragment()
                 else -> UserFragment()
             }
         }
@@ -114,5 +108,5 @@ class GroupActivity : AppCompatActivity() {
             return 3
         }
     }
-    }
+    //}
 }

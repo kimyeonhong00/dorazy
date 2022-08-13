@@ -31,6 +31,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.DocumentChange.Type
+import com.google.firebase.firestore.FieldValue.serverTimestamp
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -105,10 +106,22 @@ class grouppage : AppCompatActivity() { //selectuser
         val str = EditText(this)
         var title = ""
         val a = System.currentTimeMillis()
+        val timestamp = Date()
         val t_date = Date(a)
         val t_dateFormat = SimpleDateFormat("yyyy-MM-dd kk:mm:ss E", Locale("ko", "KR"))
         val str_date = t_dateFormat.format(t_date)
+        str.gravity = Gravity.CENTER
+        var builder = AlertDialog.Builder(this).setTitle("그룹 이름을 입력하세요")
+            .setView(str).setPositiveButton("확인",
+                DialogInterface.OnClickListener{dialog, which ->
+                    when(which){
+                        DialogInterface.BUTTON_POSITIVE -> {title = str.text.toString()
+                            Toast.makeText(this,str.text, Toast.LENGTH_SHORT).show()}
 
+                    }
+
+                })
+        builder.show()
         if(title.length==0){
             for (key in selectedUsers.keys){
                 users[key] = 0
@@ -119,6 +132,7 @@ class grouppage : AppCompatActivity() { //selectuser
             title =title.substring(0,title.length-2)+str_date
         }
         val data = mutableMapOf<String, Any>()
+        data["timestamp"] = serverTimestamp()
         data["title"]= title
         data["users"] = users
         data["leader"] = uid
@@ -126,8 +140,9 @@ class grouppage : AppCompatActivity() { //selectuser
         group.set(data).addOnCompleteListener {
             if(it.isSuccessful){
                 println("~~~~~~~~~~~~데이터세팅 성공~~~~~\n")
-                val intent = Intent(this@grouppage, grouplist::class.java)
+                val intent = Intent(this@grouppage, groupDetail::class.java)
                 intent.putExtra("groupID", group.id)
+                intent.putExtra("groupTitle", title)
                 startActivity(intent)
                 this@grouppage.finish()
             }

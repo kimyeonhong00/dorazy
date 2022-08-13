@@ -24,7 +24,8 @@
         <activity android:name=".stopwatch" />
         <activity android:name=".CreateProfileActivity"/>
         <activity android:name=".grouppage"/>
-        <activity android:name=".grouplist"/>
+        <activity android:name=".groupDetail"/>
+        <activity android:name=".GroupActivity"/>
 
     </application>
 

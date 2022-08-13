@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import java.text.SimpleDateFormat
 import android.app.ProgressDialog
+import android.widget.TextView
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,10 +28,9 @@ import java.util.*
 //chatfragment
 class fragment1:Fragment() {
     companion object {
-        fun getInstance(toUid: String?, groupID: String?): fragment1 {
+        fun getInstance(groupID: String?): fragment1 {
             val thisfragment = fragment1()
             val bdl = Bundle()
-            bdl.putString("toUid", toUid)
             bdl.putString("groupID", groupID)
             thisfragment.arguments = bdl
             return thisfragment
@@ -39,12 +39,15 @@ class fragment1:Fragment() {
 
     var groupID: String? = null
     var myUid: String? = null
-    var toUid: String? = null
-    //var mAdapter: ChatRecyclerViewAdapter? = null
+
+    //var toUid: String? = null
+    //var mAdapter: GroupRecyclerViewAdapter? = null
     @SuppressLint("SimpleDateFormat")
     val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm")
+
     @SuppressLint("SimpleDateFormat")
     val dateFormatDay = SimpleDateFormat("yyyy-MM-dd")
+
     @SuppressLint("SimpleDateFormat")
     val dateFormatHour = SimpleDateFormat("aa hh:mm")
 
@@ -75,7 +78,7 @@ class fragment1:Fragment() {
 
         if (arguments != null) {
             groupID = arguments?.getString("groupID")
-            toUid = arguments?.getString("toUid")
+            //toUid = arguments?.getString("toUid")
         }
         firestore = FirebaseFirestore.getInstance()
         storageReference = FirebaseStorage.getInstance().reference
@@ -83,9 +86,10 @@ class fragment1:Fragment() {
         dateFormatHour.timeZone = TimeZone.getTimeZone("Asia/Seoul")
         myUid = FirebaseAuth.getInstance().currentUser?.uid
 
-        if ("" != toUid && toUid != null) {                     // find existing group for two user
+        /*if ("" != toUid && toUid != null) {                     // find existing group for two user
             findGroup(toUid!!)
-        } else if ("" != groupID && groupID != null) { // existing group (multi user)
+        } else */
+        if ("" != groupID && groupID != null) { // existing group (multi user)
 
             setGroup(groupID!!)
         }
@@ -112,8 +116,9 @@ class fragment1:Fragment() {
         }*/
         return view
     }
+
     private fun findGroup(toUid: String) {
-        firestore!!.collection("groups").whereGreaterThanOrEqualTo("User.$myUid", 0).get()
+        firestore!!.collection("groups").whereGreaterThanOrEqualTo("users.$myUid", 0).get() //User
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
                 for (document in it.result!!) {
@@ -134,25 +139,27 @@ class fragment1:Fragment() {
             }
             val document = it.result
             val users =
-                document!!.get("User") as Map<String, Long>?
+                document!!.get("users") as Map<String, Long>?
             for (key in users!!.keys) {
                 getUserInfoFromServer(key)
             }
             userCount = users.size//users.put(myUid, (long) 0);
-            document.getReference().update("User", users);
+            document.getReference().update("users", users);
 
         }
     }
+
     private fun getUserInfoFromServer(id: String?) {
         firestore!!.collection("User").document(id!!).get().addOnSuccessListener {
             val userModel = it.toObject(UserModel::class.java)
-            if(userModel?.uid != null)  userList[userModel.uid!!] = userModel
+            if (userModel?.uid != null) userList[userModel.uid!!] = userModel
             if (groupID != null && userCount == userList.size) {
-                //mAdapter = ChatRecyclerViewAdapter()
+                //mAdapter = GroupRecyclerViewAdapter()
                 //recyclerView.adapter = mAdapter
             }
         }
     }
+
     fun showProgressDialog(title: String?) {
         if (progressDialog == null) {
             progressDialog = ProgressDialog(context)
@@ -163,64 +170,25 @@ class fragment1:Fragment() {
         progressDialog?.setCancelable(false)
         progressDialog?.show()
     }
+
     fun setProgressDialog(value: Int) {
         progressDialog!!.progress = value
     }
+
     fun hideProgressDialog() = progressDialog!!.dismiss()
-
-
-
-
     fun getUserList(): Map<String, UserModel> = userList
-    fun backPressed() {}
 
-    /*inner class ChatRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        private val requestOptions = RequestOptions().transforms(CenterCrop(), RoundedCorners(90))
-        internal var messageList: MutableList<Message>? = null
+/*
+    inner class GroupRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private var beforeDay: String? = null
-        internal var beforeViewHolder: MessageViewHolder? = null
-
+        internal var beforeViewHolder: GroupInfoViewHolder? = null
 
         fun startListening() {
             beforeDay = null
-            messageList?.clear()
             val roomRef: CollectionReference? =
-                firestore?.collection("rooms")?.document(roomID!!)?.collection("messages")
+                firestore?.collection("groups")?.document(groupID!!)?.collection("timestamp")
             // my chatting room information
 
-            listenerRegistration = roomRef?.orderBy("timestamp")?.addSnapshotListener { p0, e ->
-                if (e != null) {
-                    return@addSnapshotListener
-                }
-                var message: Message
-                for (change in p0!!.documentChanges) {
-                    when (change.type) {
-                        Type.ADDED -> {
-                            message = change.document.toObject<Message>(Message::class.java)
-                            if (message.readUsers.indexOf(myUid) == -1) {
-                                message.readUsers.add(myUid)
-                                change.document.reference
-                                    .update("readUsers", message.getReadUsers())
-                            }
-                            messageList?.add(message)
-                            notifyItemInserted(change.newIndex)
-                        }
-                        Type.MODIFIED -> {
-                            message = change.document.toObject<Message>(
-                                Message::class.java
-                            )
-                            messageList?.set(change.oldIndex, message)
-                            notifyItemChanged(change.oldIndex)
-                        }
-                        Type.REMOVED -> {
-                            messageList?.removeAt(change.oldIndex)
-                            notifyItemRemoved(change.oldIndex)
-                        }
-                    }
-                }
-                recyclerView.scrollToPosition(messageList!!.size - 1)
-
-            }
         }
 
         fun stopListening() {
@@ -228,25 +196,7 @@ class fragment1:Fragment() {
                 listenerRegistration?.remove()
                 listenerRegistration = null
             }
-            messageList?.clear()
             notifyDataSetChanged()
-        }
-
-        override fun getItemViewType(position: Int): Int {
-            val message: Message = messageList!![position]
-            return if (myUid == message.uid) {
-                when (message.msgtype) {
-                    "1" -> R.layout.item_chatimage_right
-                    "2" -> R.layout.item_chatfile_right
-                    else -> R.layout.item_chatmsg_right
-                }
-            } else {
-                when (message.getMsgtype()) {
-                    "1" -> R.layout.item_chatimage_left
-                    "2" -> R.layout.item_chatfile_left
-                    else -> R.layout.item_chatmsg_left
-                }
-            }
         }
 
         override fun onCreateViewHolder(
@@ -256,206 +206,54 @@ class fragment1:Fragment() {
             var view: View? = null
             view = LayoutInflater.from(parent.context)
                 .inflate(viewType, parent, false)
-            return MessageViewHolder(view)
+            return GroupInfoViewHolder(view)
         }
 
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            val messageViewHolder: ChatFragment.MessageViewHolder =
-                holder as ChatFragment.MessageViewHolder
-            val message: Message = messageList!![position]
+            val groupInfoViewHolder: fragment1.GroupInfoViewHolder =
+                holder as fragment1.GroupInfoViewHolder
 
-            if(messageViewHolder.read_counter != null)
-                setReadCounter(message, messageViewHolder.read_counter!!)
-
-            if ("0" == message.msgtype) {                                      // text message
-                messageViewHolder.msg_item?.text = message.msg
-            } else if ("2" == message.msgtype) {                                      // file transfer
-
-                messageViewHolder.msg_item?.text = message.filename.toString() + "\n" + message.filesize
-                messageViewHolder.filename = message.filename
-                messageViewHolder.realname = message.msg
-                val file =
-                    File(rootPath + message.filename)
-                if (file.exists()) {
-                    messageViewHolder.button_item?.text = "Open File"
-                } else {
-                    messageViewHolder.button_item?.text = "Download"
-                }
-            } else {                                                                // image transfer
-                messageViewHolder.realname = message.msg
-                if(messageViewHolder.img_item != null)
-                    Glide.with(context!!)
-                        .load(storageReference?.child("filesmall/" + message.msg))
-                        .apply(RequestOptions().override(1000, 1000))
-                        .into(messageViewHolder.img_item!!)
+                groupInfoViewHolder.msg_item?.text = ""
+                groupInfoViewHolder.filename = ""
+                groupInfoViewHolder.realname = ""
             }
             if (myUid != message.uid) {
                 val userModel: UserModel? = userList[message.uid]
-                messageViewHolder.msg_name?.text = userModel?.usernm
-                if (userModel?.userphoto == null) {
-                    Glide.with(context!!).load(R.drawable.user)
-                        .apply(requestOptions)
-                        .into(messageViewHolder.user_photo!!)
-                } else {
-                    Glide.with(context!!)
-                        .load(storageReference?.child("userPhoto/" + userModel.userphoto))
-                        .apply(requestOptions)
-                        .into(messageViewHolder.user_photo!!)
-                }
+                messageViewHolder.msg_name?.text = userModel?.name
             }
-            messageViewHolder.divider?.visibility = View.INVISIBLE
-            messageViewHolder.divider?.layoutParams?.height = 0
-            messageViewHolder.timestamp?.text = ""
-            if (message.timestamp == null) {
+
+            if (timestamp == null) {
                 return
             }
-            val day: String = dateFormatDay.format(message.timestamp)
-            val timestamp: String = dateFormatHour.format(message.timestamp)
-            messageViewHolder.timestamp?.text = timestamp
-            if (position == 0) {
-                messageViewHolder.divider_date?.text = day
-                messageViewHolder.divider?.visibility = View.VISIBLE
-                messageViewHolder.divider?.layoutParams?.height = 60
-            }
-            /*messageViewHolder.timestamp.setText("");
+            val day: String = dateFormatDay.format(timestamp)
+            val timestamp: String = dateFormatHour.format(timestamp)
+        groupInfoViewHolder.timestamp?.text = timestamp
+        groupInfoViewHolder.timestamp.setText("");
         if (message.getTimestamp()==null) {return;}
         String day = dateFormatDay.format( message.getTimestamp());
         String timestamp = dateFormatHour.format( message.getTimestamp());
-        messageViewHolder.timestamp.setText(timestamp);
-        if (position==0) {
-            messageViewHolder.divider_date.setText(day);
-            messageViewHolder.divider.setVisibility(View.VISIBLE);
-            messageViewHolder.divider.getLayoutParams().height = 60;
-        };
-        if (!day.equals(beforeDay) && beforeDay!=null) {
-            beforeViewHolder.divider_date.setText(beforeDay);
-            beforeViewHolder.divider.setVisibility(View.VISIBLE);
-            beforeViewHolder.divider.getLayoutParams().height = 60;
-        }
-        beforeViewHolder = messageViewHolder;
-        beforeDay = day;*/ else {
-                val beforeMsg: Message = messageList!![position - 1]
-                val beforeDay: String = dateFormatDay.format(beforeMsg.timestamp)
-                if (day != beforeDay && beforeDay != null) {
-                    messageViewHolder.divider_date?.text = day
-                    messageViewHolder.divider?.visibility = View.VISIBLE
-                    messageViewHolder.divider?.layoutParams?.height = 60
-                }
-            }
-        }
+        groupInfoViewHolder.timestamp.setText(timestamp);
 
-        private fun setReadCounter(message: Message, textView: TextView) {
-            val cnt: Int = userCount - message.readUsers.size
-            if (cnt > 0) {
-                textView.visibility = View.VISIBLE
-                textView.text = cnt.toString()
-            } else {
-                textView.visibility = View.INVISIBLE
-            }
-        }
+        beforeViewHolder = groupInfoViewHolder;
 
-        override fun getItemCount() = messageList!!.size
-
-        init {
-            val dir = File(rootPath)
-            if (!dir.exists()) {
-                if (!helpers.isPermissionGranted(
-                        activity!!,
-                        permission.WRITE_EXTERNAL_STORAGE
-                    )
-                ) {
-
-                } else dir.mkdirs()
-            }
-            messageList = ArrayList<Message>()
-            setUnread2Read()
-            startListening()
-        }
+        override fun getItemCount() = 1//모임 수
     }
 
+    inner class GroupInfoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        /*var timestamp: TextView? = view.findViewById(R.id.timestamp)
+        var groupTitle: TextView? = view.findViewById(R.id.groupTitle)
+        var leader: TextView? = view.findViewById(R.id.groupLeader)
+        var userCount: TextView? = view.findViewById(R.id.count)*/
+        var username1: TextView ?= view.findViewById(R.id.leader)
+        var username2: TextView ?= view.findViewById(R.id.member2)
+        var username3: TextView ?= view.findViewById(R.id.member3)
+        var username4: TextView ?= view.findViewById(R.id.member4)
+        var username5: TextView ?= view.findViewById(R.id.member5)
+        var username6: TextView ?= view.findViewById(R.id.member6)
 
-    inner class MessageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var user_photo: ImageView? = view.findViewById(R.id.user_photo)
-        var msg_item: TextView? = view.findViewById(R.id.msg_item)
-        var img_item: ImageView? = view.findViewById(R.id.img_item) // only item_chatimage_
-        var msg_name: TextView? = view.findViewById(R.id.msg_name)
-        var timestamp: TextView? = view.findViewById(R.id.timestamp)
-        var read_counter: TextView? = view.findViewById(R.id.read_counter)
-        var divider: LinearLayout? = view.findViewById(R.id.divider)
-        var divider_date: TextView? = view.findViewById(R.id.divider_date)
-        var button_item: TextView? = view.findViewById(R.id.button_item) // only item_chatfile_
-        var msgLine_item: LinearLayout? = view.findViewById(R.id.msgLine_item) // only item_chatfile_
-        var filename: String = ""
-        var realname: String = ""
-
-
-        var downloadClickListener = object : View.OnClickListener {
-            override fun onClick(view: View) {
-                if ("Download" == button_item?.text) {
-                    download()
-                } else {
-                    openWith()
-                }
-            }
-
-            fun download() {
-                if (!helpers.isPermissionGranted(activity!!, WRITE_EXTERNAL_STORAGE)
-                ) {
-                    return
-                }
-                showProgressDialog("Downloading File.")
-                val localFile = File(rootPath, filename)
-                storageReference?.child("files/" + realname)?.getFile(localFile)?.addOnSuccessListener{
-                    button_item?.text = "Open File"
-                    hideProgressDialog()
-                    Log.e("DirectTalk9 ", "local file created $localFile")
-                }?.addOnFailureListener{
-                    Log.e("DirectTalk9 ", "local file not created $it")
-                }
-            }
-
-            @SuppressLint("ObsoleteSdkInt")
-            fun openWith() {
-                val newFile = File(rootPath + filename)
-                val mime = MimeTypeMap.getSingleton()
-                val ext = newFile.name.substring(newFile.name.lastIndexOf(".") + 1)
-                val type = mime.getMimeTypeFromExtension(ext)
-                val intent = Intent(Intent.ACTION_VIEW)
-                val uri: Uri
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    uri = FileProvider.getUriForFile(context!!,activity!!.packageName + ".provider", newFile)
-                    val resInfoList = activity!!.packageManager
-                        .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-                    for (resolveInfo in resInfoList) {
-                        val packageName = resolveInfo.activityInfo.packageName
-                        activity!!.grantUriPermission(packageName,uri,
-                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
-                        )
-                    }
-                } else {
-                    uri = Uri.fromFile(newFile)
-                }
-                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                intent.setDataAndType(uri, type)//"application/vnd.android.package-archive");
-                startActivity(Intent.createChooser(intent, "Your title"))
-            }
-        }
-        // photo view
-        private var imageClickListener = View.OnClickListener {
-            val intent = Intent(context, ViewPagerActivity::class.java)
-            intent.putExtra("roomID", roomID)
-            intent.putExtra("realname", realname)
-            startActivity(intent)
-        }
-
-        // file download and open
-        init {
-            // for file
-            msgLine_item?.setOnClickListener(downloadClickListener)
-            img_item?.setOnClickListener(imageClickListener)
-        }
-
+        fun backPressed() {}
 
     }*/
+
 }
