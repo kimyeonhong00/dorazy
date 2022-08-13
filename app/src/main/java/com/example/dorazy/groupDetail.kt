@@ -138,7 +138,7 @@ class groupDetail : AppCompatActivity() { //chatactivity
                 for(key in users.keys){
                     getUserInfoFromServer(key)
                 }
-                //userCount= document!!.get("userCount") as Int
+                userCount= document!!.get("userCount").toString().toInt()
                 println("setGroup Success")
             }.addOnFailureListener{ e ->
                 Log.d(TAG, "exception ", e)

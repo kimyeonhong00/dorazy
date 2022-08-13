@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_profile"
+        android:title="프로필"
+        android:icon="@drawable/ic_account_circle_white"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_power"
+        android:title="로그아웃"
+        android:icon="@drawable/ic_power_settings"
+        app:showAsAction="always" />
+</menu>
