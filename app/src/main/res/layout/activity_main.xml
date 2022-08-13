@@ -17,10 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/dorazy_main_blue_color"
+            android:theme="?attr/actionBarTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@color/white" />
+            app:titleTextColor="@color/white" >
+        </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
             android:id="@+id/scrollView3"
@@ -48,16 +50,16 @@
                     tools:ignore="MissingConstraints" />
 
                 <Button
-                    android:id="@+id/recordbutton"
+                    android:id="@+id/groupList"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/radius"
-                    android:text="공부기록"
+                    android:text="그룹\n리스트"
                     android:textColor="@color/white"
-                    app:layout_constraintEnd_toStartOf="@+id/rankingbutton"
+                    app:layout_constraintEnd_toStartOf="@+id/studyRecord"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pager" />
 
@@ -71,21 +73,9 @@
                     android:background="@drawable/radius"
                     android:text="테이블\n예약"
                     android:textColor="@color/white"
-                    app:layout_constraintEnd_toStartOf="@+id/storebutton"
+                    app:layout_constraintEnd_toStartOf="@+id/rankingbutton"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recordbutton" />
-
-                <Button
-                    android:id="@+id/storebutton"
-                    android:layout_width="160dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/radius"
-                    android:text="도라지\n스토어"
-                    android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rankingbutton" />
+                    app:layout_constraintTop_toBottomOf="@+id/groupList" />
 
                 <Button
                     android:id="@+id/rankingbutton"
@@ -97,37 +87,20 @@
                     android:text="랭킹"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pager" />
+                    app:layout_constraintTop_toBottomOf="@+id/studyRecord" />
 
                 <Button
-                    android:id="@+id/setting"
+                    android:id="@+id/studyRecord"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="24dp"
                     android:background="@drawable/radius"
-                    android:text="설정"
+                    android:text="공부\n기록"
                     android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/storebutton" />
+                    app:layout_constraintTop_toBottomOf="@+id/pager" />
 
-                <Button
-                    android:id="@+id/profile"
-                    android:layout_width="160dp"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="24dp"
-                    android:background="@drawable/radius"
-                    android:text="프로필"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/setting"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bookingbutton" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </LinearLayout>
