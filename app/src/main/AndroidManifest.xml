@@ -33,6 +33,10 @@
         <activity android:name=".grouppage"/>
         <activity android:name=".groupDetail"/>
         <activity android:name=".GroupActivity"/>
+        <activity android:name=".SelfstudyNextweekActivity"/>
+        <activity android:name=".SelfstudyNextweekReservActivity"/>
+        <activity android:name=".SelfstudyN2WeekActivity"/>
+        <activity android:name=".SelfstudyN2weekReservActivity"/>
 
     </application>
 

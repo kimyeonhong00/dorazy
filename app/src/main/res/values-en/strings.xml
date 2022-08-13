@@ -41,4 +41,6 @@
     <string name="next_week">Next Week</string>
     <string name="nnext_week">Week after Next</string>
     <string name="cancel_reserv">Cancel Reservation</string>
+    <string name="ban">Not Available</string>
+    <string name="now_using">now using</string>
 </resources>

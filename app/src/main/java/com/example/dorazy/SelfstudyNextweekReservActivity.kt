@@ -8,34 +8,34 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import com.example.dorazy.databinding.ActivitySelfstudyReservBinding
+import com.example.dorazy.databinding.ActivitySelfstudyNextweekReservBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlin.concurrent.thread
 
-class SelfstudyReservActivity : AppCompatActivity() {
+class SelfstudyNextweekReservActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySelfstudyReservBinding
+    private lateinit var binding: ActivitySelfstudyNextweekReservBinding
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var auth : FirebaseAuth? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySelfstudyReservBinding.inflate(layoutInflater)
+        binding = ActivitySelfstudyNextweekReservBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
 
         // 인텐트
-        val selfstudyIntent = Intent(this, SelfstudyActivity::class.java)
+        val selfstudyNextweekIntent = Intent(this, SelfstudyNextweekActivity::class.java)
 
         // 현재 예약 데이터 불러오기
         binding.reservBtn.isEnabled=false
         val reservStatus = ArrayList<List<String>>()
         val groupId = intent.getStringExtra("groupId")
-        selfstudyIntent.putExtra("groupId",groupId)
+        selfstudyNextweekIntent.putExtra("groupId",groupId)
 
         var maxPeriod = 5
         db.collection("groups").document(groupId!!).get().addOnSuccessListener {
@@ -51,22 +51,22 @@ class SelfstudyReservActivity : AppCompatActivity() {
         var tp = -1
         db.collection("reservation").document("SelfStudySpace").get().addOnSuccessListener {doc ->
             val removeChars = "[] "
-            var str = doc["mon"].toString()
+            var str = doc["mon1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["tue"].toString()
+            str = doc["tue1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["wed"].toString()
+            str = doc["wed1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["thur"].toString()
+            str = doc["thur1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["fri"].toString()
+            str = doc["fri1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
-            str = doc["sat"].toString()
+            str = doc["sat1next"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             reservStatus.add(str.split(","))
         }
@@ -166,10 +166,10 @@ class SelfstudyReservActivity : AppCompatActivity() {
                     newStatus[i] = newStatus[i]+"/$groupId"
                 }
             }
-            db.collection("reservation").document("SelfStudySpace").update(toWeekString(selected[0]),newStatus)
-            selfstudyIntent.putExtra("isReserved",true)
-            selfstudyIntent.putExtra("groupId",groupId)
-            startActivity(selfstudyIntent)
+            db.collection("reservation").document("SelfStudySpace").update(toWeekString(selected[0])+"1next",newStatus)
+            selfstudyNextweekIntent.putExtra("isReserved",true)
+            selfstudyNextweekIntent.putExtra("groupId",groupId)
+            startActivity(selfstudyNextweekIntent)
             finish()
         }
 
@@ -215,7 +215,7 @@ class SelfstudyReservActivity : AppCompatActivity() {
 
         // 예약 기능
         binding.reservBtn.setOnClickListener {
-           showDialog()
+            showDialog()
         }
 
         // 뒤로 가기

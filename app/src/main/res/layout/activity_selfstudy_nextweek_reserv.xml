@@ -75,7 +75,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:text="@string/this_week"
+                android:text="@string/next_week"
                 android:textColor="@color/black"
                 android:textSize="17sp"  />
 

@@ -28,7 +28,7 @@
         android:fontFamily="@font/aritaburihairline"
         android:paddingTop="17dp"
         android:paddingBottom="17dp"
-        android:text="@string/interview_room"
+        android:text="@string/studyroom"
         android:textColor="@color/main_theme"
         android:textSize="35sp"
         android:textStyle="bold"

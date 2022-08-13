@@ -50,4 +50,12 @@
         <item>화학공학과</item>
 
     </string-array>
+    <string-array name="use_time">
+        <item>30분</item>
+        <item>1시간</item>
+        <item>1시간 30분</item>
+        <item>2시간</item>
+        <item>2시간 30분</item>
+        <item>3시간</item>
+    </string-array>
 </resources>

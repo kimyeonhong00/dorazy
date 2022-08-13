@@ -12,6 +12,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class StudyroomReservActivity : AppCompatActivity() {
@@ -38,44 +40,89 @@ class StudyroomReservActivity : AppCompatActivity() {
         val studyroomIntent = Intent(this, StudyroomActivity::class.java)
 
         // 자리 예약 여부
-        var table1 = intent.getBooleanExtra("table1", false)
-        var table2 = intent.getBooleanExtra("table2", false)
-        var table3 = intent.getBooleanExtra("table3", false)
-        var table4 = intent.getBooleanExtra("table4", false)
-        var t1book: String?
-        var t2book: String?
-        var t3book: String?
-        var t4book: String?
+        var table1 = intent.getIntExtra("table1",0)
+        var table2 = intent.getIntExtra("table2",0)
+        var table3 = intent.getIntExtra("table3",0)
+        var table4 = intent.getIntExtra("table4",0)
+        var t1book = mutableListOf("","","","")
+        var t2book = mutableListOf("","","","")
+        var t3book = mutableListOf("","","","")
+        var t4book = mutableListOf("","","","")
+        var t1time = mutableListOf("","","","")
+        var t2time = mutableListOf("","","","")
+        var t3time = mutableListOf("","","","")
+        var t4time = mutableListOf("","","","")
+        val ind = intent.getIntExtra("ind",0)
+        var t: String
+
+        db.collection("reservation").document("StudyRoom").get().addOnSuccessListener { doc ->
+            val removeChars = "[] "
+            var str = doc["t1_booker"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t1book = str.split(",").toMutableList()
+            str = doc["t2_booker"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t2book = str.split(",").toMutableList()
+            str = doc["t3_booker"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t3book = str.split(",").toMutableList()
+            str = doc["t4_booker"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t4book = str.split(",").toMutableList()
+            str = doc["t1_time"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t1time = str.split(",").toMutableList()
+            str = doc["t2_time"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t2time = str.split(",").toMutableList()
+            str = doc["t3_time"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t3time = str.split(",").toMutableList()
+            str = doc["t4_time"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t4time = str.split(",").toMutableList()
+        }
+
 
         // 다이얼로그에서 예를 누르는 경우
         fun reservClickYes(tc:Int) {
             isReserv = true
+            var table = 0
+            var tbook = mutableListOf("","","","")
+            var tTime = mutableListOf("","","","")
             when (tc) {
                 1 -> {
-                    table1 = true
-                    t1book = auth!!.uid
-                    db.collection("reservation").document("StudyRoom").update("table1", table1)
-                    db.collection("reservation").document("StudyRoom").update("t1_booker", t1book)
+                    table = ++table1
+                    t1book[ind] = auth!!.uid.toString()
+                    tbook = t1book
+                    tTime = t1time
                 }
                 2 -> {
-                    table2 = true
-                    t2book = auth!!.uid
-                    db.collection("reservation").document("StudyRoom").update("table2", table2)
-                    db.collection("reservation").document("StudyRoom").update("t2_booker", t2book)
+                    table = ++table2
+                    t2book[ind] = auth!!.uid.toString()
+                    tbook = t2book
+                    tTime = t2time
                 }
                 3 -> {
-                    table3 = true
-                    t3book = auth!!.uid
-                    db.collection("reservation").document("StudyRoom").update("table3", table3)
-                    db.collection("reservation").document("StudyRoom").update("t3_booker", t3book)
+                    table = ++table3
+                    t3book[ind] = auth!!.uid.toString()
+                    tbook = t3book
+                    tTime = t3time
                 }
                 else -> {
-                    table4 = true
-                    t4book = auth!!.uid
-                    db.collection("reservation").document("StudyRoom").update("table4", table4)
-                    db.collection("reservation").document("StudyRoom").update("t4_booker", t4book)
+                    table = ++table4
+                    t4book[ind] = auth!!.uid.toString()
+                    tbook = t4book
+                    tTime = t4time
                 }
             }
+            val cur = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("ddHHmm")
+            t = cur.format(formatter)
+            tTime[ind] = t
+            db.collection("reservation").document("StudyRoom").update("t${tc}_time", tTime)
+            db.collection("reservation").document("StudyRoom").update("table$tc", table)
+            db.collection("reservation").document("StudyRoom").update("t${tc}_booker", tbook)
             studyroomIntent.putExtra("isReserv", isReserv)
             startActivity(studyroomIntent) // 명령어
             finish()
@@ -95,29 +142,28 @@ class StudyroomReservActivity : AppCompatActivity() {
                         Toast.makeText(this, "취소하셨습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
-
             builder.setPositiveButton("예", listener)
             builder.setNegativeButton("아니요", listener)
             builder.show()
         }
 
         //테이블 초기 상태 세팅
-        if (table1)
+        if (table1>3)
             binding.table1.setImageResource(R.drawable.studyroom_table1_reserv)
         else
             binding.table1.setImageResource(R.drawable.studyroom_table1)
 
-        if (table2)
+        if (table2>3)
             binding.table2.setImageResource(R.drawable.studyroom_table2_reserv)
         else
             binding.table2.setImageResource(R.drawable.studyroom_table2)
 
-        if (table3)
+        if (table3>3)
             binding.table3.setImageResource(R.drawable.studyroom_table3_reserv)
         else
             binding.table3.setImageResource(R.drawable.studyroom_table3)
 
-        if (table4)
+        if (table4>3)
             binding.table4.setImageResource(R.drawable.studyroom_table4_reserv)
         else
             binding.table4.setImageResource(R.drawable.studyroom_table4)
@@ -134,8 +180,8 @@ class StudyroomReservActivity : AppCompatActivity() {
         // 하나만 클릭이 가능
         // table 클릭시 (예약 가능 자리인지 확인 후 색 변화)
         binding.table1.setOnClickListener {
-            if (table1){
-                Toast.makeText(this, "이미 예약된 자리입니다.", Toast.LENGTH_SHORT).show()
+            if (table1>3){
+                Toast.makeText(this, "자리가 없습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             tableClick = if (tableClick!=1) {
@@ -163,8 +209,8 @@ class StudyroomReservActivity : AppCompatActivity() {
         }
 
         binding.table2.setOnClickListener {
-            if (table2){
-                Toast.makeText(this, "이미 예약된 자리입니다!", Toast.LENGTH_SHORT).show()
+            if (table2>3){
+                Toast.makeText(this, "자리가 없습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             tableClick = if (tableClick!=2) {
@@ -192,8 +238,8 @@ class StudyroomReservActivity : AppCompatActivity() {
         }
 
         binding.table3.setOnClickListener {
-            if (table3){
-                Toast.makeText(this, "이미 예약된 자리입니다!", Toast.LENGTH_SHORT).show()
+            if (table3>3){
+                Toast.makeText(this, "자리가 없습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             tableClick = if (tableClick!=3) {
@@ -222,8 +268,8 @@ class StudyroomReservActivity : AppCompatActivity() {
 
 
         binding.table4.setOnClickListener {
-            if (table4){
-                Toast.makeText(this, "이미 예약된 자리입니다!", Toast.LENGTH_SHORT).show()
+            if (table4>3){
+                Toast.makeText(this, "자리가 없습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             tableClick = if (tableClick!=4) {
@@ -253,8 +299,9 @@ class StudyroomReservActivity : AppCompatActivity() {
     }
 
     private fun clickViewEvents(){
-        val timeGuide = ConfirmDialog("알림","좌석은 최대 2시간까지 사용 가능합니다.","확인")
+        val timeGuide = ConfirmDialog("알림","좌석은 최대 2시간까지\n 사용 가능합니다.","확인")
         timeGuide.isCancelable=false
         timeGuide.show(this.supportFragmentManager,"ConfirmDialog")
     }
+
 }

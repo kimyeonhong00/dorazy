@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.dorazy.databinding.ActivityStudyroomBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -14,14 +13,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.concurrent.thread
+import java.time.LocalDateTime
 
 
 class StudyroomActivity : AppCompatActivity() {
     private lateinit var binding:ActivityStudyroomBinding
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var auth : FirebaseAuth? = null
-    private var timerTask : Timer? = null
-    private var timeUsage = 0
     private var reservedTable = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,48 +40,65 @@ class StudyroomActivity : AppCompatActivity() {
 
         // 현재 자리 데이터 불러오기
         binding.reservBtn.isEnabled=false
-        var table1 = false
-        var table2 = false
-        var table3 = false
-        var table4 = false
-        var t1book:String?=null
-        var t2book:String?=null
-        var t3book:String?=null
-        var t4book:String?=null
-        var t = 0
-        db.collection("reservation").document("StudyRoom").get().addOnSuccessListener {
-            table1 = it["table1"].toString().toBoolean()
-            table2 = it["table2"].toString().toBoolean()
-            table3 = it["table3"].toString().toBoolean()
-            table4 = it["table4"].toString().toBoolean()
-            t1book = it["t1_booker"].toString()
-            t2book = it["t2_booker"].toString()
-            t3book = it["t3_booker"].toString()
-            t4book = it["t4_booker"].toString()
+        var table1 = 0
+        var table2 = 0
+        var table3 = 0
+        var table4 = 0
+        var t1book : MutableList<String> = mutableListOf("","","","")
+        var t2book : MutableList<String> = mutableListOf("","","","")
+        var t3book : MutableList<String> = mutableListOf("","","","")
+        var t4book : MutableList<String> = mutableListOf("","","","")
+        var ind = 0
+        var t =
+        db.collection("reservation").document("StudyRoom").get().addOnSuccessListener { doc ->
+            table1 = doc["table1"].toString().toInt()
+            table2 = doc["table2"].toString().toInt()
+            table3 = doc["table3"].toString().toInt()
+            table4 = doc["table4"].toString().toInt()
+            val removeChars = "[] "
+            var str = doc["t1_booker"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t1book = str.split(",").toMutableList()
+            str = doc["t2_booker"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t2book = str.split(",").toMutableList()
+            str = doc["t3_booker"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t3book = str.split(",").toMutableList()
+            str = doc["t4_booker"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t4book = str.split(",").toMutableList()
             studyroomReservIntent.putExtra("table1",table1)
             studyroomReservIntent.putExtra("table2",table2)
             studyroomReservIntent.putExtra("table3",table3)
             studyroomReservIntent.putExtra("table4",table4)
-            studyroomReservIntent.putExtra("t1book",t1book)
-            studyroomReservIntent.putExtra("t2book",t2book)
-            studyroomReservIntent.putExtra("t3book",t3book)
-            studyroomReservIntent.putExtra("t4book",t4book)
-            if (t1book==auth!!.uid.toString() || t2book==auth!!.uid.toString() || t3book==auth!!.uid.toString() || t4book==auth!!.uid.toString()){
-                isReserv = true
-                t = if (t1book==auth!!.uid.toString()){
-                    reservedTable = 1
-                    it["t1_time"].toString().toInt()
-                } else if (t2book==auth!!.uid.toString()){
-                    reservedTable = 2
-                    it["t2_time"].toString().toInt()
-                } else if (t3book==auth!!.uid.toString()){
-                    reservedTable = 3
-                    it["t3_time"].toString().toInt()
-                } else {
-                    reservedTable = 4
-                    it["t4_time"].toString().toInt()
+            for ( i in 0 until 4) {
+                if (t1book[i] == auth!!.uid.toString() || t2book[i] == auth!!.uid.toString() || t3book[i] == auth!!.uid.toString() || t4book[i] == auth!!.uid.toString()) {
+                    isReserv = true
+                    ind = i
+                    reservedTable = if (t1book[i] == auth!!.uid.toString()) {
+                        1
+                    } else if (t2book[i] == auth!!.uid.toString()) {
+                        2
+                    } else if (t3book[i] == auth!!.uid.toString()) {
+                        3
+                    } else if (t4book[i] == auth!!.uid.toString()) {
+                        4
+                    } else{
+                        0
+                    }
+                    break
                 }
             }
+            var t = if (reservedTable != 0) {
+                str = doc["t${reservedTable}_time"].toString()
+                removeChars.forEach { str = str.replace(it.toString(), "") }
+                val tStr = str.split(",").toMutableList()
+                tStr[ind].toInt()
+            } else {
+                0
+            }
+            studyroomReservIntent.putExtra("ind",ind)
         }
 
 
@@ -91,68 +106,66 @@ class StudyroomActivity : AppCompatActivity() {
         fun reservCancelClickYes() {
             isReserv = false
             when (auth!!.uid.toString()) {
-                t1book -> {
-                    table1 = false; t1book = null
+                t1book[ind] -> {
+                    table1--; t1book[ind] = ""
                     db.collection("reservation").document("StudyRoom").update("table1",table1)
                     db.collection("reservation").document("StudyRoom").update("t1_booker",t1book)
                     db.collection("reservation").document("StudyRoom").update("t1_time",0)
                 }
-                t2book -> {
-                    table2 = false; t2book = null
+                t2book[ind] -> {
+                    table2--; t2book[ind] = ""
                     db.collection("reservation").document("StudyRoom").update("table2",table2)
                     db.collection("reservation").document("StudyRoom").update("t2_booker",t2book)
                     db.collection("reservation").document("StudyRoom").update("t2_time",0)
                 }
-                t3book -> {
-                    table3 = false; t3book = null
+                t3book[ind] -> {
+                    table3--; t3book[ind] = ""
                     db.collection("reservation").document("StudyRoom").update("table3",table3)
                     db.collection("reservation").document("StudyRoom").update("t3_booker",t3book)
                     db.collection("reservation").document("StudyRoom").update("t3_time",0)
                 }
                 else -> {
-                    table4 = false; t4book = null
+                    table4--; t4book[ind] = ""
                     db.collection("reservation").document("StudyRoom").update("table4",table4)
                     db.collection("reservation").document("StudyRoom").update("t4_booker",t4book)
                     db.collection("reservation").document("StudyRoom").update("t4_time",0)
                 }
             }
-            studyroomIntent.putExtra("isReserv", isReserv)
-            studyroomIntent.putExtra("table1", table1)
-            studyroomIntent.putExtra("table2", table2)
-            studyroomIntent.putExtra("table3", table3)
-            studyroomIntent.putExtra("table4", table4)
             startActivity(studyroomIntent)
         }
 
         //예약 기능을 반영한 테이블 img
         thread (start = true){
-            Thread.sleep(1500)
-            if (table1)
+            Thread.sleep(1000)
+            if (table1>3)
                 binding.table1.setImageResource(R.drawable.studyroom_table1_reserv)
             else
                 binding.table1.setImageResource(R.drawable.studyroom_table1)
 
-            if (table2)
+            if (table2>3)
                 binding.table2.setImageResource(R.drawable.studyroom_table2_reserv)
             else
                 binding.table2.setImageResource(R.drawable.studyroom_table2)
 
-            if (table3)
+            if (table3>3)
                 binding.table3.setImageResource(R.drawable.studyroom_table3_reserv)
             else
                 binding.table3.setImageResource(R.drawable.studyroom_table3)
 
-            if (table4)
+            if (table4>3)
                 binding.table4.setImageResource(R.drawable.studyroom_table4_reserv)
             else
                 binding.table4.setImageResource(R.drawable.studyroom_table4)
 
             if (isReserv) {
                 // 2시간 타이머
-                runTimer(t, reservedTable)
                 binding.reservBtn.text = getString(R.string.return_seat)
             }
             runOnUiThread {
+                binding.t1Text.text = table1.toString()+getString(R.string.now_using)
+                binding.t2Text.text = table2.toString()+getString(R.string.now_using)
+                binding.t3Text.text = table3.toString()+getString(R.string.now_using)
+                binding.t4Text.text = table4.toString()+getString(R.string.now_using)
                 binding.reservBtn.isEnabled = true
             }
         }
@@ -208,27 +221,6 @@ class StudyroomActivity : AppCompatActivity() {
             }
 
         }
-        // 예약 기능 추가
     }
 
-    private fun runTimer(t:Int,reservedTable:Int){
-        timeUsage = t
-        timerTask = kotlin.concurrent.timer(period = 60000) {
-            timeUsage++
-            when (reservedTable) {
-                1 -> {
-                    db.collection("reservation").document("StudyRoom").update("t1_time",timeUsage)
-                }
-                2 -> {
-                    db.collection("reservation").document("StudyRoom").update("t2_time",timeUsage)
-                }
-                3 -> {
-                    db.collection("reservation").document("StudyRoom").update("t3_time",timeUsage)
-                }
-                else -> {
-                    db.collection("reservation").document("StudyRoom").update("t4_time",timeUsage)
-                }
-            }
-        }
-    }
 }

@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.auth.User
-import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.in_group.*
 import java.text.SimpleDateFormat
 
@@ -77,8 +76,8 @@ class groupDetail : AppCompatActivity() { //chatactivity
 
 
         resBtn?.setOnClickListener{
-            val intent1 = Intent(this,MainActivity::class.java)//이부분예약페이지이름으로 편경
-            intent1.putExtra("groupID",groupID)
+            val intent1 = Intent(this,SelfstudyActivity::class.java)
+            intent1.putExtra("groupId",groupID)
             startActivity(intent1)
         }
         backBtn?.setOnClickListener {
@@ -139,7 +138,7 @@ class groupDetail : AppCompatActivity() { //chatactivity
                 for(key in users.keys){
                     getUserInfoFromServer(key)
                 }
-                userCount= document!!.get("userCount") as Int
+                //userCount= document!!.get("userCount") as Int
                 println("setGroup Success")
             }.addOnFailureListener{ e ->
                 Log.d(TAG, "exception ", e)

@@ -46,14 +46,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choose_txt">
 
-        <TextView
-            android:id="@+id/textView6"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/usage_notice"
-            android:textColor="@color/main_theme"
-            android:gravity="center"/>
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <android.widget.Button
+                android:id="@+id/studyroom_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="30dp"
+                android:layout_weight="1"
+                android:background="#00FFFFFF"
+                android:drawableStart="@drawable/left_arrow"
+                android:text="@string/studyroom"
+                android:textColor="@color/main_theme"
+                android:textSize="20sp"/>
+
+            <android.widget.Button
+                android:id="@+id/meet_change_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="30dp"
+                android:layout_weight="1"
+                android:background="#00FFFFFF"
+                android:drawableEnd="@drawable/right_arrow"
+                android:text="@string/interview_room"
+                android:textColor="@color/main_theme"
+                android:textSize="20sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,11 +87,15 @@
             android:orientation="horizontal">
 
             <android.widget.Button
+                android:id="@+id/toThis"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
-                android:background="@color/white"/>
+                android:background="@color/white"
+                android:paddingStart="70dp"
+                android:drawableStart="@drawable/left_arrow_resize"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -75,21 +104,26 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:layout_weight="1"
-                android:text="@string/this_week"
+                android:text="@string/next_week"
                 android:textColor="@color/black"
                 android:textSize="17sp"  />
 
             <android.widget.Button
+                android:id="@+id/toNNext"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
-                android:background="@color/white"/>
+                android:background="@color/white"
+                android:paddingEnd="70dp"
+                android:drawableEnd="@drawable/right_arrow_resize"
+                tools:ignore="RtlSymmetry" />
         </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="3dp"
             android:layout_marginEnd="3dp"
             android:layout_marginBottom="1dp">
@@ -103,7 +137,7 @@
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1.03" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -113,63 +147,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -182,63 +210,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat2"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -251,63 +273,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat3"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -320,63 +336,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat4"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -389,63 +399,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat5"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -458,63 +462,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon6"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue6"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed6"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur6"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri6"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat6"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -527,63 +525,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon7"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue7"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed7"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur7"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri7"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat7"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -596,63 +588,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon8"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue8"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed8"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur8"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri8"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat8"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -665,63 +651,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon9"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue9"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed9"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur9"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri9"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat9"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -734,63 +714,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon10"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue10"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
-                        tools:ignore="SmallSp" />
+                        tools:ignore="SmallSp,TooManyViews" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed10"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur10"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
-                        tools:ignore="SmallSp,TooManyViews" />
+                        tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri10"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
-                        tools:ignore="SmallSp" />
+                        tools:ignore="SmallSp,TooManyViews" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat10"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp,TooManyViews" />
 
                 </LinearLayout>
@@ -801,66 +775,59 @@
                     android:layout_weight="1"
                     android:orientation="horizontal"
                     android:paddingStart="19dp"
-                    android:paddingEnd="2dp"
-                    tools:ignore="TooManyViews">
+                    android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon11"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue11"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
-                        tools:ignore="SmallSp,TooManyViews" />
+                        tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed11"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur11"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri11"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat11"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -873,63 +840,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon12"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue12"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed12"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur12"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri12"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat12"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -942,64 +903,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon13"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue13"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed13"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur13"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri13"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat13"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:enabled="false"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -1012,64 +966,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon14"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue14"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed14"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur14"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri14"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat14"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:enabled="false"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -1082,64 +1029,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon15"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue15"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed15"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur15"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri15"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat15"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:enabled="false"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -1152,64 +1092,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon16"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue16"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed16"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur16"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri16"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat16"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:enabled="false"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -1222,64 +1155,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon17"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue17"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed17"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur17"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri17"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat17"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:enabled="false"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -1292,64 +1218,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon18"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue18"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed18"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur18"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri18"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat18"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:enabled="false"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -1362,64 +1281,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon19"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue19"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed19"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur19"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri19"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat19"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:enabled="false"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -1432,64 +1344,57 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon20"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue20"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed20"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur20"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri20"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat20"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:enabled="false"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -1502,59 +1407,52 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon21"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue21"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         android:textSize="10sp"
                         tools:ignore="SmallSp" />
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed21"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         android:textSize="10sp"
                         tools:ignore="SmallSp" />
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur21"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         android:textSize="10sp"
                         tools:ignore="SmallSp" />
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri21"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         android:textSize="10sp"
                         tools:ignore="SmallSp" />
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat21"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         android:textSize="10sp"
-                        android:enabled="false"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -1567,66 +1465,60 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="2dp">
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/mon22"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
-                        android:background="#00FFFFFF"
                         tools:ignore="NestedWeights,SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/tue22"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/wed22"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/thur22"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/fri22"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
 
-                    <android.widget.Button
+                    <android.widget.TextView
                         android:id="@+id/sat22"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:text=""
                         android:textSize="10sp"
-                        android:enabled="false"
-                        android:background="#00FFFFFF"
                         tools:ignore="SmallSp" />
                 </LinearLayout>
+
 
             </LinearLayout>
         </ScrollView>
@@ -1636,10 +1528,10 @@
         android:id="@+id/reserv_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
+        android:background="@color/main_theme"
         android:fontFamily="@font/aritaburihairline"
         android:padding="22dp"
-        android:text="@string/reserve"
+        android:text="@string/select_time"
         android:textColor="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
