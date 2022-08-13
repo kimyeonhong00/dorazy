@@ -59,7 +59,7 @@
                     android:background="@drawable/radius"
                     android:text="그룹\n리스트"
                     android:textColor="@color/white"
-                    app:layout_constraintEnd_toStartOf="@+id/studyRecord"
+                    app:layout_constraintEnd_toStartOf="@+id/recordbutton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pager" />
 
@@ -87,10 +87,10 @@
                     android:text="랭킹"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/studyRecord" />
+                    app:layout_constraintTop_toBottomOf="@+id/recordbutton" />
 
                 <Button
-                    android:id="@+id/studyRecord"
+                    android:id="@+id/recordbutton"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="32dp"

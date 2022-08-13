@@ -7,8 +7,8 @@
         android:icon="@drawable/ic_account_circle_white"
         app:showAsAction="always" />
     <item
-        android:id="@+id/action_setting"
-        android:title="설정"
-        android:icon="@drawable/ic_settings_white"
+        android:id="@+id/action_power"
+        android:title="로그아웃"
+        android:icon="@drawable/ic_power_settings"
         app:showAsAction="always" />
 </menu>

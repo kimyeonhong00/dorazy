@@ -35,13 +35,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, PersonalRankingActivity::class.java))
         }
 
-//        binding.logoutbutton.setOnClickListener {
-//            val intent = Intent(this,LoginActivity::class.java)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//            startActivity(intent)
-//            auth?.signOut()
-//            finish()
-//        }
+        binding.groupList.setOnClickListener {
+            startActivity(Intent(this, GroupActivity::class.java))
+        }
         binding.bookingbutton.setOnClickListener {
             startActivity(Intent(this, MeetActivity::class.java))
         }
@@ -67,11 +63,16 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId) {
             R.id.action_profile -> {
-                print("프로필 눌림")
+                startActivity(Intent(this, ProfileActivity::class.java))
                 return super.onOptionsItemSelected(item)
             }
-            R.id.action_setting -> {
-                print("설정 눌림")
+            R.id.action_power -> {
+                val intent = Intent(this,LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
+                auth?.signOut()
+                finish()
+
                 return super.onOptionsItemSelected(item)
             }
             else -> return super.onOptionsItemSelected(item)
