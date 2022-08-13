@@ -32,4 +32,17 @@
     <string name="rent">물품 대여</string>
     <string name="more">더보기</string>
     <string name="members">구성원</string>
+    <string name="interview_room">취업 및 면접실</string>
+    <string name="table">table</string>
+    <string name="studyroom">스터디룸</string>
+    <string name="self_study_space">자율학습공간</string>
+    <string name="reserve">예약하기</string>
+    <string name="select_seat">좌석 선택하기</string>
+    <string name="return_seat">자리 반납</string>
+    <string name="select_time">시간 선택하기</string>
+    <string name="usage_notice">색깔별 예약 현황\n노랑 : 1팀 / 주황 : 2팀 / 빨강 : 3팀</string>
+    <string name="this_week">이번주</string>
+    <string name="next_week">다음주</string>
+    <string name="nnext_week">다다음주</string>
+    <string name="cancel_reserv">예약 및 이용 취소</string>
 </resources>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/dorazy_main_blue_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MeetActivity">
+
+
+    <android.widget.ImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:background="@color/main_theme"
+        android:src="@drawable/back_arrow_resize"
+        app:layout_constraintBottom_toBottomOf="@+id/choose_txt"
+        app:layout_constraintEnd_toStartOf="@+id/choose_txt"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/choose_txt"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/choose_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:text="@string/interview_room"
+        android:textColor="@color/white"
+        android:fontFamily="@font/aritaburihairline"
+        android:textStyle="bold"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/main_white_drawable"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/reserv_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choose_txt"
+        app:layout_constraintVertical_bias="1.0">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/table1"
+            android:src="@drawable/meet_table1"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/table" />
+
+        <ImageView
+            android:id="@+id/table2"
+            android:src="@drawable/meet_table2"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/table" />
+
+        <ImageView
+            android:id="@+id/table3"
+            android:src="@drawable/meet_table3"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/table" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <android.widget.Button
+                android:id="@+id/selfstudy_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:background="#00FFFFFF"
+                android:drawableStart="@drawable/left_arrow"
+                android:text="@string/self_study_space"
+                android:textColor="@color/main_theme"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                tools:ignore="NestedWeights,TouchTargetSizeCheck" />
+
+            <android.widget.Button
+                android:id="@+id/studyroom_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:background="#00FFFFFF"
+                android:drawableEnd="@drawable/right_arrow"
+                android:text="@string/studyroom"
+                android:layout_gravity="center"
+                android:textColor="@color/main_theme"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.widget.Button
+        android:id="@+id/reserv_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_theme"
+        android:text="@string/select_seat"
+        android:textStyle="bold"
+        android:fontFamily="@font/aritaburihairline"
+        android:textColor="@color/white"
+        android:padding="22dp"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

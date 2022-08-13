@@ -42,6 +42,12 @@ class MainActivity : AppCompatActivity() {
 //            auth?.signOut()
 //            finish()
 //        }
+        binding.bookingbutton.setOnClickListener {
+            startActivity(Intent(this, MeetActivity::class.java))
+        }
+
+        binding.recordbutton.setOnClickListener {
+        }
 
         setSupportActionBar(toolbar)
 
