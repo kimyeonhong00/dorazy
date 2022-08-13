@@ -9,6 +9,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.os.Handler
 import android.os.Looper
+import android.view.Menu
+import android.view.MenuItem
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,6 +35,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, PersonalRankingActivity::class.java))
         }
 
+        binding.groupList.setOnClickListener {
+            startActivity(Intent(this, GroupActivity::class.java))
+        }
         binding.bookingbutton.setOnClickListener {
             startActivity(Intent(this, MeetActivity::class.java))
         }
@@ -48,6 +53,31 @@ class MainActivity : AppCompatActivity() {
 
         val thread=Thread(PagerRunnable())
         thread.start()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item?.itemId) {
+            R.id.action_profile -> {
+                startActivity(Intent(this, ProfileActivity::class.java))
+                return super.onOptionsItemSelected(item)
+            }
+            R.id.action_power -> {
+                val intent = Intent(this,LoginActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                startActivity(intent)
+                auth?.signOut()
+                finish()
+
+                return super.onOptionsItemSelected(item)
+            }
+            else -> return super.onOptionsItemSelected(item)
+
+        }
     }
 
     private fun getList(): ArrayList<Int> {
