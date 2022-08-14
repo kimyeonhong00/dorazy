@@ -3,15 +3,15 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.dorazy.grouppage
 import com.example.dorazy.GroupFragment
@@ -21,95 +21,140 @@ import com.example.dorazy.databinding.ActivityGroupactivityBinding
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.installations.FirebaseInstallations
 import kotlinx.android.synthetic.main.activity_groupactivity.*
 import kotlinx.android.synthetic.main.activity_grouppage.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class GroupActivity : AppCompatActivity() {
-
-    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
-    lateinit var mViewPager: ViewPager
-    private var makeGroupBtn: AppCompatImageButton? = null
-
+    @SuppressLint("SimpleDateFormat")
+    private val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+    private var mAdapter: RecyclerViewAdapter? = null
+    private var makeGroupBtn: AppCompatImageButton ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_groupactivity)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
-        mViewPager = findViewById(R.id.container)
-        container.adapter = mSectionsPagerAdapter
         makeGroupBtn = findViewById(R.id.makeGroupBtn)
-        makeGroupBtn?.setOnClickListener {
-            startActivity(Intent(it.context, grouppage::class.java))
-        }
+        val toolbar:Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        mAdapter = RecyclerViewAdapter()
+        recyclerView.adapter= mAdapter
+        simpleDateFormat.timeZone= TimeZone.getTimeZone("Asia/Seoul")
         // 어느 예약페이지에서 보냈는지 알 수 있게 하는 변수
         val call = intent.getIntExtra("call",0)
         Intent(this,groupDetail::class.java).putExtra("call",call)
-        val tabLayout: TabLayout = findViewById(R.id.tabs)
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            @SuppressLint("RestrictedApi")
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                if (tab.position == 1) {     // char room
-                    //makeGroupBtn.visibility = View.VISIBLE
-                }
-            }
-
-            @SuppressLint("RestrictedApi")
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                //makeGroupBtn.visibility = View.INVISIBLE
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
-        //GroupFragment()
-        //container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
-        //tabLayout.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
-        sendRegistrationToServer()
-
     }
 
-    private fun sendRegistrationToServer() {
-        val uid =
-            FirebaseAuth.getInstance().currentUser!!.uid
-        var token = ""
-            FirebaseInstallations.getInstance().id.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d("Installations", "Installation ID: " + task.result)
-                    token = task.result
-                } else {
-                    Log.e("Installations", "Unable to get Installation ID")
-                }
+    override fun onDestroy() {
+        super.onDestroy()
+        if(mAdapter != null) mAdapter!!.stopListening()
+    }
+    inner class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+        private val groupList = ArrayList<GroupModel>()
+        private val userList = HashMap<String, UserModel>()
+        private val myUid: String = FirebaseAuth.getInstance().currentUser!!.uid
+        private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
+        private var listenerRegistration: ListenerRegistration? = null
+        private var listenerUsers: ListenerRegistration? = null
+        override fun getItemCount(): Int = groupList.size
+        init {
+            // all users information
+            listenerUsers = firestore.collection("User")
+                .addSnapshotListener(EventListener{value, e->
+                if (e != null) { return@EventListener }
+                for (doc in value!!) { userList[doc.id] = doc.toObject<UserModel>(UserModel::class.java) }
+                getGroupInfo()
+            })
+        }
+        
+        fun getGroupInfo() {
+            listenerRegistration =
+                firestore.collection("groups").whereGreaterThanOrEqualTo("users.$myUid", -1)
+                    .addSnapshotListener(EventListener{value, e->
+                        if (e != null) {
+                            return@EventListener
+                        }
+                        val orderedGroups =
+                            TreeMap<Date, GroupModel>(Collections.reverseOrder<Any>())
+
+                        for (document in value!!) {
+
+                            val groupModel = GroupModel()
+                            groupModel.groupID = document.id
+                            val users = document.get("users") as Map<String, Long>?
+                            groupModel.userCount = (users!!.size)
+                            groupModel.leader = document.get("leader").toString()
+
+                            // group chat room
+                            groupModel.title = document.getString("title")
+
+                            if (groupModel.timestamp == null) groupModel.timestamp = Date()
+                            orderedGroups[groupModel.timestamp!!] = groupModel
+                        }
+                        groupList.clear()
+                        for ((_, value1) in orderedGroups) {
+                            groupList.add(value1)
+                        }
+                        notifyDataSetChanged()
+                    })
+        }
+
+        fun stopListening() {
+            if (listenerRegistration != null) {
+                listenerRegistration!!.remove()
+                listenerRegistration = null
             }
-        var map = mutableMapOf<String, String?>()
-        map["token"] = token
-        FirebaseFirestore.getInstance().collection("User").document(uid).set(map, SetOptions.merge())
-    }
+            if (listenerUsers != null) {
+                listenerUsers!!.remove()
+                listenerUsers = null
+            }
 
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-*/
-    /**
-     * A [FragmentPagerAdapter] that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    class SectionsPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
+            groupList.clear()
+            notifyDataSetChanged()
+        }
 
-        override fun getItem(position: Int): Fragment {
-            return when (position) {
-                0 -> GroupFragment()
-                1 -> UserListFragment()
-                else -> UserFragment()
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            val view =
+                LayoutInflater.from(parent.context).inflate(R.layout.item_group, parent, false)
+            return GroupViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            val groupViewHolder = holder as GroupViewHolder
+            val groupModel = groupList[position]
+            groupViewHolder.group_title.text= groupModel.title
+            groupViewHolder.group_leader.text= groupModel.leader
+            groupViewHolder.group_count.text= groupModel.userCount.toString()
+            if (groupModel.userCount!! > 0) {
+                groupViewHolder.group_count.text= groupModel.userCount.toString()
+                groupViewHolder.group_count.visibility= View.VISIBLE
+            } else {
+                groupViewHolder.group_count.visibility= View.INVISIBLE
+            }
+            groupViewHolder.itemView.setOnClickListener{v->
+                val intent = Intent(v.context, groupDetail::class.java)
+                intent.putExtra("groupID", groupModel.groupID)
+                intent.putExtra("groupTitle", groupModel.title)
+                intent.putExtra("groupLeader",groupModel.leader)
+                startActivity(intent)
             }
         }
 
-        override fun getCount(): Int {
-            return 3
+        private inner class GroupViewHolder internal constructor(view: View) :
+            RecyclerView.ViewHolder(view) {
+            var group_title: TextView = view.findViewById(R.id.group_title)
+            var last_time: TextView = view.findViewById(R.id.last_time)
+            var group_count: TextView = view.findViewById(R.id.group_count)
+            var unread_count: TextView = view.findViewById(R.id.unread_count)
+            var group_leader: TextView = view.findViewById(R.id.group_leader)
         }
     }
-    //}
 }
