@@ -305,7 +305,7 @@ class StudyroomReservActivity : AppCompatActivity() {
     }
 
     private fun clickViewEvents(){
-        val timeGuide = ConfirmDialog("알림","좌석은 최대 2시간까지\n 사용 가능합니다.","확인")
+        val timeGuide = ConfirmDialog("알림","좌석은 최대 2시간까지\n사용 가능합니다.","확인")
         timeGuide.isCancelable=false
         timeGuide.show(this.supportFragmentManager,"ConfirmDialog")
     }

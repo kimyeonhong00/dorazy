@@ -12,6 +12,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class MeetReservActivity : AppCompatActivity() {
@@ -33,7 +36,8 @@ class MeetReservActivity : AppCompatActivity() {
         var isReserv = intent.getBooleanExtra("isReserv", false) // 예약 했는가
         var chooseTable = false // 테이블 선택 여부
         var tableClick = 0 // 선택한 테이블 번호
-
+        val reservId = intent.getStringExtra("reservId")
+        var t : String
         // 인텐트
         val meetIntent = Intent(this, MeetActivity::class.java)
 
@@ -41,33 +45,33 @@ class MeetReservActivity : AppCompatActivity() {
         var table1 = intent.getBooleanExtra("table1", false)
         var table2 = intent.getBooleanExtra("table2", false)
         var table3 = intent.getBooleanExtra("table3", false)
-        var t1book: String?
-        var t2book: String?
-        var t3book: String?
 
         // 다이얼로그에서 예를 누르는 경우
         fun reservClickYes(tc:Int) {
+            val table :Boolean
+            val cur = LocalDateTime.now()
+            val calendar = Calendar.getInstance()
+            val week = calendar.get(Calendar.DAY_OF_WEEK).toString()
+            val formatter = DateTimeFormatter.ofPattern("HHmm")
+            t = cur.format(formatter)+week
             isReserv = true
             when (tc) {
                 1 -> {
                     table1 = true
-                    t1book = auth!!.uid
-                    db.collection("reservation").document("InterviewRoom").update("table1", table1)
-                    db.collection("reservation").document("InterviewRoom").update("t1_booker", t1book)
+                    table = table1
                 }
                 2 -> {
                     table2 = true
-                    t2book = auth!!.uid
-                    db.collection("reservation").document("InterviewRoom").update("table2", table2)
-                    db.collection("reservation").document("InterviewRoom").update("t2_booker", t2book)
+                    table = table2
                 }
                 else -> {
                     table3 = true
-                    t3book = auth!!.uid
-                    db.collection("reservation").document("InterviewRoom").update("table3", table3)
-                    db.collection("reservation").document("InterviewRoom").update("t3_booker", t3book)
+                    table = table3
                 }
             }
+            db.collection("reservation").document("InterviewRoom").update("table$tc", table)
+            db.collection("reservation").document("InterviewRoom").update("t${tc}_booker", reservId)
+            db.collection("reservation").document("InterviewRoom").update("t${tc}_time", t)
             meetIntent.putExtra("isReserv", isReserv)
             startActivity(meetIntent) // 명령어
             finish()
@@ -192,7 +196,7 @@ class MeetReservActivity : AppCompatActivity() {
     }
 
     private fun clickViewEvents(){
-        val timeGuide = ConfirmDialog("알림","좌석은 최대 2시간까지 사용 가능합니다.","확인")
+        val timeGuide = ConfirmDialog("알림","좌석은 최대 2시간까지\n사용 가능합니다.","확인")
         timeGuide.isCancelable=false
         timeGuide.show(this.supportFragmentManager,"ConfirmDialog")
     }

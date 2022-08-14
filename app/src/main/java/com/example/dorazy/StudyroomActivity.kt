@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.dorazy.databinding.ActivityStudyroomBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -59,7 +58,7 @@ class StudyroomActivity : AppCompatActivity() {
         val formatter = DateTimeFormatter.ofPattern("HHmm")
         val formatted = cur.format(formatter)
         var ind1 = 0
-        var ind2 = arrayListOf<Int>(0,0,0,0)
+        val ind2 = arrayListOf(0,0,0,0)
 
         // 자리 반납 기능
         fun reservCancelClickYes() {
@@ -124,7 +123,7 @@ class StudyroomActivity : AppCompatActivity() {
             str = doc["t4_time"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             t4time = str.split(",").toMutableList()
-            var deadLine = ""
+            var deadLine: String
             for ( i in 0 until 4) {
                 if (t1book[i] == auth!!.uid.toString() || t2book[i] == auth!!.uid.toString() || t3book[i] == auth!!.uid.toString() || t4book[i] == auth!!.uid.toString()) {
                     // 예약했을 경우
@@ -146,7 +145,6 @@ class StudyroomActivity : AppCompatActivity() {
                 else{
                     deadLine = t1time[i]
                     if ((deadLine[4]<week) or (formatted.toString().toInt()-deadLine.slice(0 until 4).toInt()>200)){
-                        Log.i("TAG","데드라인 넘김!!")
                         t1book[i] = ""
                         t1time[i] = ""
                         db.collection("reservation").document("StudyRoom").update("t1_booker",t1book)
