@@ -57,6 +57,7 @@ class groupDetail : AppCompatActivity() { //chatactivity
         val groupID: String? = intent?.getStringExtra("groupID")
         val groupTitle: String? = intent?.getStringExtra("groupTitle")
         val groupLeader: String? = intent?.getStringExtra("groupLeader")
+        val call = intent.getIntExtra("call",0)
         gtitle= findViewById(R.id.gtitle)
         gtitle?.text = groupTitle
         memText1 = findViewById(R.id.member1)
@@ -77,8 +78,27 @@ class groupDetail : AppCompatActivity() { //chatactivity
 
         resBtn?.setOnClickListener{
             val intent1 = Intent(this,SelfstudyActivity::class.java)
-            intent1.putExtra("groupId",groupID)
-            startActivity(intent1)
+            val intent2 = Intent(this,SelfstudyNextweekActivity::class.java)
+            val intent3 = Intent(this,SelfstudyN2WeekActivity::class.java)
+            val intent4 = Intent(this,MeetActivity::class.java)
+            when (call) {
+                0-> {
+                    intent1.putExtra("groupId", groupID)
+                    startActivity(intent1)
+                }
+                1-> {
+                    intent2.putExtra("groupId", groupID)
+                    startActivity(intent2)
+                }
+                2-> {
+                    intent3.putExtra("groupId", groupID)
+                    startActivity(intent3)
+                }
+                3-> {
+                    intent4.putExtra("groupId", groupID)
+                    startActivity(intent4)
+                }
+            }
         }
         backBtn?.setOnClickListener {
             onBackPressed()

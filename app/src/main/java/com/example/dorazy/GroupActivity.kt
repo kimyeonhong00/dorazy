@@ -45,6 +45,9 @@ class GroupActivity : AppCompatActivity() {
         makeGroupBtn?.setOnClickListener {
             startActivity(Intent(it.context, grouppage::class.java))
         }
+        // 어느 예약페이지에서 보냈는지 알 수 있게 하는 변수
+        val call = intent.getIntExtra("call",0)
+        Intent(this,groupDetail::class.java).putExtra("call",call)
         val tabLayout: TabLayout = findViewById(R.id.tabs)
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             @SuppressLint("RestrictedApi")

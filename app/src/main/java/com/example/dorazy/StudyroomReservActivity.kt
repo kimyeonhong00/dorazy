@@ -14,6 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class StudyroomReservActivity : AppCompatActivity() {
@@ -52,7 +53,7 @@ class StudyroomReservActivity : AppCompatActivity() {
         var t2time = mutableListOf("","","","")
         var t3time = mutableListOf("","","","")
         var t4time = mutableListOf("","","","")
-        val ind = intent.getIntExtra("ind",0)
+        val ind = intent.getIntegerArrayListExtra("ind")
         var t: String
 
         db.collection("reservation").document("StudyRoom").get().addOnSuccessListener { doc ->
@@ -87,39 +88,44 @@ class StudyroomReservActivity : AppCompatActivity() {
         // 다이얼로그에서 예를 누르는 경우
         fun reservClickYes(tc:Int) {
             isReserv = true
-            var table = 0
-            var tbook = mutableListOf("","","","")
-            var tTime = mutableListOf("","","","")
+            val table : Int
+            val tbook : MutableList<String>
+            val tTime : MutableList<String>
+            val cur = LocalDateTime.now()
+            val calendar = Calendar.getInstance()
+            val week = calendar.get(Calendar.DAY_OF_WEEK).toString()
+            val formatter = DateTimeFormatter.ofPattern("HHmm")
+            t = cur.format(formatter)+week
             when (tc) {
                 1 -> {
                     table = ++table1
-                    t1book[ind] = auth!!.uid.toString()
+                    t1book[ind!![0]] = auth!!.uid.toString()
                     tbook = t1book
                     tTime = t1time
+                    tTime[ind[0]] = t
                 }
                 2 -> {
                     table = ++table2
-                    t2book[ind] = auth!!.uid.toString()
+                    t2book[ind!![1]] = auth!!.uid.toString()
                     tbook = t2book
                     tTime = t2time
+                    tTime[ind[1]] = t
                 }
                 3 -> {
                     table = ++table3
-                    t3book[ind] = auth!!.uid.toString()
+                    t3book[ind!![2]] = auth!!.uid.toString()
                     tbook = t3book
                     tTime = t3time
+                    tTime[ind[2]] = t
                 }
                 else -> {
                     table = ++table4
-                    t4book[ind] = auth!!.uid.toString()
+                    t4book[ind!![3]] = auth!!.uid.toString()
                     tbook = t4book
                     tTime = t4time
+                    tTime[ind[3]] = t
                 }
             }
-            val cur = LocalDateTime.now()
-            val formatter = DateTimeFormatter.ofPattern("ddHHmm")
-            t = cur.format(formatter)
-            tTime[ind] = t
             db.collection("reservation").document("StudyRoom").update("t${tc}_time", tTime)
             db.collection("reservation").document("StudyRoom").update("table$tc", table)
             db.collection("reservation").document("StudyRoom").update("t${tc}_booker", tbook)
@@ -299,7 +305,7 @@ class StudyroomReservActivity : AppCompatActivity() {
     }
 
     private fun clickViewEvents(){
-        val timeGuide = ConfirmDialog("알림","좌석은 최대 2시간까지\n 사용 가능합니다.","확인")
+        val timeGuide = ConfirmDialog("알림","좌석은 최대 2시간까지\n사용 가능합니다.","확인")
         timeGuide.isCancelable=false
         timeGuide.show(this.supportFragmentManager,"ConfirmDialog")
     }

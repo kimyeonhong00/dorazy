@@ -50,6 +50,8 @@ class SelfstudyActivity : AppCompatActivity() {
         val groupId = intent.getStringExtra("groupId")
         selfstudyReservIntent.putExtra("groupId",groupId)
         selfstudyNextweekIntent.putExtra("groupId",groupId)
+        meetIntent.putExtra("groupId",groupId)
+
         var isReserved = false
         var past = false
         var myReserve = ArrayList<Array<Int>>()
@@ -209,7 +211,7 @@ class SelfstudyActivity : AppCompatActivity() {
                 val listener = DialogInterface.OnClickListener { _, p1 ->
                     when (p1) {
                         DialogInterface.BUTTON_POSITIVE -> {
-                            startActivity(Intent(this, GroupActivity::class.java))
+                            startActivity(Intent(this, GroupActivity::class.java).putExtra("call",0))
                             finish()
                         }
                         DialogInterface.BUTTON_NEGATIVE ->
