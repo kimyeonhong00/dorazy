@@ -1,6 +1,7 @@
 package com.example.dorazy
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -49,6 +50,8 @@ class groupDetail : AppCompatActivity() { //chatactivity
     @SuppressLint("SimpleDateFormat")
     val dateFormatHour = SimpleDateFormat("aa hh:mm")
     val userList1 = hashMapOf<String, UserModel>()
+    val userList2 = mutableListOf<String>()
+    var s=0
     var userCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -107,24 +110,24 @@ class groupDetail : AppCompatActivity() { //chatactivity
         drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
         checkBtn = findViewById(R.id.checkButton)
         checkBtn?.setOnClickListener(OnClickListener {
-            val intent = Intent(this@groupDetail, grouppage::class.java)
-            /*startActivity(intent)
-            if (drawerLayout!!.isDrawerOpen(Gravity.RIGHT)) {
-                drawerLayout!!.closeDrawer(Gravity.RIGHT)
-            } else {
-                if (userListInGroupFragment == null) {
-                    println("userListIngroupfragment userList")
-                    println(userList1)
-                    userListInGroupFragment = UserListInGroupFragment.getInstance(groupID!!, userList1)
-                    supportFragmentManager.beginTransaction().replace(R.id.drawerFragment, userListInGroupFragment!!).commit()
+            val builder = AlertDialog.Builder(this)
+            val dialogView =layoutInflater.inflate(R.layout.grouptitle_dialog, null)
+            val dialogText = dialogView.findViewById<EditText>(R.id.text)
+            builder.setView(dialogView)
+                .setPositiveButton("확인"){DialogInterface, i->
+                    //title = dialogText.text.toString()
+                    gtitle?.text = dialogText.text.toString()
+                    val ref = firestore.collection("groups").document(groupID!!)
+                    ref.update("title",dialogText.text.toString())
+                        .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully updated!") }
+
                 }
-                drawerLayout!!.openDrawer(Gravity.RIGHT)
-            }*/
-        })
+                .setNegativeButton("취소"){DialogInterface, i->
+                }.show()
+            }
+        )
 
 
-        println("userList1 - main")
-        println(userList1)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -160,6 +163,7 @@ class groupDetail : AppCompatActivity() { //chatactivity
                 }
                 userCount= document!!.get("userCount").toString().toInt()
                 println("setGroup Success")
+                println(userList2)
             }.addOnFailureListener{ e ->
                 Log.d(TAG, "exception ", e)
             }
@@ -176,7 +180,14 @@ class groupDetail : AppCompatActivity() { //chatactivity
     private fun getUserInfoFromServer(id: String?) {
         firestore.collection("User").document(id!!).get().addOnSuccessListener {
             val userModel = it.toObject(UserModel::class.java)
-            if(userModel?.uid != null)  userList1[userModel.uid!!] = userModel
+            if(userModel?.uid != null)  {
+                userList1[userModel.uid!!] = userModel
+                userList2.add(userModel.name.toString())
+                memText1?.text = userList2[0]
+                s+=1
+                println(userList2)
+                println("userList2")
+            }
             if (groupID != null /*&& userCount == userList1.size*/) {
                 println("getuserinfofromserver success")
                 println("userList1 - getUserInfo")
@@ -214,3 +225,4 @@ class groupDetail : AppCompatActivity() { //chatactivity
     }
 
 }
+

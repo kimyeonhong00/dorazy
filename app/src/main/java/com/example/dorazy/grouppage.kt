@@ -32,11 +32,13 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.DocumentChange.Type
 import com.google.firebase.firestore.FieldValue.serverTimestamp
+import java.lang.Thread.sleep
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import kotlin.concurrent.thread
 
 
 class grouppage : AppCompatActivity() { //selectuser
@@ -44,6 +46,7 @@ class grouppage : AppCompatActivity() { //selectuser
     val selectedUsers = mutableMapOf<String, String>()
     var firestoreAdapter: FirestoreAdapter<*>? = null
     var firestore: FirebaseFirestore? = null
+    var title=""
 
     override fun onStart(){
         super.onStart()
@@ -75,7 +78,9 @@ class grouppage : AppCompatActivity() { //selectuser
         )
     }
     private var makeGroupClickListener =
+
         View.OnClickListener {
+
             if (selectedUsers.size < 2) {
                 helpers.showMessage(applicationContext, "Please select 2 or more user")
                 return@OnClickListener
@@ -84,6 +89,7 @@ class grouppage : AppCompatActivity() { //selectuser
             val newGroup =
                 FirebaseFirestore.getInstance()
                     .collection("groups").document()
+
             CreateGroup(newGroup)
         }
     private var addGroupUserClickListener =
@@ -99,29 +105,14 @@ class grouppage : AppCompatActivity() { //selectuser
             )
         }
 
-
     private fun CreateGroup(group: DocumentReference){
         val uid = FirebaseAuth.getInstance().currentUser!!.uid
         val users = mutableMapOf<String, Int>()
-        val str = EditText(this)
-        var title = ""
         val a = System.currentTimeMillis()
         val timestamp = Date()
         val t_date = Date(a)
         val t_dateFormat = SimpleDateFormat("yyyy-MM-dd kk:mm:ss E", Locale("ko", "KR"))
         val str_date = t_dateFormat.format(t_date)
-        str.gravity = Gravity.CENTER
-        var builder = AlertDialog.Builder(this).setTitle("그룹 이름을 입력하세요")
-            .setView(str).setPositiveButton("확인",
-                DialogInterface.OnClickListener{dialog, which ->
-                    when(which){
-                        DialogInterface.BUTTON_POSITIVE -> {title = str.text.toString()
-                            Toast.makeText(this,str.text, Toast.LENGTH_SHORT).show()}
-
-                    }
-
-                })
-        builder.show()
         if(title.length==0){
             for (key in selectedUsers.keys){
                 users[key] = 0
@@ -147,6 +138,8 @@ class grouppage : AppCompatActivity() { //selectuser
                 this@grouppage.finish()
             }
         }
+
+
     }
 
     inner class RecyclerViewAdapter(query: Query?):FirestoreAdapter<CustomViewHolder>(query) {
