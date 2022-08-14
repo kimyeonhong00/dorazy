@@ -11,13 +11,16 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
     private var auth :FirebaseAuth? = null
     private lateinit var binding:ActivityMainBinding
+    var backPressedTime: Long = 0
 
     private var currentPosition=0
     val handler=Handler(Looper.getMainLooper()){
@@ -53,6 +56,17 @@ class MainActivity : AppCompatActivity() {
 
         val thread=Thread(PagerRunnable())
         thread.start()
+    }
+
+    override fun onBackPressed() {
+        // 뒤로가기 버튼 클릭
+        if (System.currentTimeMillis() - backPressedTime < 2000) {
+            finish()
+            return
+        }
+
+        Toast.makeText(this, "뒤로 버튼을 한 번 더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
+        backPressedTime = System.currentTimeMillis()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
