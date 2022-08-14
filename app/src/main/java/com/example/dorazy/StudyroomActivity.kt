@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.dorazy.databinding.ActivityStudyroomBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -14,13 +15,13 @@ import com.google.firebase.ktx.Firebase
 import java.util.*
 import kotlin.concurrent.thread
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class StudyroomActivity : AppCompatActivity() {
     private lateinit var binding:ActivityStudyroomBinding
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var auth : FirebaseAuth? = null
-    private var reservedTable = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +39,6 @@ class StudyroomActivity : AppCompatActivity() {
         val selfStudyIntent = Intent(this, SelfstudyActivity::class.java)
         val studyroomIntent = Intent(this, StudyroomActivity::class.java)
 
-        // 현재 자리 데이터 불러오기
         binding.reservBtn.isEnabled=false
         var table1 = 0
         var table2 = 0
@@ -48,8 +48,52 @@ class StudyroomActivity : AppCompatActivity() {
         var t2book : MutableList<String> = mutableListOf("","","","")
         var t3book : MutableList<String> = mutableListOf("","","","")
         var t4book : MutableList<String> = mutableListOf("","","","")
-        var ind = 0
-        var t =
+        var t1time = mutableListOf("","","","")
+        var t2time = mutableListOf("","","","")
+        var t3time = mutableListOf("","","","")
+        var t4time = mutableListOf("","","","")
+        var reservedTable = 0
+        val cur = LocalDateTime.now()
+        val calendar = Calendar.getInstance()
+        val week = calendar.get(Calendar.DAY_OF_WEEK).toChar()
+        val formatter = DateTimeFormatter.ofPattern("HHmm")
+        val formatted = cur.format(formatter)
+        var ind1 = 0
+        var ind2 = arrayListOf<Int>(0,0,0,0)
+
+        // 자리 반납 기능
+        fun reservCancelClickYes() {
+            isReserv = false
+            when (auth!!.uid.toString()) {
+                t1book[ind1] -> {
+                    t1book[ind1] = ""; t1time[ind1] = ""
+                    db.collection("reservation").document("StudyRoom").update("table1",--table1)
+                    db.collection("reservation").document("StudyRoom").update("t1_booker",t1book)
+                    db.collection("reservation").document("StudyRoom").update("t1_time",t1time)
+                }
+                t2book[ind1] -> {
+                    t2book[ind1] = ""; t2time[ind1] = ""
+                    db.collection("reservation").document("StudyRoom").update("table2",--table2)
+                    db.collection("reservation").document("StudyRoom").update("t2_booker",t2book)
+                    db.collection("reservation").document("StudyRoom").update("t2_time",t2time)
+                }
+                t3book[ind1] -> {
+                    t3book[ind1] = ""; t3time[ind1] = ""
+                    db.collection("reservation").document("StudyRoom").update("table3",--table3)
+                    db.collection("reservation").document("StudyRoom").update("t3_booker",t3book)
+                    db.collection("reservation").document("StudyRoom").update("t3_time",t3time)
+                }
+                else -> {
+                    t4book[ind1] = ""; t4time[ind1] = ""
+                    db.collection("reservation").document("StudyRoom").update("table4",--table4)
+                    db.collection("reservation").document("StudyRoom").update("t4_booker",t4book)
+                    db.collection("reservation").document("StudyRoom").update("t4_time",t4time)
+                }
+            }
+            startActivity(studyroomIntent)
+        }
+
+        // 현재 자리 데이터 불러오기
         db.collection("reservation").document("StudyRoom").get().addOnSuccessListener { doc ->
             table1 = doc["table1"].toString().toInt()
             table2 = doc["table2"].toString().toInt()
@@ -68,71 +112,103 @@ class StudyroomActivity : AppCompatActivity() {
             str = doc["t4_booker"].toString()
             removeChars.forEach { str = str.replace(it.toString(),"") }
             t4book = str.split(",").toMutableList()
-            studyroomReservIntent.putExtra("table1",table1)
-            studyroomReservIntent.putExtra("table2",table2)
-            studyroomReservIntent.putExtra("table3",table3)
-            studyroomReservIntent.putExtra("table4",table4)
+            str = doc["t1_time"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t1time = str.split(",").toMutableList()
+            str = doc["t2_time"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t2time = str.split(",").toMutableList()
+            str = doc["t3_time"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t3time = str.split(",").toMutableList()
+            str = doc["t4_time"].toString()
+            removeChars.forEach { str = str.replace(it.toString(),"") }
+            t4time = str.split(",").toMutableList()
+            var deadLine = ""
             for ( i in 0 until 4) {
                 if (t1book[i] == auth!!.uid.toString() || t2book[i] == auth!!.uid.toString() || t3book[i] == auth!!.uid.toString() || t4book[i] == auth!!.uid.toString()) {
+                    // 예약했을 경우
                     isReserv = true
-                    ind = i
+                    ind1 = i
                     reservedTable = if (t1book[i] == auth!!.uid.toString()) {
                         1
                     } else if (t2book[i] == auth!!.uid.toString()) {
                         2
                     } else if (t3book[i] == auth!!.uid.toString()) {
                         3
-                    } else if (t4book[i] == auth!!.uid.toString()) {
+                    } else {
                         4
-                    } else{
-                        0
                     }
                     break
                 }
+                // 시간 지난 사람들 자리 반납 처리
+                if (t1book[i] == "") { ind2[0] = i }
+                else{
+                    deadLine = t1time[i]
+                    if ((deadLine[4]<week) or (formatted.toString().toInt()-deadLine.slice(0 until 4).toInt()>200)){
+                        Log.i("TAG","데드라인 넘김!!")
+                        t1book[i] = ""
+                        t1time[i] = ""
+                        db.collection("reservation").document("StudyRoom").update("t1_booker",t1book)
+                        db.collection("reservation").document("StudyRoom").update("t1_time",t1time)
+                        db.collection("reservation").document("StudyRoom").update("table1",--table1)
+                    }
+                }
+                if (t2book[i] == "") { ind2[1] = i }
+                else{
+                    deadLine = t2time[i]
+                    if ((deadLine[4]<week) or (formatted.toString().toInt()-deadLine.slice(0 until 4).toInt()>200)){
+                        t2book[i] = ""
+                        t2time[i] = ""
+                        db.collection("reservation").document("StudyRoom").update("t2_booker",t2book)
+                        db.collection("reservation").document("StudyRoom").update("t2_time",t2time)
+                        db.collection("reservation").document("StudyRoom").update("table2",--table2)
+                    }
+                }
+                if (t3book[i] == "") { ind2[2] = i }
+                else{
+                    deadLine = t3time[i]
+                    if ((deadLine[4]<week) or (formatted.toString().toInt()-deadLine.slice(0 until 4).toInt()>200)){
+                        t3book[i] = ""
+                        t3time[i] = ""
+                        db.collection("reservation").document("StudyRoom").update("t3_booker",t3book)
+                        db.collection("reservation").document("StudyRoom").update("t3_time",t3time)
+                        db.collection("reservation").document("StudyRoom").update("table3",--table3)
+                    }
+                }
+                if (t4book[i] == "") { ind2[3] = i }
+                else{
+                    deadLine = t4time[i]
+                    if ((deadLine[4]<week) or (formatted.toString().toInt()-deadLine.slice(0 until 4).toInt()>200)){
+                        t4book[i] = ""
+                        t4time[i] = ""
+                        db.collection("reservation").document("StudyRoom").update("t4_booker",t4book)
+                        db.collection("reservation").document("StudyRoom").update("t4_time",t4time)
+                        db.collection("reservation").document("StudyRoom").update("table4",--table4)
+                    }
+                }
             }
-            var t = if (reservedTable != 0) {
+            if (reservedTable != 0) {
                 str = doc["t${reservedTable}_time"].toString()
                 removeChars.forEach { str = str.replace(it.toString(), "") }
                 val tStr = str.split(",").toMutableList()
-                tStr[ind].toInt()
-            } else {
-                0
+                deadLine = tStr[ind1]
+                // 본인 자리가 2시간 경과 했을 경우
+                if ((deadLine[4]<week) or (formatted.toString().toInt()-deadLine.slice(0 until 4).toInt()>200)){
+                    reservCancelClickYes()
+                    Toast.makeText(this,"2시간이 지나 자동 반납되었습니다.",Toast.LENGTH_SHORT)
+                }
             }
-            studyroomReservIntent.putExtra("ind",ind)
+            //값 넘겨주기
+            studyroomReservIntent.putExtra("table1",table1)
+            studyroomReservIntent.putExtra("table2",table2)
+            studyroomReservIntent.putExtra("table3",table3)
+            studyroomReservIntent.putExtra("table4",table4)
+            studyroomReservIntent.putIntegerArrayListExtra("ind",ind2)
         }
 
 
-        // 자리 반납 기능
-        fun reservCancelClickYes() {
-            isReserv = false
-            when (auth!!.uid.toString()) {
-                t1book[ind] -> {
-                    table1--; t1book[ind] = ""
-                    db.collection("reservation").document("StudyRoom").update("table1",table1)
-                    db.collection("reservation").document("StudyRoom").update("t1_booker",t1book)
-                    db.collection("reservation").document("StudyRoom").update("t1_time",0)
-                }
-                t2book[ind] -> {
-                    table2--; t2book[ind] = ""
-                    db.collection("reservation").document("StudyRoom").update("table2",table2)
-                    db.collection("reservation").document("StudyRoom").update("t2_booker",t2book)
-                    db.collection("reservation").document("StudyRoom").update("t2_time",0)
-                }
-                t3book[ind] -> {
-                    table3--; t3book[ind] = ""
-                    db.collection("reservation").document("StudyRoom").update("table3",table3)
-                    db.collection("reservation").document("StudyRoom").update("t3_booker",t3book)
-                    db.collection("reservation").document("StudyRoom").update("t3_time",0)
-                }
-                else -> {
-                    table4--; t4book[ind] = ""
-                    db.collection("reservation").document("StudyRoom").update("table4",table4)
-                    db.collection("reservation").document("StudyRoom").update("t4_booker",t4book)
-                    db.collection("reservation").document("StudyRoom").update("t4_time",0)
-                }
-            }
-            startActivity(studyroomIntent)
-        }
+
 
         //예약 기능을 반영한 테이블 img
         thread (start = true){
@@ -158,7 +234,6 @@ class StudyroomActivity : AppCompatActivity() {
                 binding.table4.setImageResource(R.drawable.studyroom_table4)
 
             if (isReserv) {
-                // 2시간 타이머
                 binding.reservBtn.text = getString(R.string.return_seat)
             }
             runOnUiThread {
