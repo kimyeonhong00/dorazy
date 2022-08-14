@@ -21,8 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@color/white" >
-        </androidx.appcompat.widget.Toolbar>
+            app:titleTextColor="@color/white"></androidx.appcompat.widget.Toolbar>
 
         <ScrollView
             android:id="@+id/scrollView3"
@@ -47,19 +46,18 @@
                     android:layout_height="262dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="MissingConstraints" />
 
                 <Button
                     android:id="@+id/groupList"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="32dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/radius"
                     android:text="그룹\n리스트"
                     android:textColor="@color/white"
-                    app:layout_constraintEnd_toStartOf="@+id/recordbutton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pager" />
 
@@ -67,13 +65,11 @@
                     android:id="@+id/bookingbutton"
                     android:layout_width="160dp"
                     android:layout_height="150dp"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="24dp"
                     android:layout_marginTop="32dp"
-                    android:layout_marginEnd="16dp"
                     android:background="@drawable/radius"
                     android:text="테이블\n예약"
                     android:textColor="@color/white"
-                    app:layout_constraintEnd_toStartOf="@+id/rankingbutton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/groupList" />
 
@@ -82,7 +78,7 @@
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="32dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="24dp"
                     android:background="@drawable/radius"
                     android:text="랭킹"
                     android:textColor="@color/white"
@@ -94,7 +90,7 @@
                     android:layout_width="160dp"
                     android:layout_height="150dp"
                     android:layout_marginTop="32dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="24dp"
                     android:background="@drawable/radius"
                     android:text="공부\n기록"
                     android:textColor="@color/white"
