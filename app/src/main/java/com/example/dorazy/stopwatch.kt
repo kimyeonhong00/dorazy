@@ -61,7 +61,7 @@ class stopwatch : AppCompatActivity() {
                         val result = timecalculator()
                         val hour = result[0]; val min =result[1]; val sec = result[2];
                         txtTime.text = "$hour : $min : $sec"
-                        st = true; println("!!!!st true로 바뀜")
+                        st = true;
                     } else{
                         Log.d(TAG, "No such document")
                     }

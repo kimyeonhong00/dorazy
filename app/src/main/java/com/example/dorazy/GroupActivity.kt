@@ -32,12 +32,15 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.api.Distribution
 
 class GroupActivity : AppCompatActivity() {
     @SuppressLint("SimpleDateFormat")
     private val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
     private var mAdapter: RecyclerViewAdapter? = null
     private var makeGroupBtn: AppCompatImageButton ?= null
+    var call: Int ? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_groupactivity)
@@ -45,12 +48,14 @@ class GroupActivity : AppCompatActivity() {
         val toolbar:Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         mAdapter = RecyclerViewAdapter()
         recyclerView.adapter= mAdapter
+
         simpleDateFormat.timeZone= TimeZone.getTimeZone("Asia/Seoul")
         // 어느 예약페이지에서 보냈는지 알 수 있게 하는 변수
-        val call = intent.getIntExtra("call",0)
-        Intent(this,groupDetail::class.java).putExtra("call",call)
+        call = intent.getIntExtra("call",0)
+
     }
 
     override fun onDestroy() {
@@ -141,6 +146,8 @@ class GroupActivity : AppCompatActivity() {
             }
             groupViewHolder.itemView.setOnClickListener{v->
                 val intent = Intent(v.context, groupDetail::class.java)
+
+                intent.putExtra("call",call)
                 intent.putExtra("groupID", groupModel.groupID)
                 intent.putExtra("groupTitle", groupModel.title)
                 intent.putExtra("groupLeader",groupModel.leader)
