@@ -273,7 +273,6 @@ class SelfstudyNextweekReservActivity : AppCompatActivity() {
                         }else{
                             reservStatus[i][j-1].split("/").size
                         }
-                        println("$i,$j,$teams")
                         btn.isEnabled = true
                         when (teams) {
                             3 -> btn.isEnabled = false

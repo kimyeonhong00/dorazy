@@ -70,6 +70,8 @@ class LoginActivity:AppCompatActivity() {
                                             finish()
                                         }
                                     }
+                                }.addOnFailureListener{
+                                    Toast.makeText(this,"로그인에 실패 하였습니다.",Toast.LENGTH_SHORT).show()
                                 }
                         }
                     } ?: throw Exception()
