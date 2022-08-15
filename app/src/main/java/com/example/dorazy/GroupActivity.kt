@@ -51,6 +51,9 @@ class GroupActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         mAdapter = RecyclerViewAdapter()
         recyclerView.adapter= mAdapter
+        makeGroupBtn?.setOnClickListener{
+            startActivity(Intent(it.context,grouppage::class.java))
+        }
 
         simpleDateFormat.timeZone= TimeZone.getTimeZone("Asia/Seoul")
         // 어느 예약페이지에서 보냈는지 알 수 있게 하는 변수
