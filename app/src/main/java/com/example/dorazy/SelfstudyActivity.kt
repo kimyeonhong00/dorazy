@@ -24,11 +24,6 @@ class SelfstudyActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelfstudyBinding
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var auth : FirebaseAuth? = null
-    private var curTime = LocalDateTime.now()
-    private val formatter = DateTimeFormatter.ofPattern("HHmm")
-    private val formatted = curTime.format(formatter)
-    private val calendar = Calendar.getInstance()
-    private val week = calendar.get(Calendar.DAY_OF_WEEK)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +47,15 @@ class SelfstudyActivity : AppCompatActivity() {
         selfstudyNextweekIntent.putExtra("groupId",groupId)
         meetIntent.putExtra("groupId",groupId)
 
+        val curTime = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("HHmm")
+        val cur = curTime.format(formatter)
+        val calendar = Calendar.getInstance()
+        val week = toWeekInt(calendar.get(Calendar.DAY_OF_WEEK))
         var isReserved = false
         var past = false
+        var hh: String
+        var mm: String
         var myReserve = ArrayList<Array<Int>>()
         db.collection("reservation").document("SelfStudySpace").get().addOnSuccessListener {doc ->
             val removeChars = "[] "
@@ -78,7 +80,7 @@ class SelfstudyActivity : AppCompatActivity() {
         }
 
         thread {
-            Thread.sleep(1000)
+            Thread.sleep(1500)
             // 표 처음 상태 색칠
             for (i in 0 until 6){
                 for (j in 0 until 22){
@@ -99,9 +101,14 @@ class SelfstudyActivity : AppCompatActivity() {
                         }
                         for (t in reservTeams) {
                             if (groupId == t) {
-                                val hh = (9+j/2).toString()
-                                val mm = (j.toFloat()/2)*60
-                                past = (i<week) or ((i==week) and (hh+mm<formatted))
+                                hh = (9+j/2).toString()
+                                mm = if ((j%2)==1){
+                                    "30"
+                                } else{
+                                    "00"
+                                }
+                                val hhmm = (hh+mm).toInt()
+                                past = (i<week) or ((i==week) and (hhmm<cur.toInt()))
                                 myReserve.add(arrayOf(i,j))
                                 timetableTextview.setBackgroundColor(Color.parseColor("#002244"))
                                 isReserved = true
@@ -125,16 +132,24 @@ class SelfstudyActivity : AppCompatActivity() {
 
         fun cancelReservClickYes() {
             var st = 0
-            for (i in 0 until myReserve.size){
-                val hh = (9+myReserve[i][1]/2).toString()
-                val mm = (myReserve[i][1].toFloat()/2)*60
-                if (hh+mm>formatted) {
-                    st = i
-                    break
+            if (myReserve[0][0] == week){
+                for (i in 0 until myReserve.size){
+                    hh = (9+myReserve[i][1]/2).toString()
+                    mm = if ((myReserve[i][1]%2)==1){
+                        "30"
+                    } else{
+                        "00"
+                    }
+                    val hhmm = (hh+mm).toInt()
+                    if (hhmm>cur.toInt()) {
+                        st = i
+                        break
+                    }
                 }
             }
-            myReserve = myReserve.subList(st,myReserve.size) as ArrayList<Array<Int>>
-            val newStatus = reservStatus[myReserve[st][0]].toMutableList()
+            val size = myReserve.size
+            myReserve = ArrayList(myReserve.subList(st,size))
+            val newStatus = reservStatus[myReserve[0][0]].toMutableList()
             for (record in myReserve) {
                 if (newStatus[record[1]].contains("/")){
                     newStatus[record[1]] = newStatus[record[1]].replace("$groupId/","")
@@ -150,9 +165,14 @@ class SelfstudyActivity : AppCompatActivity() {
         // 자리 반납
         fun showDialog1() {
             val builder2 = AlertDialog.Builder(this)
-            val hh = (9+myReserve[0][1]/2).toString()
-            val mm = (myReserve[0][1].toFloat()/2)*60
-            if (hh+mm<formatted) {  // 이용 중
+            hh = (9+myReserve[0][1]/2).toString()
+            mm = if ((myReserve[0][1]%2)==1){
+                "30"
+            } else{
+                "00"
+            }
+            val hhmm = (hh+mm).toInt()
+            if ((myReserve[0][0] == week) and (hhmm<cur.toInt())) {  // 이용 중
                 builder2.setTitle("이용 종료")
                 builder2.setMessage("이용을 종료 하시겠습니까?")
             } else {  // 이용 전
@@ -175,7 +195,7 @@ class SelfstudyActivity : AppCompatActivity() {
 
         // 이용 제한 안내
         fun showDialog2() {
-            val timeGuide = ConfirmDialog("알림","금주의 예약 가능 횟수를 초과하였습니다.","확인")
+            val timeGuide = ConfirmDialog("알림","금주의 예약 가능 횟수를\n초과하였습니다.","확인")
             timeGuide.isCancelable=false
             timeGuide.show(this.supportFragmentManager,"ConfirmDialog")
         }
@@ -241,6 +261,18 @@ class SelfstudyActivity : AppCompatActivity() {
             3-> "thur"
             4-> "fri"
             else -> "sat"
+        }
+    }
+
+    private fun toWeekInt(n:Int):Int{
+        return when (n){
+            1 -> 6
+            2 -> 0
+            3 -> 1
+            4 -> 2
+            5 -> 3
+            6 -> 4
+            else -> 5
         }
     }
 }

@@ -13,9 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
 
@@ -24,11 +21,6 @@ class SelfstudyNextweekActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelfstudyNextweekBinding
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var auth : FirebaseAuth? = null
-    private var curTime = LocalDateTime.now()
-    private val formatter = DateTimeFormatter.ofPattern("HHmm")
-    private val formatted = curTime.format(formatter)
-    private val calendar = Calendar.getInstance()
-    private val week = calendar.get(Calendar.DAY_OF_WEEK)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +47,7 @@ class SelfstudyNextweekActivity : AppCompatActivity() {
         meetIntent.putExtra("groupId",groupId)
 
         var isReserved = false
-        var past = false
-        var myReserve = ArrayList<Array<Int>>()
+        val myReserve = ArrayList<Array<Int>>()
         db.collection("reservation").document("SelfStudySpace").get().addOnSuccessListener {doc ->
             val removeChars = "[] "
             var str = doc["mon1next"].toString()
@@ -101,17 +92,10 @@ class SelfstudyNextweekActivity : AppCompatActivity() {
                         }
                         for (t in reservTeams) {
                             if (groupId == t) {
-                                val hh = (9+j/2).toString()
-                                val mm = (j.toFloat()/2)*60
-                                past = (i<week) or ((i==week) and (hh+mm<formatted))
                                 myReserve.add(arrayOf(i,j))
                                 timetableTextview.setBackgroundColor(Color.parseColor("#002244"))
                                 isReserved = true
-                                if (!past) {
-                                    binding.reservBtn.text = getString(R.string.cancel_reserv)
-                                } else {
-                                    binding.reservBtn.text = getString(R.string.ban)
-                                }
+                                binding.reservBtn.text = getString(R.string.cancel_reserv)
                             }
                         }
                     }
@@ -119,24 +103,11 @@ class SelfstudyNextweekActivity : AppCompatActivity() {
             }
             runOnUiThread {
                 binding.reservBtn.isEnabled = true
-                if (past){
-                    binding.reservBtn.setBackgroundColor(Color.parseColor("#808080"))
-                }
             }
         }
 
         fun cancelReservClickYes() {
-            var st = 0
-            for (i in 0 until myReserve.size){
-                val hh = (9+myReserve[i][1]/2).toString()
-                val mm = (myReserve[i][1].toFloat()/2)*60
-                if (hh+mm>formatted) {
-                    st = i
-                    break
-                }
-            }
-            myReserve = myReserve.subList(st,myReserve.size) as ArrayList<Array<Int>>
-            val newStatus = reservStatus[myReserve[st][0]].toMutableList()
+            val newStatus = reservStatus[myReserve[0][0]].toMutableList()
             for (record in myReserve) {
                 if (newStatus[record[1]].contains("/")){
                     newStatus[record[1]] = newStatus[record[1]].replace("$groupId/","")
@@ -152,15 +123,8 @@ class SelfstudyNextweekActivity : AppCompatActivity() {
         // 자리 반납
         fun showDialog1() {
             val builder2 = AlertDialog.Builder(this)
-            val hh = (9+myReserve[0][1]/2).toString()
-            val mm = (myReserve[0][1].toFloat()/2)*60
-            if (hh+mm<formatted) {  // 이용 중
-                builder2.setTitle("이용 종료")
-                builder2.setMessage("이용을 종료 하시겠습니까?")
-            } else {  // 이용 전
-                builder2.setTitle("예약 취소")
-                builder2.setMessage("예약을 취소 하시겠습니까?")
-            }
+            builder2.setTitle("예약 취소")
+            builder2.setMessage("예약을 취소 하시겠습니까?")
             val listener = DialogInterface.OnClickListener { _, p1 ->
                 when(p1) {
                     DialogInterface.BUTTON_POSITIVE ->
@@ -174,12 +138,7 @@ class SelfstudyNextweekActivity : AppCompatActivity() {
             builder2.show()
         }
 
-        // 이용 제한 안내
-        fun showDialog2() {
-            val timeGuide = ConfirmDialog("알림","금주의 예약 가능 횟수를 초과하였습니다.","확인")
-            timeGuide.isCancelable=false
-            timeGuide.show(this.supportFragmentManager,"ConfirmDialog")
-        }
+
 
         // 미팅룸 activity로 전환
         binding.meetChangeBtn.setOnClickListener {
@@ -229,10 +188,8 @@ class SelfstudyNextweekActivity : AppCompatActivity() {
                 builder.show()
             } else if (!isReserved) {
                 startActivity(selfstudyNextweekReservIntent)
-            } else if (!past) {
+            } else {
                 showDialog1()
-            } else{
-                showDialog2()
             }
         }
 

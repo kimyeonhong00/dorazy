@@ -13,6 +13,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
 
 class SelfstudyReservActivity : AppCompatActivity() {
@@ -20,6 +24,11 @@ class SelfstudyReservActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySelfstudyReservBinding
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var auth : FirebaseAuth? = null
+    private var curTime = LocalDateTime.now()
+    private val formatter = DateTimeFormatter.ofPattern("HHmm")
+    private val cur = curTime.format(formatter)
+    private val calendar = Calendar.getInstance()
+    private val week = toWeekInt(calendar.get(Calendar.DAY_OF_WEEK))
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,11 +40,29 @@ class SelfstudyReservActivity : AppCompatActivity() {
         // 인텐트
         val selfstudyIntent = Intent(this, SelfstudyActivity::class.java)
 
+        fun toInd(frmtT : String) : Int{
+            val h = frmtT.slice(0 until 2).toInt()
+            var i = if (h<9){
+                -1
+            } else if (h>19) {
+                21
+            } else {
+                (h-9)*2
+            }
+            if (frmtT.slice(2 until 4) =="30"){
+                i++
+            }
+            return i
+        }
+
         // 현재 예약 데이터 불러오기
         binding.reservBtn.isEnabled=false
         val reservStatus = ArrayList<List<String>>()
         val groupId = intent.getStringExtra("groupId")
         selfstudyIntent.putExtra("groupId",groupId)
+        var hh :String
+        var mm :String
+        val curInd = toInd(cur)
 
         var maxPeriod = 5
         db.collection("groups").document(groupId!!).get().addOnSuccessListener {
@@ -131,17 +158,17 @@ class SelfstudyReservActivity : AppCompatActivity() {
         } while(period>maxPeriod)
 
         thread {
-            Thread.sleep(1000)
+            Thread.sleep(1500)
             // 표 초기 세팅
             for (i in 0 until 6){
                 for (j in 0 until 22){
                     val reservTeams = reservStatus[i][j].split("/").toMutableList()
                     val drId = resources.getIdentifier(toWeekString(i)+(j+1),"id",applicationContext.packageName)
                     val timetableButton = findViewById<Button>(drId)
+                    if(reservTeams[0]==""){
+                        reservTeams.clear()
+                    }
                     runOnUiThread {
-                        if(reservTeams[0]==""){
-                            reservTeams.clear()
-                        }
                         when (reservTeams.size) {
                             1 -> timetableButton.setBackgroundColor(Color.parseColor("#EDD74C"))
                             2 -> timetableButton.setBackgroundColor(Color.parseColor("#E09B53"))
@@ -151,7 +178,16 @@ class SelfstudyReservActivity : AppCompatActivity() {
                             }
                         }
                     }
-
+                    hh = (9+j/2).toString()
+                    mm = if ((j%2)==1){
+                        "30"
+                    } else{
+                        "00"
+                    }
+                    val hhmm = (hh+mm).toInt()
+                    if ((i<week) or ((i==week) and (hhmm<cur.toInt()))){
+                        runOnUiThread{timetableButton.isEnabled = false}
+                    }
                 }
             }
         }
@@ -238,7 +274,7 @@ class SelfstudyReservActivity : AppCompatActivity() {
                 selected = arrayOf(w,s)
                 // 색칠
                 binding.reservBtn.setBackgroundColor(Color.parseColor("#002244"))
-                for (i in 0 until 6) {
+                for (i in week until 6) {
                     for (j in 1 until 23) {
                         val btn = findViewById<Button>(resources.getIdentifier(toWeekString(i) + (j),"id",applicationContext.packageName))
                         btn.isEnabled = false
@@ -262,9 +298,9 @@ class SelfstudyReservActivity : AppCompatActivity() {
             else {
                 binding.reservBtn.setBackgroundColor(Color.parseColor("#808080"))
                 binding.reservBtn.isEnabled=false
-                for (i in 0 until 6) {
+                for (i in week until 6) {
                     for (j in 1 until 23) {
-                        if ((i==5) and (j>12)){
+                        if (((i==week) and (j-2<curInd)) or ((i==5) and (j>12))) {
                             continue
                         }
                         val btn = findViewById<Button>(resources.getIdentifier(toWeekString(i) + (j),"id",applicationContext.packageName))
@@ -273,7 +309,6 @@ class SelfstudyReservActivity : AppCompatActivity() {
                         }else{
                             reservStatus[i][j-1].split("/").size
                         }
-                        println("$i,$j,$teams")
                         btn.isEnabled = true
                         when (teams) {
                             3 -> btn.isEnabled = false
@@ -680,6 +715,18 @@ class SelfstudyReservActivity : AppCompatActivity() {
             3-> "thur"
             4-> "fri"
             else -> "sat"
+        }
+    }
+
+    private fun toWeekInt(n:Int):Int{
+        return when (n){
+            1 -> 6
+            2 -> 0
+            3 -> 1
+            4 -> 2
+            5 -> 3
+            6 -> 4
+            else -> 5
         }
     }
 }
