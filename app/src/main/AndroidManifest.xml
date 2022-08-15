@@ -40,6 +40,7 @@
         <activity android:name=".SelfstudyNextweekReservActivity"/>
         <activity android:name=".SelfstudyN2WeekActivity"/>
         <activity android:name=".SelfstudyN2weekReservActivity"/>
+        <activity android:name=".LentActivity"/>
 
     </application>
 

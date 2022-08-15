@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dorazy_main_blue_color"
+    tools:context=".LentActivity"
+    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/main_theme"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:text = "물품대여"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="40dp"
+            android:fontFamily="@font/aritaburihairline"
+            android:textStyle="bold" >
+        </TextView>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="370dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/group_button_drawable"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="안내사항\n반드시 반납해주세요\n도산라운지 내에서만\n사용해주세요\n"
+            android:textColor="@color/main_theme"
+            android:textSize="40dp"
+            app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+
+        </TextView>
+    </LinearLayout>
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="370dp"
+        android:layout_height="300dp"
+        android:background="@color/main_theme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.609"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintVertical_bias="0.8"
+
+        >
+
+        <Button
+            android:id="@+id/mutlitabLent"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/aritaburihairline"
+            android:gravity="center"
+            android:text="멀티탭\n대여하기"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_column="1"
+            app:layout_row="1">
+
+        </Button>
+
+        <Button
+            android:id="@+id/boardLent"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/aritaburihairline"
+            android:gravity="center"
+            android:text="화이트보드\n대여하기"
+            android:textColor="@color/white"
+            android:textSize="29dp"
+            android:textStyle="bold"
+            app:layout_column="0"
+            app:layout_row="1">
+
+        </Button>
+
+        <TextView
+            android:id="@+id/mutlitabCount"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:text="4/10"
+            android:gravity="center"
+            app:layout_column="1"
+            app:layout_row="0"
+            />
+        <TextView
+            android:id="@+id/boardCount"
+            android:layout_width="185dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="4/10"
+            app:layout_column="0"
+            app:layout_row="0"
+            />
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <android.widget.Button
+        android:id="@+id/returnButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_theme"
+        android:fontFamily="@font/aritaburihairline"
+        android:padding="22dp"
+        android:text="반납하기"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+         />
+</androidx.constraintlayout.widget.ConstraintLayout>
