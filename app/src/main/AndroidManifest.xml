@@ -41,6 +41,7 @@
         <activity android:name=".SelfstudyN2WeekActivity"/>
         <activity android:name=".SelfstudyN2weekReservActivity"/>
         <activity android:name=".LentActivity"/>
+        <activity android:name=".NotificationActivity"/>
 
     </application>
 
