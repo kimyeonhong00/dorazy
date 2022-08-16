@@ -10,6 +10,7 @@ import com.example.dorazy.databinding.ActivityMeetBinding
 
 
 class MeetActivity : AppCompatActivity() {
+
     private lateinit var binding:ActivityMeetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

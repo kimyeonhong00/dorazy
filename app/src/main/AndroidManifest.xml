@@ -3,8 +3,7 @@
     package="com.example.dorazy">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -14,28 +13,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dorazy">
         <activity
+            android:name=".editDesc"
+            android:exported="false" />
+        <activity
             android:name=".LoadingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".PersonalRankingActivity" />
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".CreateAccountActivity"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".CreateAccountActivity" />
         <activity android:name=".stopwatch" />
-        <activity android:name=".CreateProfileActivity"/>
-        <activity android:name=".ProfileActivity"/>
-        <activity android:name=".MeetActivity"/>
-        <activity android:name=".MeetReservActivity"/>
-        <activity android:name=".SelfstudyActivity"/>
-        <activity android:name=".SelfstudyReservActivity"/>
-        <activity android:name=".StudyroomActivity"/>
-        <activity android:name=".StudyroomReservActivity"/>
-
-
+        <activity android:name=".CreateProfileActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".MeetActivity" />
+        <activity android:name=".MeetReservActivity" />
+        <activity android:name=".SelfstudyActivity" />
+        <activity android:name=".SelfstudyReservActivity" />
+        <activity android:name=".StudyroomActivity" />
+        <activity android:name=".StudyroomReservActivity" />
     </application>
 
 </manifest>

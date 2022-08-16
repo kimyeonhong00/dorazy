@@ -2,19 +2,16 @@ package com.example.dorazy
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
 import com.example.dorazy.databinding.ActivityProfileBinding
 import com.google.firebase.auth.ktx.auth
@@ -23,6 +20,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
+import com.example.dorazy.databinding.EditDescLayoutBinding
 
 
 class ProfileActivity : AppCompatActivity() {
@@ -32,22 +30,17 @@ class ProfileActivity : AppCompatActivity() {
     private val cu = Firebase.auth.currentUser
 
 
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 바인딩 초기화(코틀린 파일에서 값 수정하기 위해 필요)
 
         binding = ActivityProfileBinding.inflate(layoutInflater)
-
         setContentView(R.layout.activity_profile)
-
-        // 갤러리 접근 코드
-
         database = Firebase.firestore
 
         var percent = 0
-
+        var desc = intent.getStringExtra("Desc")
 
         database.collection("User").get().addOnSuccessListener { doc ->
             for (d in doc){
@@ -70,9 +63,6 @@ class ProfileActivity : AppCompatActivity() {
 
             }
         }
-
-        
-
 
         setContentView(binding.root)
 
@@ -103,6 +93,10 @@ class ProfileActivity : AppCompatActivity() {
                     1000
                 )
             }
+        }
+
+        binding.subname.setOnClickListener {
+            editDesc()
         }
 
     }
@@ -170,5 +164,32 @@ class ProfileActivity : AppCompatActivity() {
             .create()
             .show()
     }
+
+
+    // 부제 수정 기능
+    fun editDesc(){
+        val builder = AlertDialog.Builder(this)
+        val builderItem = EditDescLayoutBinding.inflate(layoutInflater)
+        val editText = builderItem.editDesc
+
+        with(builder){
+            setTitle("Input Name")
+            setMessage("이름을 입력 하세요")
+            setView(builderItem.root)
+            setPositiveButton("OK"){ dialogInterface: DialogInterface, i: Int ->
+                if(editText.text != null)
+                    // toast("입력된 이름 : ${editText.text}")
+                    binding.subname.text = editText.text // 기존에 수정한 소개 저장하기
+            }
+            show()
+        }
+
+    }
+
+    private fun toast(message:String){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+
 }
 
