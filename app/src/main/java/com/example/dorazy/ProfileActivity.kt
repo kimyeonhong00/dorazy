@@ -85,21 +85,18 @@ class ProfileActivity : AppCompatActivity() {
 
                     binding.percent.text = "${percent}%"
 
-                    var maxY = 700f
-                    var minY = 1250f
+                    var firstY = binding.seaImg.y
+
                     // 퍼센트에 따라 바다 이동
                     when (percent) {
                         100 -> {
-                            // y 절대값 344dp
-                            binding.seaImg.y = maxY
+                            binding.seaImg.y = firstY
                         }
                         0 -> {
-                            // y 절대값 550dp
-                            binding.seaImg.y = minY
+                            binding.seaImg.y = firstY+750f
                         }
                         else -> {
-                            // 550-1.06*percent
-                            binding.seaImg.y = minY -5.5f*percent
+                            binding.seaImg.y = firstY+7.5f*(100-percent)
                         }
                     }
                 }
