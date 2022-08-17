@@ -31,17 +31,18 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var database: FirebaseFirestore
 
     var percent = 0
-    var introduce = intent.getStringExtra("Desc")
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // 바인딩 초기화(코틀린 파일에서 값 수정하기 위해 필요)
 
-
+        var introduce: String? = "#학과 #목표"
         val cu = Firebase.auth.currentUser
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val saveuser = db.collection("User").document(cu!!.uid)
+
 
         if (saveuser != null) {
             saveuser.get()
@@ -49,7 +50,7 @@ class ProfileActivity : AppCompatActivity() {
                     if ( document != null){
                         Log.d(ContentValues.TAG, "DocumentSnapshot data: ${document.data}")
                         introduce = document.data!!["introduce"].toString()
-
+                        binding.subname.text = introduce
                     } else{
                         Log.d(ContentValues.TAG, "No such document")
                     }
@@ -131,10 +132,13 @@ class ProfileActivity : AppCompatActivity() {
                 setPositiveButton("OK"){ dialogInterface: DialogInterface, i: Int ->
                     if(editText.text != null){
                         if (saveuser != null) {
-                            introduce = editText.text.toString()
-                            saveuser.update(
-                                mapOf("introduce" to introduce.toString())
-                            )
+                            if (introduce != null) {
+                                introduce = editText.text.toString()
+                                saveuser.update(
+                                    mapOf("introduce" to introduce.toString())
+                                )
+                                binding.subname.text = introduce
+                            }
                         }
                     }
                 }
