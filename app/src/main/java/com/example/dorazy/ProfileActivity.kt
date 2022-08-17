@@ -77,13 +77,31 @@ class ProfileActivity : AppCompatActivity() {
                     var goalTime = d.data["goalTime_db"].toString().toInt()
 
                     // 백분율: (진행시간/목표시간)*100
-                    percent =
-                        if (userStudyTime>goalTime)
-                            100
-                        else
-                            (userStudyTime/goalTime)*100
+
+                    if (userStudyTime>=goalTime)
+                        percent = 100
+                    else if (userStudyTime<goalTime)
+                        percent = userStudyTime * 100 / goalTime
 
                     binding.percent.text = "${percent}%"
+
+                    var maxY = 700f
+                    var minY = 1250f
+                    // 퍼센트에 따라 바다 이동
+                    when (percent) {
+                        100 -> {
+                            // y 절대값 344dp
+                            binding.seaImg.y = maxY
+                        }
+                        0 -> {
+                            // y 절대값 550dp
+                            binding.seaImg.y = minY
+                        }
+                        else -> {
+                            // 550-1.06*percent
+                            binding.seaImg.y = minY -5.5f*percent
+                        }
+                    }
                 }
 
             }
@@ -127,24 +145,29 @@ class ProfileActivity : AppCompatActivity() {
 
             with(builder){
                 setTitle("소개")
-                setMessage("자신에 대해 소개해보세요")
+                setMessage("예) #학과 #다짐")
                 setView(builderItem.root)
                 setPositiveButton("OK"){ dialogInterface: DialogInterface, i: Int ->
-                    if(editText.text != null){
+                    if(editText.text.toString() != ""){
                         if (saveuser != null) {
                             if (introduce != null) {
                                 introduce = editText.text.toString()
-                                saveuser.update(
-                                    mapOf("introduce" to introduce.toString())
-                                )
-                                binding.subname.text = introduce
                             }
                         }
                     }
+                    else{
+                        introduce = "클릭하여 자신을 소개해 보세요"
+                    }
+                    saveuser.update(
+                        mapOf("introduce" to introduce.toString())
+                    )
+                    binding.subname.text = introduce
                 }
                 show()
             }
         }
+
+
 
     }
 
