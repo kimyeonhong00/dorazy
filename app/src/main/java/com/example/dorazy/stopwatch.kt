@@ -146,8 +146,8 @@ class stopwatch : AppCompatActivity() {
             }
             if ((time != 0) && (isRunning == false)) {//공유창으로 이동
                 val intent = Intent(this, sharePage::class.java)
-                intent.putExtra("studyTime", time)
-                intent.putExtra("goalTime", goal)
+                intent.putExtra("studyTime", time.toString())
+                intent.putExtra("goalTime", goal.toString())
                 startActivity(intent)
             }
             reset() // 타이머 리셋

@@ -117,7 +117,7 @@ class GroupActivity : AppCompatActivity() {
                                 }
                                 .addOnFailureListener{ e ->
                                     Log.d(TAG, "GET failed with "+e)
-                                    groupModel.leader =document.get("leader").toString()
+                                    //groupModel.leader =document.get("leader").toString()
                                 }
                             groupModel.title = document.getString("title")
 
