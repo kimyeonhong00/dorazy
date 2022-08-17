@@ -4,18 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".ProfileActivity">
 
-  <Button
-      android:id="@+id/back_btn"
+  <ImageButton
+      android:id="@+id/backBtn"
       android:layout_width="30dp"
       android:layout_height="30dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="16dp"
-      android:background="@drawable/profile_arrow"
-      app:layout_constraintStart_toStartOf="parent"
+      android:background="@drawable/back"
+      android:clickable="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintHorizontal_bias="0.05"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      tools:ignore="SpeakableTextPresentCheck" />
+      app:layout_constraintVertical_bias="0.02"
+      tools:visibility="visible" />
+
+
 
   <ImageView
       android:id="@+id/sand_img"
@@ -27,28 +33,18 @@
       app:layout_constraintStart_toStartOf="parent"
       app:srcCompat="@drawable/sandex" />
 
-  <ImageView
-      android:id="@+id/backround_img"
+  <de.hdodenhof.circleimageview.CircleImageView
+      android:id="@+id/profile_image"
       android:layout_width="155dp"
       android:layout_height="155dp"
+      android:src="@drawable/default_img"
+      app:civ_border_color="#FF000000"
+      app:civ_border_width="2dp"
       app:layout_constraintBottom_toBottomOf="@+id/sand_img"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.17"
-      app:srcCompat="@drawable/background" />
-
-  <ImageView
-      android:id="@+id/profile_img"
-      android:layout_width="134dp"
-      android:layout_height="134dp"
-      app:layout_constraintBottom_toBottomOf="@+id/sand_img"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.498"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.199"
-      app:srcCompat="@drawable/default_img" />
+      app:layout_constraintVertical_bias="0.184" />
 
   <TextView
       android:id="@+id/profile_name"
@@ -57,19 +53,17 @@
       android:text="도라지"
       android:textColor="#000000"
       android:textSize="25dp"
-      app:layout_constraintBottom_toBottomOf="@+id/sand_img"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/backround_img"
-      app:layout_constraintVertical_bias="0.0" />
+      app:layout_constraintTop_toBottomOf="@+id/profile_image" />
 
   <TextView
       android:id="@+id/subname"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="368dp"
       android:text="#컴퓨터공학과 #선택과 집중"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintBottom_toTopOf="@+id/sand_img"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/profile_name"
@@ -80,8 +74,8 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="232dp"
+      android:text="0%"
       android:textColor="#66777373"
-      android:text = "0%"
       android:textSize="40dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -89,5 +83,23 @@
       app:layout_constraintStart_toStartOf="@+id/sand_img"
       app:layout_constraintTop_toTopOf="@+id/sand_img"
       app:layout_constraintVertical_bias="0.389" />
+
+  <ImageButton
+      android:id="@+id/imgAdd"
+      android:layout_width="20dp"
+      android:layout_height="20dp"
+      android:background="@drawable/img_add"
+      android:clickable="true"
+      android:text="imgAdd"
+      app:iconTint="@color/gray"
+      app:layout_constraintBottom_toBottomOf="@+id/sand_img"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.672"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.338"
+      app:rippleColor="@color/gray"
+      tools:ignore="TouchTargetSizeCheck" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
