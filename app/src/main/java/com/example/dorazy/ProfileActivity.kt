@@ -179,6 +179,11 @@ class ProfileActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
+        println(requestCode)
+        println(grantResults.isNotEmpty())
+        println(grantResults[0])
+        println(PackageManager.PERMISSION_GRANTED)
+
         when (requestCode) {
             1000 -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
@@ -193,7 +198,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun navigateGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
         // 가져올 컨텐츠들 중에서 Image 만을 가져온다.
         intent.type = "image/*"
         // 갤러리에서 이미지를 선택한 후, 프로필 이미지뷰를 수정하기 위해 갤러리에서 수행한 값을 받아오는 startActivityForeResult를 사용한다.
@@ -212,8 +217,7 @@ class ProfileActivity : AppCompatActivity() {
                 val selectedImageUri: Uri? = data?.data
                 if (selectedImageUri != null) {
                     binding.profileImage.setImageURI(selectedImageUri)
-                }
-                else {
+                } else {
                     Toast.makeText(this, "사진을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -235,6 +239,7 @@ class ProfileActivity : AppCompatActivity() {
             .create()
             .show()
     }
+
 
 
 
