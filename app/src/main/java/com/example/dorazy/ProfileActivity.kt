@@ -78,10 +78,10 @@ class ProfileActivity : AppCompatActivity() {
 
                     // 백분율: (진행시간/목표시간)*100
 
-                    if (userStudyTime>=goalTime)
+                    if (userStudyTime>=(goalTime*3600))
                         percent = 100
-                    else if (userStudyTime<goalTime)
-                        percent = userStudyTime * 100 / goalTime
+                    else if (userStudyTime<(goalTime * 3600))
+                        percent = userStudyTime * 100 / (goalTime *3600)
 
                     binding.percent.text = "${percent}%"
 

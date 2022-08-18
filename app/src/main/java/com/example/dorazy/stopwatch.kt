@@ -61,6 +61,7 @@ class stopwatch : AppCompatActivity() {
                         val result = timecalculator()
                         val hour = result[0]; val min =result[1]; val sec = result[2];
                         txtTime.text = "$hour : $min : $sec"
+                        goalTime.text = "$goal : 00 : 00"
                         st = true;
                     } else{
                         Log.d(TAG, "No such document")
@@ -80,6 +81,10 @@ class stopwatch : AppCompatActivity() {
         finishBtn = findViewById(R.id.finishBtn)
         backBtn = findViewById(R.id.backtBtn)
         progressBar = findViewById(R.id.progress_horizontal)
+        val temp = intent?.getStringExtra("isFirst")
+        if(temp == "false"){
+            first = false
+        }
         //버튼 클릭 리스너
         startBtn.setOnClickListener {
             if (first) {
@@ -164,7 +169,9 @@ class stopwatch : AppCompatActivity() {
     //뒤로 가기 버튼 클릭하면 메인 페이지로 이동
     override fun onBackPressed() {
         if(isRunning == false) {//홈화면으로 이동
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent =Intent(this, MainActivity::class.java)
+            intent.putExtra("isFirst",first.toString())
+            startActivity(intent)
             finish()
         }
         else{ //측정중엔 뒤로 가기 작동 x 안내창 띄우기
