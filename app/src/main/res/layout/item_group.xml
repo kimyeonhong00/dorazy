@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/text_layout"
             android:layout_marginTop="5dp"
-            android:text="group leader" />
+            android:text="" />
 
         <TextView
             android:id="@+id/last_time"
@@ -65,7 +65,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="30dp"
             android:layout_marginRight="10dp"
-            android:text="0"
+            android:text=""
             android:textAlignment="center" />
     </RelativeLayout>
 

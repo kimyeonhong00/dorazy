@@ -155,7 +155,7 @@ class GroupActivity : AppCompatActivity() {
             val groupViewHolder = holder as GroupViewHolder
             val groupModel = groupList[position]
             groupViewHolder.group_title.text= groupModel.title
-            groupViewHolder.group_leader.text= groupModel.leader
+            //groupViewHolder.group_leader.text= groupModel.leader
             groupViewHolder.group_count.text= groupModel.userCount.toString()
             if (groupModel.userCount!! > 0) {
                 groupViewHolder.group_count.text= groupModel.userCount.toString()

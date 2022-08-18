@@ -76,7 +76,7 @@ class stopwatch : AppCompatActivity() {
         txtTime = findViewById(R.id.txtText)
         goalTime = findViewById(R.id.goalText)
         startBtn = findViewById(R.id.startBtn)
-        groupBtn = findViewById(R.id.groupBtn)
+        //groupBtn = findViewById(R.id.groupBtn)
         finishBtn = findViewById(R.id.finishBtn)
         backBtn = findViewById(R.id.backtBtn)
         progressBar = findViewById(R.id.progress_horizontal)
@@ -119,11 +119,11 @@ class stopwatch : AppCompatActivity() {
                 } else pause()
             }
         }
-        groupBtn.setOnClickListener {
+        /*groupBtn.setOnClickListener {
             //running이면안되게
             //그룹 화면으로 전환
             if(isRunning == false) startActivity(Intent(this, GroupActivity::class.java))
-        }
+        }*/
         finishBtn.setOnClickListener {
             //끝나면 사용자 시간 set
             val time_db = time.toLong()

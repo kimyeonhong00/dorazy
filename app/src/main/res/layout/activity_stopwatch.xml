@@ -26,18 +26,6 @@
 
         </ImageView>
 
-        <ImageButton
-            android:id="@+id/groupBtn"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/groupimg"
-            android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/startBtn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.12"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/finishBtn"
-            app:layout_constraintVertical_bias= "1.0" />
 
 
         <ImageButton
