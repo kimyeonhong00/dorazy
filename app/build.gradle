@@ -86,4 +86,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
     //noinspection GradleCompatible
     implementation "com.android.support:support-compat:28.0.0"
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

@@ -171,9 +171,17 @@
         <entry key="..\:/Users/dongj/OneDrive/Desktop/dorazy/app/src/main/res/layout/my_ranking_stats.xml" value="0.12" />
         <entry key="..\:/Users/dongj/OneDrive/Desktop/dorazy/app/src/main/res/layout/ranking_home.xml" value="0.12129629629629629" />
         <entry key="..\:/Users/dongj/OneDrive/Desktop/dorazy/app/src/main/res/layout/weekly_ranking.xml" value="0.18" />
+        <entry key="..\:/Users/dongj/OneDrive/Desktop/git/profile/dorazy/app/src/main/res/drawable/img_add.xml" value="0.2055" />
+        <entry key="..\:/Users/dongj/OneDrive/Desktop/git/profile/dorazy/app/src/main/res/layout/activity_main.xml" value="0.536923076923077" />
+        <entry key="..\:/Users/dongj/OneDrive/Desktop/git/profile/dorazy/app/src/main/res/layout/activity_profile.xml" value="0.33" />
+        <entry key="..\:/Users/dongj/OneDrive/Desktop/git/profile/dorazy/app/src/main/res/layout/activity_selfstudy_nextweek_reserv.xml" value="0.35520833333333335" />
+        <entry key="..\:/Users/dongj/OneDrive/Desktop/git/profile/dorazy/app/src/main/res/layout/activity_studyroom.xml" value="0.35520833333333335" />
+        <entry key="..\:/Users/dongj/OneDrive/Desktop/git/profile/dorazy/app/src/main/res/layout/create_profile.xml" value="0.1" />
+        <entry key="..\:/Users/dongj/OneDrive/Desktop/git/profile/dorazy/app/src/main/res/layout/edit_desc_layout.xml" value="0.5307291666666667" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
