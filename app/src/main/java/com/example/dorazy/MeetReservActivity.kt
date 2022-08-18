@@ -33,7 +33,7 @@ class MeetReservActivity : AppCompatActivity() {
         //이용 안내
         clickViewEvents()
 
-        var isReserv = intent.getBooleanExtra("isReserv", false) // 예약 했는가
+        val isReserv = intent.getBooleanExtra("isReserv", false) // 예약 했는가
         var chooseTable = false // 테이블 선택 여부
         var tableClick = 0 // 선택한 테이블 번호
         val reservId = intent.getStringExtra("reservId")
@@ -51,10 +51,17 @@ class MeetReservActivity : AppCompatActivity() {
             val table :Boolean
             val cur = LocalDateTime.now()
             val calendar = Calendar.getInstance()
-            val week = calendar.get(Calendar.DAY_OF_WEEK).toString()
+            val week = when (calendar.get(Calendar.DAY_OF_WEEK)){
+                1 -> 6
+                2 -> 0
+                3 -> 1
+                4 -> 2
+                5 -> 3
+                6 -> 4
+                else -> 5
+            }.toChar()
             val formatter = DateTimeFormatter.ofPattern("HHmm")
             t = cur.format(formatter)+week
-            isReserv = true
             when (tc) {
                 1 -> {
                     table1 = true
@@ -72,7 +79,6 @@ class MeetReservActivity : AppCompatActivity() {
             db.collection("reservation").document("InterviewRoom").update("table$tc", table)
             db.collection("reservation").document("InterviewRoom").update("t${tc}_booker", reservId)
             db.collection("reservation").document("InterviewRoom").update("t${tc}_time", t)
-            meetIntent.putExtra("isReserv", isReserv)
             startActivity(meetIntent) // 명령어
             finish()
         }

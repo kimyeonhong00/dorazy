@@ -37,7 +37,7 @@ class MeetActivity : AppCompatActivity() {
         val studyroomIntent = Intent(this, StudyroomActivity::class.java)
 
         // 예약 여부
-        var isReserv = intent.getBooleanExtra("isReserv", false)
+        var isReserv = false
         val groupId = intent.getStringExtra("groupId")
 
 
@@ -54,7 +54,15 @@ class MeetActivity : AppCompatActivity() {
         var t = ""
         val cur = LocalDateTime.now()
         val calendar = Calendar.getInstance()
-        val week = calendar.get(Calendar.DAY_OF_WEEK).toChar()
+        val week = when (calendar.get(Calendar.DAY_OF_WEEK)){
+            1 -> 6
+            2 -> 0
+            3 -> 1
+            4 -> 2
+            5 -> 3
+            6 -> 4
+            else -> 5
+        }.toChar()
         val formatter = DateTimeFormatter.ofPattern("HHmm")
         val formatted = cur.format(formatter)
 
