@@ -72,7 +72,7 @@ class MeetActivity : AppCompatActivity() {
         // 내 아이디 + 내가 속한 그룹아이디 배열 생성
         val myIds = arrayListOf(auth!!.uid.toString())
         db.collection("groups").whereGreaterThanOrEqualTo("users.${auth!!.uid}", -1).get().addOnSuccessListener {
-            for (id in it.toMutableList() ){
+            for (id in it.toMutableList() ) {
                 myIds.add(id.id)
             }
         }
@@ -117,12 +117,6 @@ class MeetActivity : AppCompatActivity() {
             t1book = it["t1_booker"].toString()
             t2book = it["t2_booker"].toString()
             t3book = it["t3_booker"].toString()
-            meetReservIntent.putExtra("table1", table1)
-            meetReservIntent.putExtra("table2", table2)
-            meetReservIntent.putExtra("table3", table3)
-            meetReservIntent.putExtra("t1book", t1book)
-            meetReservIntent.putExtra("t2book", t2book)
-            meetReservIntent.putExtra("t3book", t3book)
             if (myIds.contains(t1book) || myIds.contains(t2book) || myIds.contains(t3book)) {
                 isReserv = true
                 for (id in myIds) {
@@ -146,10 +140,15 @@ class MeetActivity : AppCompatActivity() {
             }
         }
 
-
         //예약 기능을 반영한 테이블 img
         thread(start = true) {
-            Thread.sleep(1700)
+            Thread.sleep(2000)
+            meetReservIntent.putExtra("table1", table1)
+            meetReservIntent.putExtra("table2", table2)
+            meetReservIntent.putExtra("table3", table3)
+            meetReservIntent.putExtra("t1book", t1book)
+            meetReservIntent.putExtra("t2book", t2book)
+            meetReservIntent.putExtra("t3book", t3book)
             binding.reservBtn.setBackgroundColor(Color.parseColor("#002244"))
             binding.reservBtn.text = getString(R.string.reserve)
             if (table1)
