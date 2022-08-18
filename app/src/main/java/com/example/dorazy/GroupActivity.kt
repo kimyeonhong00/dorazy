@@ -64,12 +64,6 @@ class GroupActivity : AppCompatActivity() {
         simpleDateFormat.timeZone= TimeZone.getTimeZone("Asia/Seoul")
         // 어느 예약페이지에서 보냈는지 알 수 있게 하는 변수
         call = intent.getIntExtra("call",0)
-
-        firestore.collection("User").document("53Uj3d9cAFbVYiiXBkEQHH4Bxm82").get()
-            .addOnSuccessListener { document ->
-                println("document - > {$document}")
-                println(document.data)
-            }
     }
 
     override fun onDestroy() {
@@ -123,11 +117,12 @@ class GroupActivity : AppCompatActivity() {
 
                             if (groupModel.timestamp == null) groupModel.timestamp = Date()
                             orderedGroups[groupModel.timestamp!!] = groupModel
+                            groupList.add(groupModel)
                         }
-                        groupList.clear()
-                        for ((_, value1) in orderedGroups) {
-                            groupList.add(value1)
-                        }
+                        //groupList.clear()
+                        //for ((_, value1) in orderedGroups) {
+                        //    groupList.add(value1)
+                        //}
                         notifyDataSetChanged()
                     })
         }
@@ -146,8 +141,10 @@ class GroupActivity : AppCompatActivity() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            sleep(20)
             val view =
                 LayoutInflater.from(parent.context).inflate(R.layout.item_group, parent, false)
+
             return GroupViewHolder(view)
         }
 
