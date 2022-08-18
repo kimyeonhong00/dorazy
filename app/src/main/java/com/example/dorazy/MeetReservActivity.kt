@@ -59,7 +59,7 @@ class MeetReservActivity : AppCompatActivity() {
                 5 -> 3
                 6 -> 4
                 else -> 5
-            }.toChar()
+            }.toString()
             val formatter = DateTimeFormatter.ofPattern("HHmm")
             t = cur.format(formatter)+week
             when (tc) {

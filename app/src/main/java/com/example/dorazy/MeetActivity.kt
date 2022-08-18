@@ -51,7 +51,7 @@ class MeetActivity : AppCompatActivity() {
         var t3book: String? = null
         var reservId = groupId ?: auth!!.uid.toString()
         meetReservIntent.putExtra("reservId",reservId)
-        var t = ""
+        var reservTime = ""
         val cur = LocalDateTime.now()
         val calendar = Calendar.getInstance()
         val week = when (calendar.get(Calendar.DAY_OF_WEEK)){
@@ -62,7 +62,7 @@ class MeetActivity : AppCompatActivity() {
             5 -> 3
             6 -> 4
             else -> 5
-        }.toChar()
+        }.toString()
         val formatter = DateTimeFormatter.ofPattern("HHmm")
         val formatted = cur.format(formatter)
 
@@ -124,7 +124,7 @@ class MeetActivity : AppCompatActivity() {
                 isReserv = true
                 for (id in myIds) {
                     reservId = id
-                    t = if (t1book == reservId) {
+                    reservTime = if (t1book == reservId) {
                         reservedTable = 1
                         it["t1_time"].toString()
                     } else if (t2book == reservId) {
@@ -136,8 +136,8 @@ class MeetActivity : AppCompatActivity() {
                     }
                 }
             }
-            if (isReserv) {
-                if ((t[4]<week) or (formatted.toString().toInt()-t.slice(0 until 4).toInt()>200)){
+            if ((isReserv) and (reservTime!="")) {
+                if ((reservTime[4]<week[0]) or (formatted.toString().toInt()-reservTime.slice(0 until 4).toInt()>200)){
                     reservCancelClickYes()
                 }
             }
