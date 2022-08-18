@@ -3,6 +3,7 @@ package com.example.dorazy
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -11,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_profile.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -43,6 +45,8 @@ class MeetActivity : AppCompatActivity() {
 
         // 현재 자리 데이터 불러오기
         binding.reservBtn.isEnabled = false
+        binding.reservBtn.text = getString(R.string.wait)
+        binding.reservBtn.setBackgroundColor(Color.parseColor("#808080"))
         var table1 = false
         var table2 = false
         var table3 = false
@@ -146,7 +150,9 @@ class MeetActivity : AppCompatActivity() {
 
         //예약 기능을 반영한 테이블 img
         thread(start = true) {
-            Thread.sleep(1500)
+            Thread.sleep(1700)
+            binding.reservBtn.setBackgroundColor(Color.parseColor("#002244"))
+            binding.reservBtn.text = getString(R.string.reserve)
             if (table1)
                 binding.table1.setImageResource(R.drawable.meet_table1_reserv)
             else
@@ -226,7 +232,6 @@ class MeetActivity : AppCompatActivity() {
         }
 
         binding.backBtn.setOnClickListener {
-            mainIntent.putExtra("isReserv", isReserv)
             startActivity(mainIntent)
             finish()
         }
@@ -234,7 +239,6 @@ class MeetActivity : AppCompatActivity() {
         // 예약 or 반납 버튼
         binding.reservBtn.setOnClickListener {
             if (!isReserv) {
-                meetReservIntent.putExtra("isReserv", isReserv)
                 startActivity(meetReservIntent)
             } else {
                 showDialog()

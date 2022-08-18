@@ -43,4 +43,5 @@
     <string name="cancel_reserv">Cancel Reservation</string>
     <string name="ban">Not Available</string>
     <string name="now_using">now using</string>
+    <string name="wait">Please Wait..</string>
 </resources>

@@ -47,4 +47,5 @@
     <string name="cancel_reserv">예약 및 이용 취소</string>
     <string name="now_using">명 이용중</string>
     <string name="ban">이용 불가</string>
+    <string name="wait">잠시만 기다려주세요</string>
 </resources>
