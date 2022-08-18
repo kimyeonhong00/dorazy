@@ -1,9 +1,11 @@
 package com.example.dorazy
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
@@ -34,6 +36,8 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.api.Distribution
+import java.lang.Thread.sleep
+import kotlin.concurrent.thread
 
 class GroupActivity : AppCompatActivity() {
     @SuppressLint("SimpleDateFormat")
@@ -41,6 +45,8 @@ class GroupActivity : AppCompatActivity() {
     private var mAdapter: RecyclerViewAdapter? = null
     private var makeGroupBtn: AppCompatImageButton ?= null
     var call: Int ? = null
+    var temp = ""
+    private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_groupactivity)
@@ -59,6 +65,11 @@ class GroupActivity : AppCompatActivity() {
         // 어느 예약페이지에서 보냈는지 알 수 있게 하는 변수
         call = intent.getIntExtra("call",0)
 
+        firestore.collection("User").document("53Uj3d9cAFbVYiiXBkEQHH4Bxm82").get()
+            .addOnSuccessListener { document ->
+                println("document - > {$document}")
+                println(document.data)
+            }
     }
 
     override fun onDestroy() {
@@ -84,6 +95,7 @@ class GroupActivity : AppCompatActivity() {
         }
         
         fun getGroupInfo() {
+            val db = firestore.collection("User")
             listenerRegistration =
                 firestore.collection("groups").whereGreaterThanOrEqualTo("users.$myUid", -1)
                     .addSnapshotListener(EventListener{value, e->
@@ -99,9 +111,14 @@ class GroupActivity : AppCompatActivity() {
                             groupModel.groupID = document.id
                             val users = document.get("users") as Map<String, Long>?
                             groupModel.userCount = (users!!.size)
-                            groupModel.leader = document.get("leader").toString()
-
-                            // group chat room
+                            db.document(document.get("leader").toString()).get()
+                                .addOnSuccessListener { d ->
+                                    groupModel.leader = d.data?.get("name").toString()
+                                }
+                                .addOnFailureListener{ e ->
+                                    Log.d(TAG, "GET failed with "+e)
+                                    //groupModel.leader =document.get("leader").toString()
+                                }
                             groupModel.title = document.getString("title")
 
                             if (groupModel.timestamp == null) groupModel.timestamp = Date()
@@ -114,7 +131,6 @@ class GroupActivity : AppCompatActivity() {
                         notifyDataSetChanged()
                     })
         }
-
         fun stopListening() {
             if (listenerRegistration != null) {
                 listenerRegistration!!.remove()
@@ -139,7 +155,7 @@ class GroupActivity : AppCompatActivity() {
             val groupViewHolder = holder as GroupViewHolder
             val groupModel = groupList[position]
             groupViewHolder.group_title.text= groupModel.title
-            groupViewHolder.group_leader.text= groupModel.leader
+            //groupViewHolder.group_leader.text= groupModel.leader
             groupViewHolder.group_count.text= groupModel.userCount.toString()
             if (groupModel.userCount!! > 0) {
                 groupViewHolder.group_count.text= groupModel.userCount.toString()
@@ -163,7 +179,7 @@ class GroupActivity : AppCompatActivity() {
             var group_title: TextView = view.findViewById(R.id.group_title)
             var last_time: TextView = view.findViewById(R.id.last_time)
             var group_count: TextView = view.findViewById(R.id.group_count)
-            var unread_count: TextView = view.findViewById(R.id.unread_count)
+            //var unread_count: TextView = view.findViewById(R.id.unread_count)
             var group_leader: TextView = view.findViewById(R.id.group_leader)
         }
     }

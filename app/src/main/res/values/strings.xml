@@ -47,6 +47,4 @@
     <string name="cancel_reserv">예약 및 이용 취소</string>
     <string name="now_using">명 이용중</string>
     <string name="ban">이용 불가</string>
-    <string name="channel_name" translatable="false">채널 이름</string>
-    <string name="channel_description" translatable="false">channel description </string>
 </resources>

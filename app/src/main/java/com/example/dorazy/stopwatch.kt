@@ -61,6 +61,7 @@ class stopwatch : AppCompatActivity() {
                         val result = timecalculator()
                         val hour = result[0]; val min =result[1]; val sec = result[2];
                         txtTime.text = "$hour : $min : $sec"
+                        goalTime.text = "$goal : 00 : 00"
                         st = true;
                     } else{
                         Log.d(TAG, "No such document")
@@ -76,10 +77,14 @@ class stopwatch : AppCompatActivity() {
         txtTime = findViewById(R.id.txtText)
         goalTime = findViewById(R.id.goalText)
         startBtn = findViewById(R.id.startBtn)
-        groupBtn = findViewById(R.id.groupBtn)
+        //groupBtn = findViewById(R.id.groupBtn)
         finishBtn = findViewById(R.id.finishBtn)
         backBtn = findViewById(R.id.backtBtn)
         progressBar = findViewById(R.id.progress_horizontal)
+        val temp = intent?.getStringExtra("isFirst")
+        if(temp == "false"){
+            first = false
+        }
         //버튼 클릭 리스너
         startBtn.setOnClickListener {
             if (first) {
@@ -119,11 +124,11 @@ class stopwatch : AppCompatActivity() {
                 } else pause()
             }
         }
-        groupBtn.setOnClickListener {
+        /*groupBtn.setOnClickListener {
             //running이면안되게
             //그룹 화면으로 전환
             if(isRunning == false) startActivity(Intent(this, GroupActivity::class.java))
-        }
+        }*/
         finishBtn.setOnClickListener {
             //끝나면 사용자 시간 set
             val time_db = time.toLong()
@@ -146,8 +151,8 @@ class stopwatch : AppCompatActivity() {
             }
             if ((time != 0) && (isRunning == false)) {//공유창으로 이동
                 val intent = Intent(this, sharePage::class.java)
-                intent.putExtra("studyTime", time)
-                intent.putExtra("goalTime", goal)
+                intent.putExtra("studyTime", time.toString())
+                intent.putExtra("goalTime", goal.toString())
                 startActivity(intent)
             }
             reset() // 타이머 리셋
@@ -164,7 +169,9 @@ class stopwatch : AppCompatActivity() {
     //뒤로 가기 버튼 클릭하면 메인 페이지로 이동
     override fun onBackPressed() {
         if(isRunning == false) {//홈화면으로 이동
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent =Intent(this, MainActivity::class.java)
+            intent.putExtra("isFirst",first.toString())
+            startActivity(intent)
             finish()
         }
         else{ //측정중엔 뒤로 가기 작동 x 안내창 띄우기

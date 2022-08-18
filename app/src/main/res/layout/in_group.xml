@@ -288,18 +288,6 @@
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:openDrawer="start">
-        <FrameLayout
-            android:id="@+id/drawerFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="right"
-            android:background="@android:color/white">
-        </FrameLayout>
-    </androidx.drawerlayout.widget.DrawerLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,6 @@ package com.example.dorazy
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -10,15 +9,10 @@ import android.util.Log
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import android.view.View.OnClickListener
-import android.view.Gravity
 import android.view.MenuItem
 import android.widget.*
 import androidx.appcompat.widget.AppCompatImageButton
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.auth.User
-import kotlinx.android.synthetic.main.in_group.*
 import java.text.SimpleDateFormat
 
 class groupDetail : AppCompatActivity() { //chatactivity
@@ -103,6 +97,11 @@ class groupDetail : AppCompatActivity() { //chatactivity
                 }
             }
         }
+        lentBtn?.setOnClickListener {
+            val intent5 = Intent(this,LentActivity::class.java)
+            intent5.putExtra("groupID",groupID)
+            startActivity(intent5)
+        }
         backBtn?.setOnClickListener {
             onBackPressed()
         }
@@ -167,8 +166,6 @@ class groupDetail : AppCompatActivity() { //chatactivity
             }.addOnFailureListener{ e ->
                 Log.d(TAG, "exception ", e)
             }
-
-
     }
     private fun getUser(id: String?){
         firestore.collection("User").document(id!!).get().addOnSuccessListener { document->
@@ -183,8 +180,6 @@ class groupDetail : AppCompatActivity() { //chatactivity
             if(userModel?.uid != null)  {
                 userList1[userModel.uid!!] = userModel
                 userList2.add(userModel.name.toString())
-                memText1?.text = userList2[0]
-                s+=1
                 println(userList2)
                 println("userList2")
             }
@@ -194,6 +189,21 @@ class groupDetail : AppCompatActivity() { //chatactivity
                 println(userList1)
                 println(userList1.keys)
             }
+            setMembers(userList2)
+        }
+    }
+    private fun setMembers(userList2: MutableList<String>){
+        var i=0
+        for(usernm in userList2){
+            when(i){
+                1 -> memText1?.text = usernm
+                2 -> memText2?.text = usernm
+                3 -> memText3?.text = usernm
+                4 -> memText4?.text = usernm
+                5 -> memText5?.text = usernm
+                6 -> memText6?.text = usernm
+            }
+            i+=1
         }
     }
     private fun getUserInfoFromServer1(id: String?) {

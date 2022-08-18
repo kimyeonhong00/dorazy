@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private var auth :FirebaseAuth? = null
     private lateinit var binding:ActivityMainBinding
     var backPressedTime: Long = 0
+    private var first = true
 
     private var currentPosition=0
     val handler=Handler(Looper.getMainLooper()){
@@ -46,7 +47,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.recordbutton.setOnClickListener {
-            startActivity(Intent(this, stopwatch::class.java))
+            val intent1 = Intent(this, stopwatch::class.java)
+            val temp = intent?.getStringExtra("isFirst")
+            if(temp == "false"){
+            intent1.putExtra("isFirst","false")
+            }else{
+                intent1.putExtra("isFirst","true")
+            }
+            startActivity(intent1)
         }
 
         setSupportActionBar(toolbar)

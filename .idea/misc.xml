@@ -28,10 +28,15 @@
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_groupactivity.xml" value="0.1" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_grouplist.xml" value="0.264" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_grouppage.xml" value="0.1" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_lent.xml" value="0.2039333048311244" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_profile.xml" value="0.20478837109876016" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_selfstudy.xml" value="0.20478837109876016" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_selfstudy_reserv.xml" value="0.15818725951261223" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_sharepage.xml" value="0.2" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/activity_stopwatch.xml" value="0.176" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/create_account.xml" value="0.15989583333333332" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/create_profile.xml" value="0.20478837109876016" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/fragment1.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/fragment_group.xml" value="0.1453125" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/fragment_user.xml" value="0.264" />
@@ -44,10 +49,12 @@
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/item_select_user.xml" value="0.264" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/item_user.xml" value="0.2" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/layout_main_color_dialog.xml" value="0.15904232578024796" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/lent_dialog.xml" value="0.4" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/loading.xml" value="0.175" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/login.xml" value="0.1" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/meet_reserv_dialog.xml" value="0.16075245831551946" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/my_ranking_stats.xml" value="0.20989583333333334" />
+        <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/notify_test.xml" value="0.15904232578024796" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/ranking_home.xml" value="0.20989583333333334" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/ranking_personal_bar_layout.xml" value="0.175" />
         <entry key="..\:/Users/17905/dorazy/app/src/main/res/layout/spinner_item.xml" value="0.1453125" />

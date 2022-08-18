@@ -268,7 +268,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
-                            android:text="구성원4"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             tools:ignore="HardcodedText" />
@@ -278,7 +278,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
-                            android:text="구성원5"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             tools:ignore="HardcodedText" />
@@ -288,7 +288,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
-                            android:text="구성원6"
+                            android:text=""
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             tools:ignore="HardcodedText" />
