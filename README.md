@@ -45,8 +45,7 @@
   
 | IDE | Language | Database |
 |:---:|:---:|:---:|
-|<img src="https://img.shields.io/badge/AndroidStudio-3DDC84?style=flat-square&logo=AndroidStudio&logoColor=white"/>|<img src="https://img.shields.io/badge/Java-007396?style=flat-square&logo=Java&logoColor=white"/>|<img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=Firebase&logoColor=white"/>|
-
+|<img src="https://img.shields.io/badge/AndroidStudio-3DDC84?style=flat-square&logo=AndroidStudio&logoColor=white"/>|<img src="https://img.shields.io/badge/kotlin-7F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white"/>|<img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=Firebase&logoColor=white"/>|
 
   
 ### 4️⃣ Dorazy 사용설명서
