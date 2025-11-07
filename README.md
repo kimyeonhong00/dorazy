@@ -13,7 +13,7 @@
     <td align="center"><a href="https://github.com/WaRoong2"><img src="https://avatars.githubusercontent.com/u/57708892?v=44" width="100px;" alt=""/><br /><sub><b>SeJun Lim</b></sub></a><br />
     <td align="center"><a href="https://github.com/kimyeonhong00"><img src="https://avatars.githubusercontent.com/u/63278864?v=4" width="100px;" alt=""/><br /><sub><b>YeonHong Kim</b></sub></a><br />
     <td align="center"><a href="https://github.com/dbqls200"><img src="https://avatars.githubusercontent.com/u/87077859?v=4" width="100px;" alt=""/><br /><sub><b>YuBeen Kim</b></sub></a><br />
-    <td align="center"><a href="https://github.com/Lee-Coderrr"><img src="https://avatars.githubusercontent.com/u/80030418?v=4" width="100px;" alt=""/><br /><sub><b>DongJu Lee</b></sub></a><br />
+    <td align="center"><a href="https://github.com/DvwN-Lee"><img src="https://avatars.githubusercontent.com/u/80030418?v=4" width="100px;" alt=""/><br /><sub><b>DongJu Lee</b></sub></a><br />
 </table>  
 
 ---
